@@ -1,6 +1,8 @@
 package com.bazzar.domain.item;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -46,6 +49,8 @@ public class Manufacture extends DBBase implements Serializable{
 	)
  	private Picture picture;
  	
+ 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "manufacture")
+	private Set<Item> item = new HashSet<Item>(0);
  	
 	public Picture getPicture() {
 		return picture;

@@ -1,13 +1,21 @@
 package com.bazzar.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Where;
+
+import com.bazzar.domain.item.Item;
+import com.bazzar.domain.item.Manufacture;
 
 @Entity
 @Table(name = "PICTURES")
@@ -26,6 +34,12 @@ public class Picture  extends DBBase {
 	private String alt;
 	@Column(name="Status")
 	private boolean isActive;
+	
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "picture")
+	private Set<Item> item = new HashSet<Item>(0);
+	
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "picture")
+	private Set<Manufacture> manufacture = new HashSet<Manufacture>(0);
 	
 	public boolean isActive() {
 		return isActive;

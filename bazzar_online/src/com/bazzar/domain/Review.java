@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Where;
 
+
 // import com.bazzar.domain.customer.buyer.Customer;
 
 @Entity

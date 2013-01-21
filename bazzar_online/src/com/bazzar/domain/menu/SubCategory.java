@@ -1,6 +1,7 @@
 package com.bazzar.domain.menu;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -35,6 +36,9 @@ public class SubCategory  extends DBBase implements Serializable{
  	private String displayOption;
 	@Column(name="Status")
 	private boolean isActive;
+	
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "subCategory")
+	private Set<Category> category = new HashSet<Category>(0);
  	
 	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
@@ -43,6 +47,15 @@ public class SubCategory  extends DBBase implements Serializable{
 	     inverseJoinColumns = @JoinColumn( name="PRODUCT_ID")
 	)
 	private Set<Product> product;
+
+	
+	public Set<Category> getCategory() {
+		return category;
+	}
+
+	public void setCategory(Set<Category> category) {
+		this.category = category;
+	}
 
 	public Long getId() {
 		return id;

@@ -26,6 +26,8 @@ public class Note extends DBBase implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="type")
 	private OrderTypeLookup noteType;
+	
+	
 	public Long getId() {
 		return id;
 	}

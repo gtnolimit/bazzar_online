@@ -40,6 +40,8 @@ public class Product extends DBBase implements Serializable {
  	private String displayOption;
 	@Column(name="Status")
 	private boolean isActive;
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "product")
+	private Set<SubCategory> subCategory = new HashSet<SubCategory>(0);
  	
  	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
@@ -57,6 +59,15 @@ public class Product extends DBBase implements Serializable {
 	)
 	private Set <Item> item = new HashSet <Item> ();
  	
+ 	
+	public Set<SubCategory> getSubCategory() {
+		return subCategory;
+	}
+
+	public void setSubCategory(Set<SubCategory> subCategory) {
+		this.subCategory = subCategory;
+	}
+
 	public Long getId() {
 		return id;
 	}

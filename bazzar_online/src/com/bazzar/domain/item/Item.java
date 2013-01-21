@@ -24,6 +24,7 @@ import com.bazzar.domain.DBBase;
 import com.bazzar.domain.Picture;
 import com.bazzar.domain.QA;
 import com.bazzar.domain.Review;
+import com.bazzar.domain.menu.Product;
 import com.bazzar.domain.order.Shipping;
 
 @Entity
@@ -68,6 +69,9 @@ public class Item extends DBBase implements Serializable{
 	@Column(name="Status")
 	private boolean isActive;
 		
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "item")
+	private Set<Product> product = new HashSet<Product>(0);
+	
 	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 	     name="ITEM_MANUFACTURE",
@@ -173,6 +177,13 @@ public class Item extends DBBase implements Serializable{
 	private Set <QA> qa = new HashSet <QA> ();
 	
 	
+	
+	public Set<Product> getProduct() {
+		return product;
+	}
+	public void setProduct(Set<Product> product) {
+		this.product = product;
+	}
 	public boolean isRebate() {
 		return rebate;
 	}
