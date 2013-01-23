@@ -121,15 +121,15 @@ public class MenuDaoImpl implements MenuDao {
 	
 	public void edit ( Category category ){
 		logger.debug ( "Editing Category : " + category.getId ( ) );
-		sessionFactory.getCurrentSession ( ).save ( category );
+		sessionFactory.getCurrentSession ( ).merge ( category );
 	}
 	public void edit ( SubCategory subCategory ){
 		logger.debug ( "Editing SubCategory : " + subCategory .getId ( ) );
-		sessionFactory.getCurrentSession ( ).save ( subCategory );
+		sessionFactory.getCurrentSession ( ).merge ( subCategory );
 	}
 	public void edit ( Product product ){
 		logger.debug ( "Editing Product : " + product.getId ( ) );
-		sessionFactory.getCurrentSession ( ).save ( product );
+		sessionFactory.getCurrentSession ( ).merge ( product );
 	}
 
 	
