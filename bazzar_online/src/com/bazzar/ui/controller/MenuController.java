@@ -42,8 +42,8 @@ public class MenuController {
 	@Autowired
 	private FormValidator validator;
 	
-	@PersistenceContext(unitName="menuService", 
-            type=PersistenceContextType.TRANSACTION)
+	//@PersistenceContext(unitName="menuService", 
+    //        type=PersistenceContextType.TRANSACTION)
 	@POST
     @Consumes(MediaType.APPLICATION_XML)
     public void create(Category category) {

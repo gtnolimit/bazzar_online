@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Where;
 
-import com.bazzar.domain.item.Item;
+//import com.bazzar.domain.item.Item;
 import com.bazzar.domain.item.Manufacture;
 
 @Entity
@@ -35,12 +35,18 @@ public class Picture  extends DBBase {
 	@Column(name="Status")
 	private boolean isActive;
 	
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "picture")
-	private Set<Item> item = new HashSet<Item>(0);
+	//@ManyToMany(fetch = FetchType.LAZY, mappedBy = "picture")
+	//private Set<Item> item = new HashSet<Item>(0);
 	
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "picture")
 	private Set<Manufacture> manufacture = new HashSet<Manufacture>(0);
 	
+	public Set<Manufacture> getManufacture() {
+		return manufacture;
+	}
+	public void setManufacture(Set<Manufacture> manufacture) {
+		this.manufacture = manufacture;
+	}
 	public boolean isActive() {
 		return isActive;
 	}
