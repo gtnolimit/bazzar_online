@@ -4,6 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
 import javax.annotation.Resource;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
@@ -32,8 +35,12 @@ import com.bazzar.domain.menu.Category;
 //import com.bazzar.domain.menu.SubCategory;
 import com.bazzar.ui.model.FormValidator;
 
-@Controller
-@RequestMapping("/menu")
+@Stateless
+@LocalBean
+@Path("/menu")
+
+//@Controller
+//@RequestMapping("/menu")
 public class MenuController {
 	
 	@Resource

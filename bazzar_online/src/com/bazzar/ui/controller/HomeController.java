@@ -67,6 +67,7 @@ public class HomeController {
 		itemTest.createItem(itemDao, menuDao);
 		return "home";
 	}
+	/*
 	@RequestMapping("/viewAllCategory")
 	public ModelAndView getAllContacts()
 	{
@@ -122,5 +123,5 @@ public class HomeController {
 		mav.addObject("SEARCH_CATEGORY_RESULTS_KEY", categories);
 		return mav;
 	}
-	
+	*/
 }
