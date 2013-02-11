@@ -69,10 +69,12 @@ protected static Logger logger = Logger.getLogger ( "ItemDao" );
 		return criteria.list();
 	}
 
-	@Override
+	@SuppressWarnings("unchecked")
 	public List<Item> findItemsByManufacture(String manufacture) {
-		// TODO Auto-generated method stub
-		return null;
+		Query q = sessionFactory.getCurrentSession()
+				.createQuery("SELECT i FROM Item i LEFT JOIN FETCH i.manufacture where i.status<>0 and i.name=:manufacture");
+		q.setParameter("manufacture", manufacture);
+		return q.list();
 	}
 
 	@SuppressWarnings("unchecked")
