@@ -45,7 +45,6 @@ public class MenuController {
 		}
 		return new ModelAndView ( jsonView_i, CATEGORY_FIELD, menuService_i.getCategory ( _id ) );
 	}
-
 	@RequestMapping ( value = "/subCategory/{subCategoryId}", method = RequestMethod.GET )
 	public ModelAndView getSubCategory ( @PathVariable ( "subCategoryId" ) String subCategoryId ) {
 		Long _id = (long) 0;
@@ -57,7 +56,6 @@ public class MenuController {
 		}
 		return new ModelAndView ( jsonView_i, SUBCATEGORY_FIELD, menuService_i.getSubCategory ( _id ) );
 	}
-
 	@RequestMapping ( value = "/product/{productId}", method = RequestMethod.GET )
 	public ModelAndView getProduct ( @PathVariable ( "productId" ) String productId ) {
 		Long _id = (long) 0;
@@ -69,17 +67,14 @@ public class MenuController {
 		}
 		return new ModelAndView ( jsonView_i, PRODUCT_FIELD, menuService_i.getProduct ( _id ) );
 	}
-
 	@RequestMapping(value = "/categories/", method = RequestMethod.GET)
 	public ModelAndView getCategories() {
 		return new ModelAndView(jsonView_i, CATEGORY_FIELD, menuService_i.getAllCategories());
 	}
-
 	@RequestMapping(value = "/subCategories/", method = RequestMethod.GET)
 	public ModelAndView getSubCategories() {
 		return new ModelAndView(jsonView_i, SUBCATEGORY_FIELD, menuService_i.getAllSubCategories());
 	}
-
 	@RequestMapping(value = "/products/", method = RequestMethod.GET)
 	public ModelAndView getProducts() {
 			return new ModelAndView(jsonView_i, PRODUCT_FIELD, menuService_i.getAllProducts());
@@ -172,8 +167,6 @@ public class MenuController {
 		return new ModelAndView(jsonView_i, PRODUCT_FIELD, null);
 	}
 	@RequestMapping(value = { "/menu/find/product/{productName}" }, method = { RequestMethod.GET })
-	//public ModelAndView findProductByName(@RequestBody Product product_p, @PathVariable("productName") String productName,
-	//							   HttpServletResponse httpResponse_p) {
 	public ModelAndView findProductByName(@PathVariable("productName") String productName,
 				   HttpServletResponse httpResponse_p) {
 	System.out.println("name : " + productName);
@@ -187,6 +180,22 @@ public class MenuController {
 
 		httpResponse_p.setStatus(HttpStatus.OK.value());
 		return new ModelAndView(jsonView_i, PRODUCT_FIELD, productList);
+	}
+	@RequestMapping(value = { "/menu/find/product/id/{productId}" }, method = { RequestMethod.GET })
+	public ModelAndView findProductById(@PathVariable("productId") String productId,
+				   HttpServletResponse httpResponse_p) {
+	System.out.println("name : " + productId);
+		Product product;
+		try {
+			Long id = Long.parseLong(productId);
+			product = menuService_i.getProduct( id );
+		} catch (Exception e) {
+			String sMessage = "Error finding product. [%1$s]";
+			return createErrorResponse(String.format(sMessage, e.toString()));
+		}
+
+		httpResponse_p.setStatus(HttpStatus.OK.value());
+		return new ModelAndView(jsonView_i, PRODUCT_FIELD, product);
 	}
 	@RequestMapping(value = "/menu/delete/category/{categoryId}", method = RequestMethod.DELETE)
 	public ModelAndView removeCategory(@PathVariable("categoryId") String categoryId_p,
