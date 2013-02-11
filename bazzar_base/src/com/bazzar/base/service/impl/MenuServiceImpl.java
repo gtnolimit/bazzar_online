@@ -71,8 +71,8 @@ public class MenuServiceImpl implements MenuService {
 	public void deleteProductById(Long id) {
 		menuDao.deleteProduct(id);
 	}
-	public void edit(Category category_p) {
-		// TODO Auto-generated method stub
-		
+	public List <Product> findProductByName ( String name ){
+		return menuDao.findProductByName(name);
 	}
+	
 }

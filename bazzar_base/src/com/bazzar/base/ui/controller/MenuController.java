@@ -1,5 +1,7 @@
 package com.bazzar.base.ui.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
 import com.bazzar.base.domain.menu.Category;
+import com.bazzar.base.domain.menu.Product;
+import com.bazzar.base.domain.menu.SubCategory;
 import com.bazzar.base.service.impl.MenuServiceImpl;
 
 @Controller
@@ -81,7 +85,7 @@ public class MenuController {
 			return new ModelAndView(jsonView_i, PRODUCT_FIELD, menuService_i.getAllProducts());
 	}
 	
-	@RequestMapping(value = { "/menu/category/" }, method = { RequestMethod.POST })
+	@RequestMapping(value = { "/menu/add/category/" }, method = { RequestMethod.POST })
 	public ModelAndView createCategory(@RequestBody Category category_p,
 			HttpServletResponse httpResponse_p, WebRequest request_p) {
 
@@ -93,24 +97,50 @@ public class MenuController {
 			String sMessage = "Error creating new category. [%1$s]";
 			return createErrorResponse(String.format(sMessage, e.toString()));
 		}
-		/* set HTTP response code */
 		httpResponse_p.setStatus(HttpStatus.CREATED.value());
-		/* set location of created resource */
 		httpResponse_p.setHeader("caregory", request_p.getContextPath() + "/menu/category/" + createCategoryId);
 		return new ModelAndView(jsonView_i, CATEGORY_FIELD, category_p );
 	}
 	
-	@RequestMapping(value = { "/menu/category/{categoryId}" }, method = { RequestMethod.PUT })
-	public ModelAndView updateFund(@RequestBody Category category_p, @PathVariable("categoryId") String categoryId_p,
-								   HttpServletResponse httpResponse_p) {
+	@RequestMapping(value = { "/menu/add/subCategory/" }, method = { RequestMethod.POST })
+	public ModelAndView createSubCategory(@RequestBody SubCategory subCategory_p,
+			HttpServletResponse httpResponse_p, WebRequest request_p) {
 
-		/* validate fund Id parameter */
-		if (isEmpty(categoryId_p) || categoryId_p.length() < 50) {
-			String sMessage = "Error updating fund - Invalid fund Id parameter";
-			return createErrorResponse(sMessage);
-		}
+		Long createSubCategoryId;
 		try {
-			menuService_i.edit(category_p);
+			createSubCategoryId = menuService_i.create ( subCategory_p );
+			subCategory_p.setId( createSubCategoryId );
+		} catch (Exception e) {
+			String sMessage = "Error creating new subcategory. [%1$s]";
+			return createErrorResponse(String.format(sMessage, e.toString()));
+		}
+		httpResponse_p.setStatus(HttpStatus.CREATED.value());
+		httpResponse_p.setHeader("subCaregory", request_p.getContextPath() + "/menu/add/category/" + createSubCategoryId);
+		return new ModelAndView(jsonView_i, SUBCATEGORY_FIELD, subCategory_p );
+	}
+
+	@RequestMapping(value = { "/menu/add/product/" }, method = { RequestMethod.POST })
+	public ModelAndView createProduct(@RequestBody Product product_p,
+			HttpServletResponse httpResponse_p, WebRequest request_p) {
+
+		Long createProductId;
+		try {
+			createProductId = menuService_i.create ( product_p );
+			product_p.setId( createProductId );
+		} catch (Exception e) {
+			String sMessage = "Error creating new subcategory. [%1$s]";
+			return createErrorResponse(String.format(sMessage, e.toString()));
+		}
+		httpResponse_p.setStatus(HttpStatus.CREATED.value());
+		httpResponse_p.setHeader("product", request_p.getContextPath() + "/menu/add/product/" + createProductId);
+		return new ModelAndView(jsonView_i, PRODUCT_FIELD, product_p );
+	}
+
+	@RequestMapping(value = { "/menu/update/category/{categoryId}" }, method = { RequestMethod.PUT })
+	public ModelAndView updateCategory(@RequestBody Category category_p, @PathVariable("categoryId") String categoryId_p,
+								   HttpServletResponse httpResponse_p) {
+		try {
+			menuService_i.update(category_p);
 		} catch (Exception e) {
 			String sMessage = "Error updating category. [%1$s]";
 			return createErrorResponse(String.format(sMessage, e.toString()));
@@ -120,8 +150,52 @@ public class MenuController {
 		return new ModelAndView(jsonView_i, CATEGORY_FIELD, null);
 	}
 
-	@RequestMapping(value = "/menu/category/{categoryId}", method = RequestMethod.DELETE)
-	public ModelAndView removeFund(@PathVariable("categoryId") String categoryId_p,
+	@RequestMapping(value = { "/menu/update/subCategory/{subCategoryId}" }, method = { RequestMethod.PUT })
+	public ModelAndView updateSubCategory(@RequestBody SubCategory subCategory_p, @PathVariable("subCategoryId") String subCategoryId_p,
+								   HttpServletResponse httpResponse_p) {
+		try {
+			menuService_i.update(subCategory_p);
+		} catch (Exception e) {
+			String sMessage = "Error updating subcategory. [%1$s]";
+			return createErrorResponse(String.format(sMessage, e.toString()));
+		}
+
+		httpResponse_p.setStatus(HttpStatus.OK.value());
+		return new ModelAndView(jsonView_i, SUBCATEGORY_FIELD, null);
+	}
+	
+	@RequestMapping(value = { "/menu/update/product/{productId}" }, method = { RequestMethod.PUT })
+	public ModelAndView updateProduct(@RequestBody Product product_p, @PathVariable("productId") String productId_p,
+								   HttpServletResponse httpResponse_p) {
+		try {
+			menuService_i.update(product_p);
+		} catch (Exception e) {
+			String sMessage = "Error updating subcategory. [%1$s]";
+			return createErrorResponse(String.format(sMessage, e.toString()));
+		}
+
+		httpResponse_p.setStatus(HttpStatus.OK.value());
+		return new ModelAndView(jsonView_i, PRODUCT_FIELD, null);
+	}
+	
+	@RequestMapping(value = { "/menu/find/product/{productName}" }, method = { RequestMethod.PUT })
+	public ModelAndView findProductByName(@RequestBody Product product_p, @PathVariable("productName") String productName,
+								   HttpServletResponse httpResponse_p) {
+		List <Product> productList;
+		try {
+			productList = menuService_i.findProductByName(productName);
+		} catch (Exception e) {
+			String sMessage = "Error updating subcategory. [%1$s]";
+			return createErrorResponse(String.format(sMessage, e.toString()));
+		}
+
+		httpResponse_p.setStatus(HttpStatus.OK.value());
+		return new ModelAndView(jsonView_i, PRODUCT_FIELD, productList);
+	}
+
+
+	@RequestMapping(value = "/menu/delete/category/{categoryId}", method = RequestMethod.DELETE)
+	public ModelAndView removeCategory(@PathVariable("categoryId") String categoryId_p,
 								   HttpServletResponse httpResponse_p) {
 
 		try {
@@ -136,6 +210,38 @@ public class MenuController {
 		return new ModelAndView(jsonView_i, CATEGORY_FIELD, null);
 	}
 	
+	@RequestMapping(value = "/menu/delete/subCategory/{subCategoryId}", method = RequestMethod.DELETE)
+	public ModelAndView removeSubCategory(@PathVariable("subCategoryId") String subCategoryId_p,
+								   HttpServletResponse httpResponse_p) {
+
+		try {
+			Long id = Long.parseLong(subCategoryId_p);
+			menuService_i.deleteSubCategoryById( id);
+		} catch (Exception e) {
+			String sMessage = "Error invoking getFunds. [%1$s]";
+			return createErrorResponse(String.format(sMessage, e.toString()));
+		}
+
+		httpResponse_p.setStatus(HttpStatus.OK.value());
+		return new ModelAndView(jsonView_i, SUBCATEGORY_FIELD, null);
+	}
+	
+	@RequestMapping(value = "/menu/delete/product/{productId}", method = RequestMethod.DELETE)
+	public ModelAndView removeProduct(@PathVariable("productId") String productId_p,
+								   HttpServletResponse httpResponse_p) {
+
+		try {
+			Long id = Long.parseLong(productId_p);
+			menuService_i.deleteProductById( id);
+		} catch (Exception e) {
+			String sMessage = "Error invoking getFunds. [%1$s]";
+			return createErrorResponse(String.format(sMessage, e.toString()));
+		}
+
+		httpResponse_p.setStatus(HttpStatus.OK.value());
+		return new ModelAndView(jsonView_i, PRODUCT_FIELD, null);
+	}
+	
 	public void setJsonView(View view) {
 		jsonView_i = view;
 	}
@@ -143,10 +249,5 @@ public class MenuController {
 	private ModelAndView createErrorResponse(String sMessage) {
 		return new ModelAndView(jsonView_i, ERROR_FIELD, sMessage);
 	}
-
-	public static boolean isEmpty(String s_p) {
-		return (null == s_p) || s_p.trim().length() == 0;
-	}
-
 
 }

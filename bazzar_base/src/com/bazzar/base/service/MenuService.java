@@ -29,4 +29,6 @@ public interface MenuService {
 	public void update ( Product product );
 	public void delete ( Product product );
 	public void deleteProductById ( Long id );
+	
+	public List <Product> findProductByName ( String name );
 }
