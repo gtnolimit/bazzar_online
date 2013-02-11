@@ -169,7 +169,6 @@ public class MenuController {
 	@RequestMapping(value = { "/menu/find/product/{productName}" }, method = { RequestMethod.GET })
 	public ModelAndView findProductByName(@PathVariable("productName") String productName,
 				   HttpServletResponse httpResponse_p) {
-	System.out.println("name : " + productName);
 		List <Product> productList;
 		try {
 			productList = menuService_i.findProductByName(productName);
@@ -184,7 +183,6 @@ public class MenuController {
 	@RequestMapping(value = { "/menu/find/product/id/{productId}" }, method = { RequestMethod.GET })
 	public ModelAndView findProductById(@PathVariable("productId") String productId,
 				   HttpServletResponse httpResponse_p) {
-	System.out.println("name : " + productId);
 		Product product;
 		try {
 			Long id = Long.parseLong(productId);
@@ -242,7 +240,7 @@ public class MenuController {
 		httpResponse_p.setStatus(HttpStatus.OK.value());
 		return new ModelAndView(jsonView_i, PRODUCT_FIELD, null);
 	}
-	
+
 	public void setJsonView(View view) {
 		jsonView_i = view;
 	}
