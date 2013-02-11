@@ -32,10 +32,10 @@ protected static Logger logger = Logger.getLogger ( "OrderDao" );
 				.setLong ( "customerId", customerId ).list();
 	}
 
-	public Order getOrderByInvoice ( Long invoiceNumber ) {
+	public Order getOrderByInvoice ( String invoiceNumber ) {
 		return (Order) sessionFactory.getCurrentSession ( ).
 				createQuery ( "FROM Order o WHERE o.INVOICE_NUMBER = :invoiceNumber")
-				.setLong ( "invoiceNumber", invoiceNumber ).uniqueResult();
+				.setString ( "invoiceNumber", invoiceNumber ).uniqueResult();
 	}
 	
 	public Order getOrder ( Long orderId ) {
@@ -48,6 +48,13 @@ protected static Logger logger = Logger.getLogger ( "OrderDao" );
 
 	public void editOrder ( Order order ) {
 		sessionFactory.getCurrentSession ( ).merge ( order );
+	}
+
+	@Override
+	public void delete(Long id) {
+		Order order = getOrder ( id );
+		// TODO implement delete order
+		
 	}
 
 }

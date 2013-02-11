@@ -32,7 +32,7 @@ public class ItemController {
 	private static final String ERROR_FIELD = "error";
 	
 	@RequestMapping(value = "/items/", method = RequestMethod.GET)
-	public ModelAndView getCategories() {
+	public ModelAndView getItems() {
 		return new ModelAndView(jsonView_i, ITEMS_FIELD, itemService_i.getAllItems());
 	}
 	
@@ -49,7 +49,7 @@ public class ItemController {
 	}
 
 	@RequestMapping ( value = "/itemQuestions/{itemId}", method = RequestMethod.GET )
-	public ModelAndView getQuestions ( @PathVariable ( "itemId" ) String itemId ) {
+	public ModelAndView getItemQuestions ( @PathVariable ( "itemId" ) String itemId ) {
 		Long _id = (long) 0;
 		try {
 			_id = Long.parseLong ( itemId );
@@ -61,7 +61,7 @@ public class ItemController {
 	}
 	
 	@RequestMapping ( value = "/itemReviews/{itemId}", method = RequestMethod.GET )
-	public ModelAndView getReviews ( @PathVariable ( "itemId" ) String itemId ) {
+	public ModelAndView getItemReviews ( @PathVariable ( "itemId" ) String itemId ) {
 		Long _id = (long) 0;
 		try {
 			_id = Long.parseLong ( itemId );
@@ -73,7 +73,7 @@ public class ItemController {
 	}
 	
 	@RequestMapping ( value = "/itemAccessories/{itemId}", method = RequestMethod.GET )
-	public ModelAndView getAccessories ( @PathVariable ( "itemId" ) String itemId ) {
+	public ModelAndView getItemAccessories ( @PathVariable ( "itemId" ) String itemId ) {
 		Long _id = (long) 0;
 		try {
 			_id = Long.parseLong ( itemId );
@@ -85,7 +85,7 @@ public class ItemController {
 	}
 	
 	@RequestMapping(value = { "/item/add/" }, method = { RequestMethod.POST })
-	public ModelAndView createCategory(@RequestBody Item item_p,
+	public ModelAndView createItem(@RequestBody Item item_p,
 			HttpServletResponse httpResponse_p, WebRequest request_p) {
 
 		Long createItemId;
@@ -97,12 +97,12 @@ public class ItemController {
 			return createErrorResponse(String.format(sMessage, e.toString()));
 		}
 		httpResponse_p.setStatus(HttpStatus.CREATED.value());
-		httpResponse_p.setHeader("caregory", request_p.getContextPath() + "/item/" + createItemId);
+		httpResponse_p.setHeader("item", request_p.getContextPath() + "/item/" + createItemId);
 		return new ModelAndView(jsonView_i, ITEM_FIELD, item_p );
 	}
 
 	@RequestMapping(value = { "/item/update/{itemId}" }, method = { RequestMethod.PUT })
-	public ModelAndView updateCategory(@RequestBody Item item_p, @PathVariable("itemId") String itemId_p,
+	public ModelAndView updateItem(@RequestBody Item item_p, @PathVariable("itemId") String itemId_p,
 								   HttpServletResponse httpResponse_p) {
 		try {
 			itemService_i.editItem(item_p);
@@ -116,7 +116,7 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/item/delete/{itemId}", method = RequestMethod.DELETE)
-	public ModelAndView removeCategory(@PathVariable("itemId") String itemId_p,
+	public ModelAndView removeItem(@PathVariable("itemId") String itemId_p,
 								   HttpServletResponse httpResponse_p) {
 
 		try {
@@ -130,7 +130,6 @@ public class ItemController {
 		httpResponse_p.setStatus(HttpStatus.OK.value());
 		return new ModelAndView(jsonView_i, ITEM_FIELD, null);
 	}	
-
 
 	@RequestMapping(value = { "/item/find/id/{itemId}" }, method = { RequestMethod.GET })
 	public ModelAndView findItemById(@PathVariable("itemId") String itemId,
