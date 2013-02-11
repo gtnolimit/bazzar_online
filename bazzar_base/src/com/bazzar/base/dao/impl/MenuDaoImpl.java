@@ -72,7 +72,7 @@ public class MenuDaoImpl implements MenuDao {
 	@SuppressWarnings("unchecked")
 	public List <Product> findProductByName(String productName) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Product.class);
-		criteria.add(Restrictions.ilike ("ATTRIBUTE", productName +"%" ) );
+		criteria.add(Restrictions.ilike ("attribute", productName +"%" ) );
 		return criteria.list();
 	}
 

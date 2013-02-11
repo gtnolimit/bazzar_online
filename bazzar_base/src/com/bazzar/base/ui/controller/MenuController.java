@@ -84,7 +84,6 @@ public class MenuController {
 	public ModelAndView getProducts() {
 			return new ModelAndView(jsonView_i, PRODUCT_FIELD, menuService_i.getAllProducts());
 	}
-	
 	@RequestMapping(value = { "/menu/add/category/" }, method = { RequestMethod.POST })
 	public ModelAndView createCategory(@RequestBody Category category_p,
 			HttpServletResponse httpResponse_p, WebRequest request_p) {
@@ -101,7 +100,6 @@ public class MenuController {
 		httpResponse_p.setHeader("caregory", request_p.getContextPath() + "/menu/category/" + createCategoryId);
 		return new ModelAndView(jsonView_i, CATEGORY_FIELD, category_p );
 	}
-	
 	@RequestMapping(value = { "/menu/add/subCategory/" }, method = { RequestMethod.POST })
 	public ModelAndView createSubCategory(@RequestBody SubCategory subCategory_p,
 			HttpServletResponse httpResponse_p, WebRequest request_p) {
@@ -118,7 +116,6 @@ public class MenuController {
 		httpResponse_p.setHeader("subCaregory", request_p.getContextPath() + "/menu/add/category/" + createSubCategoryId);
 		return new ModelAndView(jsonView_i, SUBCATEGORY_FIELD, subCategory_p );
 	}
-
 	@RequestMapping(value = { "/menu/add/product/" }, method = { RequestMethod.POST })
 	public ModelAndView createProduct(@RequestBody Product product_p,
 			HttpServletResponse httpResponse_p, WebRequest request_p) {
@@ -135,7 +132,6 @@ public class MenuController {
 		httpResponse_p.setHeader("product", request_p.getContextPath() + "/menu/add/product/" + createProductId);
 		return new ModelAndView(jsonView_i, PRODUCT_FIELD, product_p );
 	}
-
 	@RequestMapping(value = { "/menu/update/category/{categoryId}" }, method = { RequestMethod.PUT })
 	public ModelAndView updateCategory(@RequestBody Category category_p, @PathVariable("categoryId") String categoryId_p,
 								   HttpServletResponse httpResponse_p) {
@@ -149,7 +145,6 @@ public class MenuController {
 		httpResponse_p.setStatus(HttpStatus.OK.value());
 		return new ModelAndView(jsonView_i, CATEGORY_FIELD, null);
 	}
-
 	@RequestMapping(value = { "/menu/update/subCategory/{subCategoryId}" }, method = { RequestMethod.PUT })
 	public ModelAndView updateSubCategory(@RequestBody SubCategory subCategory_p, @PathVariable("subCategoryId") String subCategoryId_p,
 								   HttpServletResponse httpResponse_p) {
@@ -162,8 +157,7 @@ public class MenuController {
 
 		httpResponse_p.setStatus(HttpStatus.OK.value());
 		return new ModelAndView(jsonView_i, SUBCATEGORY_FIELD, null);
-	}
-	
+	}	
 	@RequestMapping(value = { "/menu/update/product/{productId}" }, method = { RequestMethod.PUT })
 	public ModelAndView updateProduct(@RequestBody Product product_p, @PathVariable("productId") String productId_p,
 								   HttpServletResponse httpResponse_p) {
@@ -177,23 +171,23 @@ public class MenuController {
 		httpResponse_p.setStatus(HttpStatus.OK.value());
 		return new ModelAndView(jsonView_i, PRODUCT_FIELD, null);
 	}
-	
-	@RequestMapping(value = { "/menu/find/product/{productName}" }, method = { RequestMethod.PUT })
-	public ModelAndView findProductByName(@RequestBody Product product_p, @PathVariable("productName") String productName,
-								   HttpServletResponse httpResponse_p) {
+	@RequestMapping(value = { "/menu/find/product/{productName}" }, method = { RequestMethod.GET })
+	//public ModelAndView findProductByName(@RequestBody Product product_p, @PathVariable("productName") String productName,
+	//							   HttpServletResponse httpResponse_p) {
+	public ModelAndView findProductByName(@PathVariable("productName") String productName,
+				   HttpServletResponse httpResponse_p) {
+	System.out.println("name : " + productName);
 		List <Product> productList;
 		try {
 			productList = menuService_i.findProductByName(productName);
 		} catch (Exception e) {
-			String sMessage = "Error updating subcategory. [%1$s]";
+			String sMessage = "Error finding product. [%1$s]";
 			return createErrorResponse(String.format(sMessage, e.toString()));
 		}
 
 		httpResponse_p.setStatus(HttpStatus.OK.value());
 		return new ModelAndView(jsonView_i, PRODUCT_FIELD, productList);
 	}
-
-
 	@RequestMapping(value = "/menu/delete/category/{categoryId}", method = RequestMethod.DELETE)
 	public ModelAndView removeCategory(@PathVariable("categoryId") String categoryId_p,
 								   HttpServletResponse httpResponse_p) {
@@ -208,8 +202,7 @@ public class MenuController {
 
 		httpResponse_p.setStatus(HttpStatus.OK.value());
 		return new ModelAndView(jsonView_i, CATEGORY_FIELD, null);
-	}
-	
+	}	
 	@RequestMapping(value = "/menu/delete/subCategory/{subCategoryId}", method = RequestMethod.DELETE)
 	public ModelAndView removeSubCategory(@PathVariable("subCategoryId") String subCategoryId_p,
 								   HttpServletResponse httpResponse_p) {
@@ -224,8 +217,7 @@ public class MenuController {
 
 		httpResponse_p.setStatus(HttpStatus.OK.value());
 		return new ModelAndView(jsonView_i, SUBCATEGORY_FIELD, null);
-	}
-	
+	}	
 	@RequestMapping(value = "/menu/delete/product/{productId}", method = RequestMethod.DELETE)
 	public ModelAndView removeProduct(@PathVariable("productId") String productId_p,
 								   HttpServletResponse httpResponse_p) {
