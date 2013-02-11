@@ -30,7 +30,7 @@ protected static Logger logger = Logger.getLogger ( "ItemDao" );
 
 	public Item getItemQuestions(Long id) {
 		return (Item) sessionFactory.getCurrentSession ( )
-				.createQuery("FROM Item i left outer join Qestion q WHERE i.id = :id")
+				.createQuery("FROM Item i left join Qestion q WHERE i.id = :id")
 				.setParameter("id", id).uniqueResult();
 	}
 
@@ -58,14 +58,14 @@ protected static Logger logger = Logger.getLogger ( "ItemDao" );
 	@SuppressWarnings("unchecked")
 	public List<Item> findItemsByName ( String itemName ) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Item.class);
-		criteria.add(Restrictions.ilike ("SUBJECT", itemName +"%" ) );
+		criteria.add(Restrictions.ilike ("subgect", itemName +"%" ) );
 		return criteria.list();
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Item> findItemsByManufactureNumber(String manufactureNumber) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Item.class);
-		criteria.add(Restrictions.ilike ("MANUFACTURE_MODEL_NUMBER", manufactureNumber +"%" ) );
+		criteria.add(Restrictions.ilike ("manufactureModelNumber", manufactureNumber +"%" ) );
 		return criteria.list();
 	}
 
@@ -80,14 +80,14 @@ protected static Logger logger = Logger.getLogger ( "ItemDao" );
 	@SuppressWarnings("unchecked")
 	public List<Item> findItemsByDescription(String description) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Item.class);
-		criteria.add(Restrictions.ilike ("DESCRIPTION", description +"%" ) );
+		criteria.add(Restrictions.ilike ("description", description +"%" ) );
 		return criteria.list();
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Item> findItemsByBarCode ( String barCode ) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Item.class);
-		criteria.add(Restrictions.ilike ("BAR_CODE", barCode +"%" ) );
+		criteria.add(Restrictions.ilike ("barCode", barCode +"%" ) );
 		return criteria.list();
 	}
 	
