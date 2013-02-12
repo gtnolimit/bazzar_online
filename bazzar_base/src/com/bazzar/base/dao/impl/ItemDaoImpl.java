@@ -55,46 +55,6 @@ protected static Logger logger = Logger.getLogger ( "ItemDao" );
         return query.list ();
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Item> findItemsByName ( String itemName ) {
-		Query query = sessionFactory.getCurrentSession().
-				createQuery("SELECT i FROM Item i WHERE i.subgect like :subgect").
-				setParameter ( "subgect", "%" + itemName + "%" );
-		return query.list();
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Item> findItemsByManufactureNumber(String manufactureNumber) {
-		Query query = sessionFactory.getCurrentSession().
-				createQuery("SELECT i FROM Item i WHERE i.manufactureModelNumber like :manufactureModelNumber").
-				setString( "manufactureModelNumber", "%" + manufactureNumber + "%" );
-		return query.list();
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Item> findItemsByManufacture(String manufacture) {
-		Query query = sessionFactory.getCurrentSession().
-				createQuery("SELECT i FROM Item i WHERE i.manufacture like :manufacture").
-				setString( "manufacture", "%" + manufacture + "%" );
-		return query.list();
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Item> findItemsByDescription(String description) {
-		Query query = sessionFactory.getCurrentSession().
-				createQuery("SELECT i FROM Item i WHERE i.description like :description").
-				setString( "description", "%" + description + "%" );
-		return query.list();
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Item> findItemsByBarCode ( String barCode ) {
-		Query query = sessionFactory.getCurrentSession().
-				createQuery("SELECT i FROM Item i WHERE i.barCode like :barCode").
-				setString( "barCode", "%" + barCode + "%" );
-		return query.list();
-	}
-	
 	public void editItem(Item item) {
 		sessionFactory.getCurrentSession ( ).merge ( item );
 	}

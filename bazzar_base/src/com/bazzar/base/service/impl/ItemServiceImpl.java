@@ -35,22 +35,6 @@ public class ItemServiceImpl implements ItemService {
 		return itemDao.getItem ( id );
 	}
 
-	public List<Item> findItemsByName(String itemName) {
-		return itemDao.findItemsByName(itemName);
-	}
-
-	public List<Item> findItemsByManufactureNumber(String manufactureNumber) {
-		return itemDao.findItemsByManufactureNumber(manufactureNumber);
-	}
-
-	public List<Item> findItemsByManufacture(String manufacture) {
-		return itemDao.findItemsByManufacture(manufacture);
-	}
-
-	public List<Item> findItemsByDescription(String description) {
-		return itemDao.findItemsByDescription(description);
-	}
-
 	public void editItem(Item item) {
 		itemDao.editItem(item);
 	}

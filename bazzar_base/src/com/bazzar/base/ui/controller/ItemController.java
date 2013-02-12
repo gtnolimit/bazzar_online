@@ -1,7 +1,5 @@
 package com.bazzar.base.ui.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,67 +144,6 @@ public class ItemController {
 		httpResponse_p.setStatus(HttpStatus.OK.value());
 		return new ModelAndView(jsonView_i, ITEM_FIELD, item);
 	}
-
-	@RequestMapping(value = { "/item/find/name/{itemName}" }, method = { RequestMethod.GET })
-	public ModelAndView findItemByName(@PathVariable("itemName") String itemName,
-				   HttpServletResponse httpResponse_p) {
-		List <Item> item;
-		try {
-			item = itemService_i.findItemsByName( itemName );
-		} catch (Exception e) {
-			String sMessage = "Error finding product. [%1$s]";
-			return createErrorResponse(String.format(sMessage, e.toString()));
-		}
-
-		httpResponse_p.setStatus(HttpStatus.OK.value());
-		return new ModelAndView(jsonView_i, ITEM_FIELD, item);
-	}
-
-	@RequestMapping(value = { "/item/find/manufactureNumber/{manufactureNumber}" }, method = { RequestMethod.GET })
-	public ModelAndView findItemByManufactureName(@PathVariable("manufactureNumber") String manufactureNumber,
-				   HttpServletResponse httpResponse_p) {
-		List <Item> item;
-		try {
-			item = itemService_i.findItemsByManufactureNumber( manufactureNumber );
-		} catch (Exception e) {
-			String sMessage = "Error finding product. [%1$s]";
-			return createErrorResponse(String.format(sMessage, e.toString()));
-		}
-
-		httpResponse_p.setStatus(HttpStatus.OK.value());
-		return new ModelAndView(jsonView_i, ITEM_FIELD, item);
-	}
-
-	@RequestMapping(value = { "/item/find/manufacture/{manufacture}" }, method = { RequestMethod.GET })
-	public ModelAndView findItemsByManufacture(@PathVariable("manufacture") String manufacture,
-				   HttpServletResponse httpResponse_p) {
-		List <Item> item;
-		try {
-			item = itemService_i.findItemsByManufacture( manufacture );
-		} catch (Exception e) {
-			String sMessage = "Error finding product. [%1$s]";
-			return createErrorResponse(String.format(sMessage, e.toString()));
-		}
-
-		httpResponse_p.setStatus(HttpStatus.OK.value());
-		return new ModelAndView(jsonView_i, ITEM_FIELD, item);
-	}
-
-	@RequestMapping(value = { "/item/find/description/{description}" }, method = { RequestMethod.GET })
-	public ModelAndView findItemsByDescription(@PathVariable("description") String description,
-				   HttpServletResponse httpResponse_p) {
-		List <Item> item;
-		try {
-			item = itemService_i.findItemsByDescription( description );
-		} catch (Exception e) {
-			String sMessage = "Error finding product. [%1$s]";
-			return createErrorResponse(String.format(sMessage, e.toString()));
-		}
-
-		httpResponse_p.setStatus(HttpStatus.OK.value());
-		return new ModelAndView(jsonView_i, ITEM_FIELD, item);
-	}
-
 	
 	public void setJsonView(View view) {
 		jsonView_i = view;
