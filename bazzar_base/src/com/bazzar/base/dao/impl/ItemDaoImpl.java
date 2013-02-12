@@ -59,7 +59,7 @@ protected static Logger logger = Logger.getLogger ( "ItemDao" );
 	public List<Item> findItemsByName ( String itemName ) {
 		Query query = sessionFactory.getCurrentSession().
 				createQuery("SELECT i FROM Item i WHERE i.subgect like :subgect").
-				setString( "subgect", itemName );
+				setParameter ( "subgect", "%" + itemName + "%" );
 		return query.list();
 	}
 
@@ -67,7 +67,7 @@ protected static Logger logger = Logger.getLogger ( "ItemDao" );
 	public List<Item> findItemsByManufactureNumber(String manufactureNumber) {
 		Query query = sessionFactory.getCurrentSession().
 				createQuery("SELECT i FROM Item i WHERE i.manufactureModelNumber like :manufactureModelNumber").
-				setString( "manufactureModelNumber", manufactureNumber );
+				setString( "manufactureModelNumber", "%" + manufactureNumber + "%" );
 		return query.list();
 	}
 
@@ -75,37 +75,24 @@ protected static Logger logger = Logger.getLogger ( "ItemDao" );
 	public List<Item> findItemsByManufacture(String manufacture) {
 		Query query = sessionFactory.getCurrentSession().
 				createQuery("SELECT i FROM Item i WHERE i.manufacture like :manufacture").
-				setString( "manufacture", manufacture );
+				setString( "manufacture", "%" + manufacture + "%" );
 		return query.list();
-		
-//		Query q = sessionFactory.getCurrentSession()
-//				.createQuery("SELECT i FROM Item i LEFT JOIN FETCH i.manufacture where i.status<>0 and i.name=:manufacture");
-//		q.setParameter("manufacture", manufacture);
-//		return q.list();
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Item> findItemsByDescription(String description) {
 		Query query = sessionFactory.getCurrentSession().
 				createQuery("SELECT i FROM Item i WHERE i.description like :description").
-				setString( "description", description );
+				setString( "description", "%" + description + "%" );
 		return query.list();
-		
-//		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Item.class);
-//		criteria.add(Restrictions.ilike ("description", description +"%" ) );
-//		return criteria.list();
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Item> findItemsByBarCode ( String barCode ) {
 		Query query = sessionFactory.getCurrentSession().
 				createQuery("SELECT i FROM Item i WHERE i.barCode like :barCode").
-				setString( "barCode", barCode );
+				setString( "barCode", "%" + barCode + "%" );
 		return query.list();
-
-//		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Item.class);
-//		criteria.add(Restrictions.ilike ("barCode", barCode +"%" ) );
-//		return criteria.list();
 	}
 	
 	public void editItem(Item item) {
