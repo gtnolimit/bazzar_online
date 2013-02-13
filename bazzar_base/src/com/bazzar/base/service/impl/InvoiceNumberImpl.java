@@ -7,7 +7,8 @@ import com.bazzar.base.service.InvoiceNumber;
 public class InvoiceNumberImpl implements InvoiceNumber {
 	
 	private AtomicInteger atomicInteger;  
-    private static InvoiceNumberImpl obj = null;  
+    private static InvoiceNumberImpl obj = null; 
+    
     private InvoiceNumberImpl(int initialValue){  
         this.atomicInteger = new AtomicInteger(initialValue);   
     }  

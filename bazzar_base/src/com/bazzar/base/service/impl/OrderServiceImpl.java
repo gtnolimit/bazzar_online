@@ -40,8 +40,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	public void delete ( Long orderId ){
-		// TODO add delete
-		//orderDao.delete ( orderId );
+		orderDao.delete ( orderId );
 	}
 
 }

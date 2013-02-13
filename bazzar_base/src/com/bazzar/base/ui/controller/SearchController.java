@@ -54,7 +54,6 @@ public class SearchController {
 			return createErrorResponse(String.format(sMessage, e.toString()));
 		}
 		httpResponse_p.setStatus(HttpStatus.OK.value());
-		System.out.println("about to return");
 		return new ModelAndView(jsonView_i, ITEMS_FIELD, items);
 	}
 

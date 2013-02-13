@@ -57,6 +57,8 @@ public class Order extends DBBase implements Serializable{
 	private double orderTotal;
 	@Column(name="ORDER_TAX")
 	private double orderTax;
+	@Column(name="status")
+	private boolean isActive;
 	
 	
 	@ManyToOne
@@ -271,5 +273,12 @@ public class Order extends DBBase implements Serializable{
 	public void setShipping(Set<Shipping> shipping) {
 		this.shipping = shipping;
 	}
-	
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setIsActive(boolean isActive) {
+		this.isActive = isActive;
+	}
 }

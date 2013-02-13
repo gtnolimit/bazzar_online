@@ -53,8 +53,8 @@ protected static Logger logger = Logger.getLogger ( "OrderDao" );
 	@Override
 	public void delete(Long id) {
 		Order order = getOrder ( id );
-		// TODO implement delete order
-		
+		order.setIsActive(false);
+		this.editOrder(order);
 	}
 
 }

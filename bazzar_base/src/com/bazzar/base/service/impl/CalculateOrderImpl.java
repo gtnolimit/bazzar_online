@@ -3,13 +3,17 @@ package com.bazzar.base.service.impl;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.bazzar.base.dao.HomeDao;
 import com.bazzar.base.domain.Address;
+import com.bazzar.base.domain.customer.Home;
 import com.bazzar.base.domain.lookup.AddressTypeLookup;
 import com.bazzar.base.domain.order.Order;
 import com.bazzar.base.domain.order.OrderDetail;
 import com.bazzar.base.service.CalculateOrder;
 
 public class CalculateOrderImpl implements CalculateOrder{
+	
+	private HomeDao homeDao;
 	
 	public Order calculateOrder ( Order order ){
 		order = calculateSubTotal ( order );
@@ -33,15 +37,15 @@ public class CalculateOrderImpl implements CalculateOrder{
 		return order;
 	}
 	
-	// TODO create a tax class and table for Home state
 	public Order calculateTax ( Order order){
+		Home company = homeDao.get((long) 1);
 		Set <Address> address = order.getAddress();
 		Iterator <Address> addressIt = address.iterator();
 		while ( addressIt.hasNext () ){
 			Address add = addressIt.next();
 			AddressTypeLookup addressType = add.getAddressType();
 			if ( addressType.getCode ().equals ( "B" ) && add.getState ().equals ("IL") )
-				order.setOrderTax( order.getTotalBeforeTax() * 9.75 / 100 );
+				order.setOrderTax( order.getTotalBeforeTax() * company.getStateTax() / 100 );
 		}
 		return order;
 	}
