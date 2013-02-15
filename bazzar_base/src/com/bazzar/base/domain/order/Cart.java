@@ -21,7 +21,6 @@ import javax.persistence.Table;
 
 import com.bazzar.base.domain.DBBase;
 import com.bazzar.base.domain.Note;
-import com.bazzar.base.domain.customer.Customer;
 import com.bazzar.base.domain.item.Item;
 import com.bazzar.base.domain.lookup.ShoppingCartTypeLookup;
 
@@ -29,7 +28,6 @@ import com.bazzar.base.domain.lookup.ShoppingCartTypeLookup;
 @Table(name = "CART")
 public class Cart extends DBBase implements Serializable{
 
-	//TODO add customer
 	private static final long serialVersionUID = -5527566248002296042L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -65,14 +63,6 @@ public class Cart extends DBBase implements Serializable{
 	     inverseJoinColumns = @JoinColumn( name="ITEM_ID")
 	)
 	private Set <Item> item = new HashSet <Item> ();
-	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinTable(
-	     name="ORDER_CUSTOMER",
-	     joinColumns = @JoinColumn( name="ORDER_ID"),
-	     inverseJoinColumns = @JoinColumn( name="CUSTOMER_ID")
-	)
-	private Set <Customer> customer = new HashSet <Customer> ();
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
@@ -143,12 +133,6 @@ public class Cart extends DBBase implements Serializable{
 	}
 	public void setItem(Set<Item> item) {
 		this.item = item;
-	}
-	public Set<Customer> getCustomer() {
-		return customer;
-	}
-	public void setCustomer(Set<Customer> customer) {
-		this.customer = customer;
 	}
 	public Set<Note> getNote() {
 		return note;

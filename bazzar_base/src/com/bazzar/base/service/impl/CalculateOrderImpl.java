@@ -3,6 +3,8 @@ package com.bazzar.base.service.impl;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.bazzar.base.dao.HomeDao;
 import com.bazzar.base.domain.Address;
 import com.bazzar.base.domain.customer.Home;
@@ -13,7 +15,8 @@ import com.bazzar.base.service.CalculateOrder;
 
 public class CalculateOrderImpl implements CalculateOrder{
 	
-	private HomeDao homeDao;
+	@Autowired
+	HomeDao homeDao;
 	
 	public Order calculateOrder ( Order order ){
 		order = calculateSubTotal ( order );

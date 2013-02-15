@@ -39,6 +39,10 @@ public class Order extends DBBase implements Serializable{
 	private Long customer_id;
 	@Column(name="TRACKING_NUMBER")
 	private String trackingNumber;
+	@Column(name="URL_TRACKING_NUMBER")
+	private String urlTrackingNumber;
+	@Column(name="SHIPPING_COMPANY")
+	private String shippingCompany;
 	@Column(name="PURCHASE_DATE")
 	private Date purchaseDate;
 	@Column(name="CANCELED_DATE")
@@ -57,6 +61,8 @@ public class Order extends DBBase implements Serializable{
 	private double orderTotal;
 	@Column(name="ORDER_TAX")
 	private double orderTax;
+	@Column(name="INVOICE_PDF_LOCATOR")
+	private String invoicePdfLocator;
 	@Column(name="status")
 	private boolean isActive;
 	
@@ -114,8 +120,37 @@ public class Order extends DBBase implements Serializable{
 	private Set <Note> note = new HashSet <Note> ();
 	
 	
+	
+	public String getUrlTrackingNumber() {
+		return urlTrackingNumber;
+	}
+
+	public void setUrlTrackingNumber(String urlTrackingNumber) {
+		this.urlTrackingNumber = urlTrackingNumber;
+	}
+
+	public String getShippingCompany() {
+		return shippingCompany;
+	}
+
+	public void setShippingCompany(String shippingCompany) {
+		this.shippingCompany = shippingCompany;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
 	public Long getCustomer_id() {
 		return customer_id;
+	}
+
+	public String getInvoicePdfLocator() {
+		return invoicePdfLocator;
+	}
+
+	public void setInvoicePdfLocator(String invoicePdfLocator) {
+		this.invoicePdfLocator = invoicePdfLocator;
 	}
 
 	public void setCustomer_id(Long customer_id) {

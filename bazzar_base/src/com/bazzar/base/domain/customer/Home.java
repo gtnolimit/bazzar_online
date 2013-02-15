@@ -36,6 +36,16 @@ public class Home extends DBBase implements Serializable{
 	private Double stateTax;
 	@Column(name = "HOME_STATE")
 	private Double homeState;
+	@Column(name = "SMTP_HOST")
+	private String smtpHost;
+	@Column (name="SMTP_PORT")
+	private String smtpPort;
+	@Column (name="SMTP_USER")
+	private String smtpUser;
+	@Column (name="SMTP_PASS")
+	private String smtpPass;
+	@Column (name="INFO_EMAIL")
+	private String infoEmail;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
@@ -60,6 +70,15 @@ public class Home extends DBBase implements Serializable{
 	     inverseJoinColumns = @JoinColumn( name="EMAIL_ID")
 	)
 	private Set<Email> email = new HashSet <Email> ();
+
+	
+	public String getInfoEmail() {
+		return infoEmail;
+	}
+
+	public void setInfoEmail(String infoEmail) {
+		this.infoEmail = infoEmail;
+	}
 
 	public Long getId() {
 		return id;
@@ -117,4 +136,37 @@ public class Home extends DBBase implements Serializable{
 		this.homeState = homeState;
 	}
 
+	public String getSmtpHost() {
+		return smtpHost;
+	}
+
+	public void setSmtpHost(String smtpHost) {
+		this.smtpHost = smtpHost;
+	}
+
+	public String getSmtpPort() {
+		return smtpPort;
+	}
+
+	public void setSmtpPort(String smtpPort) {
+		this.smtpPort = smtpPort;
+	}
+
+	public String getSmtpUser() {
+		return smtpUser;
+	}
+
+	public void setSmtpUser(String smtpUser) {
+		this.smtpUser = smtpUser;
+	}
+
+	public String getSmtpPass() {
+		return smtpPass;
+	}
+
+	public void setSmtpPass(String smtpPass) {
+		this.smtpPass = smtpPass;
+	}
+
+	
 }
