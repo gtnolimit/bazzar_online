@@ -89,6 +89,14 @@ public class Item extends DBBase implements Serializable{
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
+	     name="ITEM_COLOR",
+	     joinColumns = @JoinColumn( name="ITEM_ID"),
+	     inverseJoinColumns = @JoinColumn( name="COLOR_ID")
+	)
+	private Set <Color> color = new HashSet <Color> ();
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinTable(
 	     name="ITEM_REVIEW",
 	     joinColumns = @JoinColumn( name="ITEM_ID"),
 	     inverseJoinColumns = @JoinColumn( name="REVIEW_ID")
@@ -167,6 +175,12 @@ public class Item extends DBBase implements Serializable{
 	)
 	private Set <Question> qa = new HashSet <Question> ();
 	
+	public Set<Color> getColor() {
+		return color;
+	}
+	public void setColor(Set<Color> color) {
+		this.color = color;
+	}
 	public boolean isRebate() {
 		return rebate;
 	}
@@ -212,6 +226,13 @@ public class Item extends DBBase implements Serializable{
 	}
 	public String getSubgect() {
 		return subgect;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public void setSubgect(String subgect) {
 		this.subgect = subgect;
