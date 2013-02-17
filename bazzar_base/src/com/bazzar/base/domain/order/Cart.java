@@ -14,14 +14,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+//import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.bazzar.base.domain.DBBase;
 import com.bazzar.base.domain.Note;
-import com.bazzar.base.domain.item.Item;
+//import com.bazzar.base.domain.item.Item;
 import com.bazzar.base.domain.lookup.ShoppingCartTypeLookup;
 
 @Entity
@@ -33,7 +33,7 @@ public class Cart extends DBBase implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	@Column ( name = "CUSTOMER_ID")
-	private Long customer_id;
+	private String customer_id;
 	@Column(name="SHOPPINGCART_CREATED")
 	private Date shoppingCartCreated;
 	@Column(name="SHOPPINGCART_SEND")
@@ -55,7 +55,7 @@ public class Cart extends DBBase implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="type")
 	private ShoppingCartTypeLookup shoppingCartStatus;
-	
+	/*
 	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 	     name="SHOPPINGCART_ITEM",
@@ -63,7 +63,7 @@ public class Cart extends DBBase implements Serializable{
 	     inverseJoinColumns = @JoinColumn( name="ITEM_ID")
 	)
 	private Set <Item> item = new HashSet <Item> ();
-	
+	*/
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 	     name="SHOPPINGCART_NOTE",
@@ -73,10 +73,10 @@ public class Cart extends DBBase implements Serializable{
 	private Set <Note> note = new HashSet <Note> ();
 	
 	
-	public Long getCustomer_id() {
+	public String getCustomer_id() {
 		return customer_id;
 	}
-	public void setCustomer_id(Long customer_id) {
+	public void setCustomer_id(String customer_id) {
 		this.customer_id = customer_id;
 	}
 	public Set<OrderDetail> getDetail() {
@@ -128,12 +128,14 @@ public class Cart extends DBBase implements Serializable{
 	public void setShoppingCartStatus(ShoppingCartTypeLookup shoppingCartStatus) {
 		this.shoppingCartStatus = shoppingCartStatus;
 	}
+	/*
 	public Set<Item> getItem() {
 		return item;
 	}
 	public void setItem(Set<Item> item) {
 		this.item = item;
 	}
+	*/
 	public Set<Note> getNote() {
 		return note;
 	}

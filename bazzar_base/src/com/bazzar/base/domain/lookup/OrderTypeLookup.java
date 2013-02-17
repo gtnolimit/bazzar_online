@@ -15,6 +15,7 @@ private static final long serialVersionUID = 3212625355790851086L;
 	public static final OrderTypeLookup PK = createConstant("PK", "PACKED", OrderTypeLookup.class);
 	public static final OrderTypeLookup SH = createConstant("SH", "SHIPPED", OrderTypeLookup.class);
 	public static final OrderTypeLookup PR = createConstant("PR", "PROCESSED", OrderTypeLookup.class);
+	public static final OrderTypeLookup PD = createConstant("PD", "PAID", OrderTypeLookup.class);
 	
  	@Id
     @Column(name="Code")

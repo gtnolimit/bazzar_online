@@ -11,6 +11,7 @@ import com.bazzar.base.service.CalculateCart;
 public class CalculateCartImpl implements CalculateCart{
 
 	public Cart calculateSubTotal (Cart shippingCart){
+/*
 		double subTotal = 0.00;
 		Set <Item> items = shippingCart.getItem();
 		Set <OrderDetail> quantities = shippingCart.getDetail();
@@ -28,5 +29,7 @@ public class CalculateCartImpl implements CalculateCart{
 		}
 		shippingCart.setShoppingCartSubTotal ( subTotal );
 		return shippingCart;
+*/
+		return null;
 	}
 }

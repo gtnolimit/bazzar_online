@@ -24,7 +24,23 @@ public class ProcessOrderServiceImpl implements ProcessOrderService {
 	@Autowired
 	ItemDao itemDao;
 	
-	public Order processOrderComplete ( Long orderId ){
+	public Order processOrderCreated ( Long orderId ){
+		// TODO create orderProcess
+		return null;
+	}
+	public Order processOrderPaid ( Long orderId ){
+		// TODO create orderProcess
+		return null;
+	}
+	public Order processOrderPacked ( Long orderId ){
+		// TODO create orderProcess
+		return null;
+	}
+	public Order processOrderShipped ( Long orderId ){
+		// TODO create orderProcess
+		return null;
+	}
+ 	public Order processOrderComplete ( Long orderId ){
 		
 		Order order = orderDao.getOrder ( orderId );
 		order.setInvoiceNumber ( invoiceNumImpl.getInvoiceNumber () );
