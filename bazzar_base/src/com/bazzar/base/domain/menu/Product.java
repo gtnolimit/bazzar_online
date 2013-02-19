@@ -13,12 +13,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Where;
 
 import com.bazzar.base.domain.DBBase;
@@ -47,13 +45,12 @@ public class Product extends DBBase  implements Serializable{
 	@JoinColumn(name="PICTURE_ID")
 	private Picture picture;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
  	@JoinTable(
 	     name="PRODUCT_ITEM",
 	     joinColumns = @JoinColumn( name="PRODUCT_ID"),
 	     inverseJoinColumns = @JoinColumn( name="ITEM_ID")
 	)
-	@LazyCollection(LazyCollectionOption.TRUE)
 	private Set <Item> item = new HashSet <Item> ();
  	
 	public Picture getPicture() {

@@ -13,7 +13,7 @@ public interface ItemService {
 	public Item getItem ( Long id );
 	
 	public void editItem ( Item item );
-	public int addItem ( Item item );
+	public Long addItem ( Item item );
 	public void delete ( Long id );
 	public void delete ( Item item );
 }

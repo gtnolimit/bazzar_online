@@ -15,7 +15,7 @@ public interface ItemDao {
 	public List <Item> getAllItems ( );
 		
 	public void editItem ( Item item );
-	public int addItem ( Item item );
+	public Long addItem ( Item item );
 	public void delete ( Long id );
 	public void delete ( Item item );
 

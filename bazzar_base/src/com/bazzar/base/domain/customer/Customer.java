@@ -14,7 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -41,11 +40,8 @@ public class Customer  extends DBBase implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id; 
-	
-	//@Column(name = "TYPE")
-	//private String type;
 	@ManyToOne
-	@JoinColumn(name="prefix")
+	@JoinColumn(name="PREFIX")
 	private PersonPrefixLookup personPerfix;
 	@ManyToOne
 	@JoinColumn(name="TYPE")
@@ -63,7 +59,7 @@ public class Customer  extends DBBase implements Serializable{
 	@Column(name="STATUS")
 	private boolean isActive;
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 	     name="PERSON_ADDRESS",
 	     joinColumns = @JoinColumn( name="PERSON_ID"),
@@ -103,7 +99,7 @@ public class Customer  extends DBBase implements Serializable{
 	)
 	private Set<Review> review = new HashSet <Review> ();
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 	     name="PERSON_QUESTIONS",
 	     joinColumns = @JoinColumn( name="PERSON_ID"),
@@ -111,7 +107,7 @@ public class Customer  extends DBBase implements Serializable{
 	)
 	private Set<Question> qa = new HashSet <Question> ();
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 	     name="PERSON_EMAIL",
 	     joinColumns = @JoinColumn( name="PERSON_ID"),

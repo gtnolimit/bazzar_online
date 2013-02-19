@@ -1,4 +1,4 @@
-package com.bazzar.base.test.cart;
+package com.bazzar.base.test;
 
 public class CreateCartTest {
 

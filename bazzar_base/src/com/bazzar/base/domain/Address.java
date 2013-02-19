@@ -20,8 +20,8 @@ import com.bazzar.base.domain.lookup.StateTypeLookup;
 public class Address extends DBBase {
 
 	private static final long serialVersionUID = 1L;
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="ID")
+	@Id 
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	@ManyToOne
 	@JoinColumn (name="type")

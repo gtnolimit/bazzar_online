@@ -14,7 +14,7 @@ import org.hibernate.annotations.Where;
 import com.bazzar.base.domain.lookup.PhoneTypeLookup;
 
 @Entity
-@Table(name="Phone")
+@Table(name="PHONE")
 @Where(clause="STATUS=1")
 public class Phone  extends DBBase {
 

@@ -3,12 +3,10 @@ package com.bazzar.base.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-//import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-//import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Where;
@@ -33,9 +31,9 @@ public class Picture  extends DBBase {
 	private String alt;
 	@Column(name="STATUS")
 	private boolean isActive;
+	
 	@OneToOne(fetch=FetchType.LAZY, mappedBy="picture")
 	private Color color;
-	
 	
 	public Color getColor() {
 		return color;

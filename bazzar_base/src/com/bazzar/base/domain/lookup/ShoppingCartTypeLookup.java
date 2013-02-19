@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "SHOPPINGCART_STATUS_TYPE_LOOKUP")
+@Table(name = "LOOKUP_SHOPPINGCARTSTATUSTYPE")
 public class ShoppingCartTypeLookup extends AbstractLookupType  {
 
 private static final long serialVersionUID = 3212625355790851086L;
@@ -17,13 +17,13 @@ private static final long serialVersionUID = 3212625355790851086L;
 	public static final ShoppingCartTypeLookup SN = createConstant("SN", "SAND TO ORDER", ShoppingCartTypeLookup.class);
 	
  	@Id
-    @Column(name="Code")
+    @Column(name="CODE")
     @Override
     public String getCode() {
         return super.getCode();
     }
 
-    @Column(name="Description")
+    @Column(name="DESCRIPTION")
     @Override
     public String getDescription() {
         return super.getDescription();

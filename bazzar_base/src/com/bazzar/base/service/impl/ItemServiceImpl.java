@@ -39,7 +39,7 @@ public class ItemServiceImpl implements ItemService {
 		itemDao.editItem(item);
 	}
 
-	public int addItem(Item item) {
+	public Long addItem(Item item) {
 		return itemDao.addItem(item);
 	}
 

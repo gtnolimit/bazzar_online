@@ -1,4 +1,4 @@
-package com.bazzar.base.test.order;
+package com.bazzar.base.test;
 
 public class CreateOrderTest {
 

@@ -7,12 +7,13 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Where;
@@ -36,7 +37,7 @@ public class Category extends DBBase implements Serializable{
 	@Column(name="STATUS")
 	private boolean isActive;
  	
- 	@ManyToMany(cascade=CascadeType.ALL)
+ 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
  	@JoinTable(
 	     name="CATEGORY_SUBCATEGORY",
 	     joinColumns = @JoinColumn( name="CATEGORY_ID"),

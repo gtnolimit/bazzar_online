@@ -42,8 +42,8 @@ protected static Logger logger = Logger.getLogger ( "OrderDao" );
 		return ( Order ) sessionFactory.getCurrentSession ( ).get ( Order.class, orderId );
 	}
 
-	public int createOrder ( Order order ) {
-		return ( Integer ) sessionFactory.getCurrentSession ( ).save ( order );
+	public Long createOrder ( Order order ) {
+		return ( Long ) sessionFactory.getCurrentSession ( ).save ( order );
 	}
 
 	public void editOrder ( Order order ) {

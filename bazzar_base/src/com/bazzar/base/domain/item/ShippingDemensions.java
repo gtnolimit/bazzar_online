@@ -12,9 +12,9 @@ import org.hibernate.annotations.Where;
 import com.bazzar.base.domain.DBBase;
 
 @Entity
-@Table(name = "DETAIL")
+@Table(name = "SHIPPING_DEMENSIONS")
 @Where(clause="STATUS=1")
-public class Detail extends DBBase{
+public class ShippingDemensions  extends DBBase {
 
 	private static final long serialVersionUID = -5527566248002296042L;
 	@Id
@@ -28,26 +28,24 @@ public class Detail extends DBBase{
 	private String displayOption;
 	@Column(name="STATUS")
 	private boolean isActive;
-	
-	
+ 	
 	public boolean isActive() {
 		return isActive;
 	}
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-	public String getAttribute() {
-		return attribute;
-	}
-	public void setAttribute(String attribute) {
-		this.attribute = attribute;
-	}
-
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getAttribute() {
+		return attribute;
+	}
+	public void setAttribute(String attribute) {
+		this.attribute = attribute;
 	}
 	public String getValue() {
 		return value;
@@ -61,5 +59,5 @@ public class Detail extends DBBase{
 	public void setDisplayOption(String displayOption) {
 		this.displayOption = displayOption;
 	}
-	
+
 }

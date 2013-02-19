@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "emailtypelookup")
+@Table(name = "LOOKUP_EMAILTYPE")
 //@Where(clause="status=true")
 public class EmailTypeLookup  extends AbstractLookupType{
 
@@ -19,13 +19,13 @@ public class EmailTypeLookup  extends AbstractLookupType{
 
 	
  	@Id
-    @Column(name="Code")
+    @Column(name="CODE")
     @Override
     public String getCode() {
         return super.getCode();
     }
 
-    @Column(name="Description")
+    @Column(name="DESCRIPTION")
     @Override
     public String getDescription() {
         return super.getDescription();

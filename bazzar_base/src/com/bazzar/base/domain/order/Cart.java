@@ -14,14 +14,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-//import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.bazzar.base.domain.DBBase;
 import com.bazzar.base.domain.Note;
-//import com.bazzar.base.domain.item.Item;
 import com.bazzar.base.domain.lookup.ShoppingCartTypeLookup;
 
 @Entity
@@ -34,40 +32,31 @@ public class Cart extends DBBase implements Serializable{
 	private Long id;
 	@Column ( name = "CUSTOMER_ID")
 	private String customer_id;
-	@Column(name="SHOPPINGCART_CREATED")
+	@Column(name="CART_CREATED")
 	private Date shoppingCartCreated;
-	@Column(name="SHOPPINGCART_SEND")
+	@Column(name="CART_SEND")
 	private Date shoppingCartSendToOrder;
-	@Column(name="SHOPPINGCART_CANCELED")
+	@Column(name="CART_CANCELED")
 	private Date shoppingCartCanceled;
-	@Column(name="SHOPPINGCART_SAVED")
+	@Column(name="CART_SAVED")
 	private Date shoppingCartSaved;
-	@Column(name="SHOPPINGCART_SUB_TOTAL")
+	@Column(name="CART_SUB_TOTAL")
 	private double shoppingCartSubTotal;
-
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinTable(
-	     name="SHOPPINGCART_DETAIL",
-	     joinColumns = @JoinColumn( name="SHOPPINGCART_ID"),
-	     inverseJoinColumns = @JoinColumn( name="DETAIL_ID")
-	)private Set <OrderDetail> detail = new HashSet <OrderDetail> ();
-	
 	@ManyToOne
-	@JoinColumn(name="type")
+	@JoinColumn(name="CART_STATUS")
 	private ShoppingCartTypeLookup shoppingCartStatus;
-	/*
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinTable(
-	     name="SHOPPINGCART_ITEM",
-	     joinColumns = @JoinColumn( name="SHOPPINGCART_ID"),
-	     inverseJoinColumns = @JoinColumn( name="ITEM_ID")
-	)
-	private Set <Item> item = new HashSet <Item> ();
-	*/
+ 
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
-	     name="SHOPPINGCART_NOTE",
-	     joinColumns = @JoinColumn( name="SHOPPINGCART_ID"),
+	     name="CART_DETAILS",
+	     joinColumns = @JoinColumn( name="CART_ID"),
+	     inverseJoinColumns = @JoinColumn( name="DETAIL_ID")
+	)private Set <CartDetail> detail = new HashSet <CartDetail> ();
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinTable(
+	     name="CART_NOTE",
+	     joinColumns = @JoinColumn( name="CART_ID"),
 	     inverseJoinColumns = @JoinColumn( name="NOTE_ID")
 	)
 	private Set <Note> note = new HashSet <Note> ();
@@ -79,10 +68,10 @@ public class Cart extends DBBase implements Serializable{
 	public void setCustomer_id(String customer_id) {
 		this.customer_id = customer_id;
 	}
-	public Set<OrderDetail> getDetail() {
+	public Set<CartDetail> getDetail() {
 		return detail;
 	}
-	public void setDetail(Set<OrderDetail> detail) {
+	public void setDetail(Set<CartDetail> detail) {
 		this.detail = detail;
 	}
 	

@@ -18,29 +18,22 @@ public class OrderServiceImpl implements OrderService {
 	public List<Order> getOrders() {
 		return orderDao.getOrders();
 	}
-
 	public List<Order> getOrdersForCustomer(Long customerId) {
 		return orderDao.getOrdersForCustomer(customerId);
 	}
-
 	public Order getOrder(Long orderId) {
 		return orderDao.getOrder(orderId);
 	}
-
-	public int createOrder(Order order) {
+	public Long createOrder(Order order) {
 		return orderDao.createOrder(order);
 	}
-
 	public void editOrder(Order order) {
 		orderDao.editOrder(order);
 	}
-
 	public Order getOrderByInvoice(String invoiceNumber) {
 		return orderDao.getOrderByInvoice(invoiceNumber);
 	}
-	
 	public void delete ( Long orderId ){
 		orderDao.delete ( orderId );
 	}
-
 }

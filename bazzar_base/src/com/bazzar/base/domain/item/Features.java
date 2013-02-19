@@ -20,8 +20,6 @@ public class Features extends DBBase{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	@Column(name = "CATEGORY")
-	private String category;
 	@Column(name = "ATTRIBUTE")
 	private String attribute;
 	@Column(name = "VALUE")
@@ -30,25 +28,12 @@ public class Features extends DBBase{
 	private String displayOption;
 	@Column(name="STATUS")
 	private boolean isActive;
-	
-	
-	//public String getSubCategory() {
-	//	return subCategory;
-	//}
-	//public void setSubCategory(String subCategory) {
-	//	this.subCategory = subCategory;
-	//}
+
 	public boolean isActive() {
 		return isActive;
 	}
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
-	}
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
 	}
 	public Long getId() {
 		return id;

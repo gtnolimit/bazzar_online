@@ -1,4 +1,4 @@
-package com.bazzar.base.test.menu;
+package com.bazzar.base.test;
 
 import java.util.Date;
 import java.util.HashSet;

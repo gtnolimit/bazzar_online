@@ -1,5 +1,10 @@
 package com.bazzar.base.ui.controller;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
+import com.bazzar.base.dao.ItemDao;
 import com.bazzar.base.dao.MenuDao;
+import com.bazzar.base.dao.SearchDao;
 import com.bazzar.base.domain.item.Item;
-//import com.bazzar.base.domain.menu.Category;
-import com.bazzar.base.test.menu.CreateMenuTest;
+import com.bazzar.base.domain.menu.Product;
+import com.bazzar.base.test.CreateItemTest;
+import com.bazzar.base.test.CreateMenuTest;
 
 @Controller
 public class HomeController {
@@ -23,7 +31,10 @@ public class HomeController {
 	private View jsonView_i;
 	@Autowired 
 	MenuDao menuDao;
-	
+	@Autowired 
+	ItemDao itemDao;
+	@Autowired 
+	SearchDao searchDao;
 	
 	private static final String HOME_FIELD = "home";
 	private static final String ITEM_FIELD = "item";
@@ -41,7 +52,22 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/createItemTest/", method = RequestMethod.GET)
 	public ModelAndView createItem() {
-		
+		Set <Item> items = new HashSet <Item> ();
+		CreateItemTest cit = new CreateItemTest();
+		Item micr = cit.setMicrovave();
+		Long itemMicro = itemDao.addItem(micr);
+		System.out.println("Item Out will be this : " + itemMicro);
+		items.add(micr);
+		List <Product> microwaves = searchDao.findProductByName("Microwave Ovens");
+		Iterator<Product> itM = microwaves.iterator();
+		while ( itM.hasNext() ){
+			Product pr = (Product) itM.next();
+			System.out.println("ProductFound : " + pr.getAttribute());
+			pr.setItem(items);
+			System.out.println("Item added to Product: ");
+			menuDao.edit(pr);
+		}
+		System.out.println("product saved");
 		return new ModelAndView(jsonView_i, ITEM_FIELD, null);
 	}
 	@RequestMapping(value = { "/addItemCart/{itemId}" }, method = { RequestMethod.GET })

@@ -1,10 +1,5 @@
 package com.bazzar.base.service.impl;
 
-import java.util.Iterator;
-import java.util.Set;
-
-import com.bazzar.base.domain.item.Item;
-import com.bazzar.base.domain.order.OrderDetail;
 import com.bazzar.base.domain.order.Cart;
 import com.bazzar.base.service.CalculateCart;
 

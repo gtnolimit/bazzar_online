@@ -14,8 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Where;
@@ -62,10 +62,10 @@ public class CreditCard  extends DBBase {
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
-	@ManyToMany(cascade = ALL,fetch=FetchType.LAZY)
-	@JoinTable(name = "CreditCardAddress", 
-		joinColumns = { @JoinColumn(name = "CreditCard_Id") }, 
-		inverseJoinColumns = { @JoinColumn(name = "Address_Id") })
+	@OneToMany(cascade = ALL,fetch=FetchType.LAZY)
+	@JoinTable(name = "CREDITCARD_ADDRESS", 
+		joinColumns = { @JoinColumn(name = "CREDITCARD_ID") }, 
+		inverseJoinColumns = { @JoinColumn(name = "ADDRESS_ID") })
 	private Set<Address> cardAddress = new HashSet<Address>();
 	
 		public long getId() {

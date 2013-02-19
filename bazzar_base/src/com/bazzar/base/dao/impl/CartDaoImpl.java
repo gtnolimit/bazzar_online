@@ -18,31 +18,25 @@ protected static Logger logger = Logger.getLogger ( "CartDao" );
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public int create ( Cart cart ) {
-		return ( Integer ) sessionFactory.getCurrentSession ().save ( cart );
+	public Long create ( Cart cart ) {
+		return ( Long ) sessionFactory.getCurrentSession ().save ( cart );
 	}
-
 	public void delete ( Long cartId ){
 		delete ( get ( cartId ) );
 		
 	}
-	
 	public void delete ( Cart cart ) {
 		sessionFactory.getCurrentSession ().delete ( cart );
 	}
-
 	public void edit ( Cart cart ) {
 		sessionFactory.getCurrentSession ().merge ( cart );
 	}
-
 	public Cart get ( Long cartId ) {
 		return ( Cart ) sessionFactory.getCurrentSession ().get ( Cart.class, cartId);
 	}
-
 	public Cart findCartByCustomerId ( Long customerId ) {
 		return (Cart) sessionFactory.getCurrentSession ( ).
 				createQuery ( "FROM CART c WHERE c.customer_id = :customerId")
 				.setLong ( "customerId", customerId ).uniqueResult();
 	}
-
 }

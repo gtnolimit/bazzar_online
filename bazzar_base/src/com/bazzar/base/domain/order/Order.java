@@ -14,7 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -63,15 +62,14 @@ public class Order extends DBBase implements Serializable{
 	private double orderTax;
 	@Column(name="INVOICE_PDF_LOCATOR")
 	private String invoicePdfLocator;
-	@Column(name="status")
+	@Column(name="STATUS")
 	private boolean isActive;
 	
-	
 	@ManyToOne
-	@JoinColumn(name="orderStatus")
+	@JoinColumn(name="ORDER_STATUS")
 	private OrderTypeLookup orderStatus;
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 	     name="ORDER_CUSTOMER",
 	     joinColumns = @JoinColumn( name="ORDER_ID"),
@@ -105,7 +103,7 @@ public class Order extends DBBase implements Serializable{
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
-	     name="ORDERS_DETAIL",
+	     name="ORDER_DETAILS",
 	     joinColumns = @JoinColumn( name="ORDER_ID"),
 	     inverseJoinColumns = @JoinColumn( name="DETAIL_ID")
 	)

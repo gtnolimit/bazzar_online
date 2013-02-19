@@ -59,8 +59,8 @@ protected static Logger logger = Logger.getLogger ( "ItemDao" );
 		sessionFactory.getCurrentSession ( ).merge ( item );
 	}
 
-	public int addItem(Item item) {
-		return ( Integer ) sessionFactory.getCurrentSession ( ).save ( item );
+	public Long addItem(Item item) {
+		return ( Long ) sessionFactory.getCurrentSession ( ).save ( item );
 	}
 
 	public void delete(Long id) {

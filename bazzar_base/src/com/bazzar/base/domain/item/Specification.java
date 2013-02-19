@@ -20,8 +20,6 @@ public class Specification extends DBBase{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	@Column(name = "CATEGORY")
-	private String category;
 	@Column(name = "ATTRIBUTE")
 	private String attribute;
 	@Column(name = "VALUE")
@@ -45,13 +43,7 @@ public class Specification extends DBBase{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
-	}
-		public String getValue() {
+	public String getValue() {
 		return value;
 	}
 	public void setValue(String value) {

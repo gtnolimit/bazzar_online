@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
@@ -66,7 +65,7 @@ public class Item extends DBBase implements Serializable{
 	@Column(name="STATUS")
 	private boolean isActive;
 		
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 	     name="ITEM_MANUFACTURE",
 	     joinColumns = @JoinColumn( name="ITEM_ID"),
@@ -82,7 +81,7 @@ public class Item extends DBBase implements Serializable{
 	)
 	private Set <Rating> rating = new HashSet <Rating> ();
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 	     name="ITEM_COLOR",
 	     joinColumns = @JoinColumn( name="ITEM_ID"),
@@ -98,7 +97,7 @@ public class Item extends DBBase implements Serializable{
 	)
 	private Set <Review> review = new HashSet <Review> ();
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 	     name="ITEM_PICTURES",
 	     joinColumns = @JoinColumn( name="ITEM_ID"),
@@ -138,7 +137,15 @@ public class Item extends DBBase implements Serializable{
 	)
 	private Set <Demensions> demensions = new HashSet <Demensions> ();
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinTable(
+	     name="ITEM_SHIPMENTDEMENSIONS",
+	     joinColumns = @JoinColumn( name="ITEM_ID"),
+	     inverseJoinColumns = @JoinColumn( name="DEMENSIONS_ID")
+	)
+	private Set <ShippingDemensions> shippingDemensions = new HashSet <ShippingDemensions> ();
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 	     name="ITEM_ACCESSORIES",
 	     joinColumns = @JoinColumn( name="ITEM_ID"),
@@ -346,6 +353,12 @@ public class Item extends DBBase implements Serializable{
 	}
 	public void setSpecification(Set<Specification> specification) {
 		this.specification = specification;
+	}
+	public Set<ShippingDemensions> getShippingDemensions() {
+		return shippingDemensions;
+	}
+	public void setShippingDemensions(Set<ShippingDemensions> shippingDemensions) {
+		this.shippingDemensions = shippingDemensions;
 	}
 		
 }

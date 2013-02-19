@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bazzar.base.dao.SearchDao;
 import com.bazzar.base.domain.item.Item;
+import com.bazzar.base.domain.menu.Product;
 
 @Repository
 @Transactional
@@ -23,6 +24,14 @@ public class SearchDaoImpl implements SearchDao {
 		Query query = sessionFactory.getCurrentSession().
 				createQuery("SELECT i FROM Item i WHERE i.subgect like :subgect").
 				setParameter ( "subgect", "%" + itemName + "%" );
+		return query.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Product> findProductByName ( String productName ) {
+		Query query = sessionFactory.getCurrentSession().
+				createQuery("SELECT p FROM Product p WHERE p.attribute like :productName").
+				setParameter ( "productName", "%" + productName + "%" );
 		return query.list();
 	}
 

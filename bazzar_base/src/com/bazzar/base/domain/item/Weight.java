@@ -20,10 +20,6 @@ public class Weight extends DBBase{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	@Column(name = "CATEGORY_GROUP")
-	private long categoryGroup;
-	@Column(name = "CATEGORY")
-	private String category;
 	@Column(name = "ATTRIBUTE")
 	private String attribute;
 	@Column(name = "VALUE")
@@ -45,18 +41,6 @@ public class Weight extends DBBase{
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public long getCategoryGroup() {
-		return categoryGroup;
-	}
-	public void setCategoryGroup(long categoryGroup) {
-		this.categoryGroup = categoryGroup;
-	}
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
 	}
 	public String getAttribute() {
 		return attribute;
