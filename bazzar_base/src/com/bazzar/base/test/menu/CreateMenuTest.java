@@ -187,22 +187,20 @@ public class CreateMenuTest {
 		product.setCPD( new Date () );
 		product.setUPD( new Date () );
 		
-		if ( pictureLocation != null )
+		if ( pictureLocation != null ){
 			product.setPicture( setPicture (pictureLocation)) ;
+			System.out.println ("setting picture : " + pictureLocation);
+		}
 		return product;
 	}
-	@SuppressWarnings("unchecked")
-	private Set <Picture> setPicture ( String location ){
-		@SuppressWarnings("rawtypes")
-		Set <Picture> pics = new HashSet ();
+	private Picture setPicture ( String location ){
 		Picture pic = new Picture ();
 		pic.setPictureLocation(location);
 		pic.setDescription(location);
 		pic.setActive(true);
 		pic.setCPD(new Date ());
 		pic.setUPD(new Date ());
-		pics.add(pic);
-		return pics;
+		return pic;
 	}
 	private SubCategory setSubCategory (String attribute, Set <Product> products){
 		SubCategory subCategory = new SubCategory ();

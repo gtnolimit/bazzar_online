@@ -14,8 +14,8 @@ import org.hibernate.annotations.Where;
 import com.bazzar.base.domain.lookup.EmailTypeLookup;
 
 @Entity
-@Table(name="Email")
-@Where(clause="status<>0")
+@Table(name="EMAIL")
+@Where(clause="STATUS=1")
 public class Email  extends DBBase {
 
 	private static final long serialVersionUID = 1L;
@@ -24,11 +24,11 @@ public class Email  extends DBBase {
 	@Column(name="ID")
 	private long id;
 	@ManyToOne
-	@JoinColumn(name="type")
+	@JoinColumn(name="TYPE")
 	private EmailTypeLookup emailType;
-	@Column(name="Email")
+	@Column(name="EMAIL")
 	private String email;
-	@Column(name="status")
+	@Column(name="STATUS")
 	private Boolean isActuve;
 
 	

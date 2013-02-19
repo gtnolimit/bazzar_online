@@ -13,7 +13,7 @@ import com.bazzar.base.domain.DBBase;
 
 @Entity
 @Table(name = "WARRANTY")
-@Where(clause="status=1")
+@Where(clause="STATUS=1")
 public class Warranty extends DBBase{
 
 	private static final long serialVersionUID = -5527566248002296042L;
@@ -30,7 +30,7 @@ public class Warranty extends DBBase{
 	private String value;
 	@Column(name = "DISPLAY_OPTION")
 	private String displayOption;
-	@Column(name="Status")
+	@Column(name="STATUS")
 	private boolean isActive;
 	
 	public boolean isActive() {

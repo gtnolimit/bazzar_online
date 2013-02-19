@@ -13,7 +13,7 @@ import com.bazzar.base.domain.DBBase;
 
 @Entity
 @Table(name = "FEATURES")
-@Where(clause="status=1")
+@Where(clause="STATUS=1")
 public class Features extends DBBase{
 	
 	private static final long serialVersionUID = -5527566248002296042L;
@@ -22,15 +22,13 @@ public class Features extends DBBase{
 	private Long id;
 	@Column(name = "CATEGORY")
 	private String category;
-	//@Column(name = "SUB_CATEGORY")
-	//private String subCategory;
 	@Column(name = "ATTRIBUTE")
 	private String attribute;
 	@Column(name = "VALUE")
 	private String value;
 	@Column(name = "DISPLAY_OPTION")
 	private String displayOption;
-	@Column(name="Status")
+	@Column(name="STATUS")
 	private boolean isActive;
 	
 	

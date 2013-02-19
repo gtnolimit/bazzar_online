@@ -33,7 +33,7 @@ import com.bazzar.base.domain.Review;
 
 @Entity
 @Table(name = "CUSTOMER")
-@Where(clause="status<>1")
+@Where(clause="STATUS=1")
 public class Customer  extends DBBase implements Serializable{
 // TODO add user
 	
@@ -48,7 +48,7 @@ public class Customer  extends DBBase implements Serializable{
 	@JoinColumn(name="prefix")
 	private PersonPrefixLookup personPerfix;
 	@ManyToOne
-	@JoinColumn(name="type")
+	@JoinColumn(name="TYPE")
 	private CustomerTypeLookup customerType;
 	@Column(name = "FIRST_NAME")
 	private String firstName;
@@ -60,7 +60,7 @@ public class Customer  extends DBBase implements Serializable{
 	private String suffix;
 	@Column(name = "DOB")
 	private Date dob;
-	@Column(name="Status")
+	@Column(name="STATUS")
 	private boolean isActive;
 	
 	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)

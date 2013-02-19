@@ -13,7 +13,7 @@ import com.bazzar.base.domain.DBBase;
 
 @Entity
 @Table(name = "DETAIL")
-@Where(clause="status=1")
+@Where(clause="STATUS=1")
 public class Detail extends DBBase{
 
 	private static final long serialVersionUID = -5527566248002296042L;
@@ -28,7 +28,7 @@ public class Detail extends DBBase{
 	private String value;
 	@Column(name = "DISPLAY_OPTION")
 	private String displayOption;
-	@Column(name="Status")
+	@Column(name="STATUS")
 	private boolean isActive;
 	
 	

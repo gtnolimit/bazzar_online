@@ -23,18 +23,13 @@ import org.hibernate.annotations.Where;
 import com.bazzar.base.domain.DBBase;
 import com.bazzar.base.domain.Picture;
 import com.bazzar.base.domain.Review;
-//import com.bazzar.base.domain.menu.Product;
-//import com.bazzar.base.domain.order.Shipping;
 import com.bazzar.base.domain.qa.Question;
 
 @Entity
 @Table(name = "ITEM") 
-@Where(clause="status=1")
+@Where(clause="STATUS=1")
 public class Item extends DBBase implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2013406734640664822L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -68,7 +63,7 @@ public class Item extends DBBase implements Serializable{
 	private String barCode;
 	@Column (name= "PAGE_LOCATOR")
 	private String pageLocator;
-	@Column(name="Status")
+	@Column(name="STATUS")
 	private boolean isActive;
 		
 	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
@@ -87,7 +82,7 @@ public class Item extends DBBase implements Serializable{
 	)
 	private Set <Rating> rating = new HashSet <Rating> ();
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 	     name="ITEM_COLOR",
 	     joinColumns = @JoinColumn( name="ITEM_ID"),
@@ -103,7 +98,7 @@ public class Item extends DBBase implements Serializable{
 	)
 	private Set <Review> review = new HashSet <Review> ();
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 	     name="ITEM_PICTURES",
 	     joinColumns = @JoinColumn( name="ITEM_ID"),
@@ -298,12 +293,6 @@ public class Item extends DBBase implements Serializable{
 	public void setManufacture(Set<Manufacture> manufacture) {
 		this.manufacture = manufacture;
 	}
-	//public Set<Shipping> getShipping() {
-	//	return shipping;
-	//}
-	//public void setShipping(Set<Shipping> shipping) {
-	//	this.shipping = shipping;
-	//}
 	public Set<Review> getReview() {
 		return review;
 	}

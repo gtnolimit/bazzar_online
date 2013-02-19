@@ -13,7 +13,7 @@ import com.bazzar.base.domain.DBBase;
 
 @Entity
 @Table(name = "RATING")
-@Where(clause="status=1")
+@Where(clause="STATUS=1")
 public class Rating extends DBBase{
 
 	private static final long serialVersionUID = -5527566248002296042L;
@@ -22,7 +22,7 @@ public class Rating extends DBBase{
 	private Long id;
 	@Column(name = "RATING")
 	private int rating;
-	@Column(name="Status")
+	@Column(name="STATUS")
 	private boolean isActive;
 	
 	public Long getId() {

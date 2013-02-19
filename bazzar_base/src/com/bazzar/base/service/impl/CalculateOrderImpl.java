@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bazzar.base.dao.HomeDao;
 import com.bazzar.base.domain.Address;
-import com.bazzar.base.domain.customer.Home;
+import com.bazzar.base.domain.Home;
 import com.bazzar.base.domain.lookup.AddressTypeLookup;
 import com.bazzar.base.domain.order.Order;
 import com.bazzar.base.domain.order.OrderDetail;

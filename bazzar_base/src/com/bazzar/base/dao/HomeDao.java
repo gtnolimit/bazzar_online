@@ -1,11 +1,10 @@
 package com.bazzar.base.dao;
 
-import com.bazzar.base.domain.customer.Home;
+import com.bazzar.base.domain.Home;
 
 public interface HomeDao {
-	
-	public int add ( Home company );
-	public void edit ( Home comoany );
-	public Home get ( Long id );
 
+	public int create ( Home cart );
+	public void edit ( Home cart );
+	public Home get ( Long homeId );
 }

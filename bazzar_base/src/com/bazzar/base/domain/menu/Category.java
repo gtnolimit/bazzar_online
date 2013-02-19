@@ -7,13 +7,12 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Where;
@@ -22,7 +21,7 @@ import com.bazzar.base.domain.DBBase;
 
 @Entity
 @Table(name = "CATEGORY") 
-@Where(clause="status=1")
+@Where(clause="STATUS=1")
 public class Category extends DBBase implements Serializable{
 	
 	private static final long serialVersionUID = 2013406734640664822L;
@@ -34,10 +33,10 @@ public class Category extends DBBase implements Serializable{
  	private String attribute;
  	@Column(name="DISPLAY_OPTION")
  	private String displayOption;
-	@Column(name="Status")
+	@Column(name="STATUS")
 	private boolean isActive;
  	
- 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+ 	@ManyToMany(cascade=CascadeType.ALL)
  	@JoinTable(
 	     name="CATEGORY_SUBCATEGORY",
 	     joinColumns = @JoinColumn( name="CATEGORY_ID"),

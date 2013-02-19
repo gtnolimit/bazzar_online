@@ -12,7 +12,7 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bazzar.base.dao.HomeDao;
-import com.bazzar.base.domain.customer.Home;
+import com.bazzar.base.domain.Home;
 
 public class SendEmailService {
 	

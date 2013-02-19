@@ -24,35 +24,35 @@ import com.bazzar.base.domain.lookup.CreditCardTypeLookup;
 import com.bazzar.base.domain.lookup.CustomerTypeLookup;
 
 @Entity
-@Table(name="CreditCard")
-@Where(clause="status<>0")
+@Table(name="CREDITCARD")
+@Where(clause="STATUS=1")
 public class CreditCard  extends DBBase {
 
 	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="ID")
 	private long id;
-	@Column(name="parent_Id")
+	@Column(name="PARENT_ID")
 	private long parentId;
 	@ManyToOne
-	@JoinColumn(name="Global_Type")
+	@JoinColumn(name="GLOBAL_TYPE")
 	private CustomerTypeLookup globalType;
 	@ManyToOne
-	@JoinColumn(name="Card_Type")
+	@JoinColumn(name="CARD_TYPE")
 	private CreditCardTypeLookup cardType;
-	@Column(name="Number")
+	@Column(name="NUMBER")
 	private String number; 
-	@Column(name="Display_Number")
+	@Column(name="DISPLAY_NUMBER")
 	private String displayNumber; 
-	@Column(name="Expiration")
+	@Column(name="EXPARATION")
 	private String expiration; 
-	@Column(name="Security_Code")
+	@Column(name="SECURITY_CODE")
 	private String securityCode; 
-	@Column(name="Cardholder_Name")
+	@Column(name="CARHOLDER_NAME")
 	private String cardholderName;
-	@Column(name="Nickname")
+	@Column(name="NICKNAME")
 	private String nickname;
-	@Column(name="Status")
+	@Column(name="STATUS")
 	private Boolean isActive;
 
 	

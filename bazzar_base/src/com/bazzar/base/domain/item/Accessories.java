@@ -13,7 +13,7 @@ import com.bazzar.base.domain.DBBase;
 
 @Entity
 @Table(name = "ACCESSORIES")
-@Where(clause="status=1")
+@Where(clause="STATUS=1")
 public class Accessories extends DBBase {
 
 	private static final long serialVersionUID = -5527566248002296042L;
@@ -22,7 +22,7 @@ public class Accessories extends DBBase {
 	private Long id;
 	@Column(name = "ITEM_ID")
 	private Long itemId;
-	@Column(name="Status")
+	@Column(name="STATUS")
 	private boolean isActive;
 	
 	public boolean isActive() {
@@ -46,7 +46,7 @@ public class Accessories extends DBBase {
 	}
 
 	public void setItem(Long itemId) {
-		itemId = itemId;
+		this.itemId = itemId;
 	}
 
 

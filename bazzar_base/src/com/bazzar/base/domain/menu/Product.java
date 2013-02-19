@@ -13,7 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
@@ -27,7 +28,7 @@ import com.bazzar.base.domain.item.Item;
 
 @Entity
 @Table(name = "PRODUCT")
-@Where(clause="status=1")
+@Where(clause="STATUS=1")
 public class Product extends DBBase  implements Serializable{
 
 	private static final long serialVersionUID = 2013406734640664822L;
@@ -39,18 +40,14 @@ public class Product extends DBBase  implements Serializable{
  	private String attribute;
  	@Column(name="DISPLAY_OPTION")
  	private String displayOption;
-	@Column(name="Status")
+	@Column(name="STATUS")
 	private boolean isActive;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinTable(
-	     name="PRODUCT_PICTURE",
-	     joinColumns = @JoinColumn( name="PRODUCT_ID"),
-	     inverseJoinColumns = @JoinColumn( name="PICTURE_ID")
-	)
-	private Set <Picture> picture = new HashSet <Picture> ();
-
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="PICTURE_ID")
+	private Picture picture;
+	
+	@ManyToMany(cascade=CascadeType.ALL)
  	@JoinTable(
 	     name="PRODUCT_ITEM",
 	     joinColumns = @JoinColumn( name="PRODUCT_ID"),
@@ -59,51 +56,39 @@ public class Product extends DBBase  implements Serializable{
 	@LazyCollection(LazyCollectionOption.TRUE)
 	private Set <Item> item = new HashSet <Item> ();
  	
-	
- 	public Long getId() {
+	public Picture getPicture() {
+		return picture;
+	}
+	public void setPicture(Picture picture) {
+		this.picture = picture;
+	}
+	public Long getId() {
 		return id;
 	}
-
-	public void setId(Long id) {
+ 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public String getAttribute() {
 		return attribute;
 	}
-
 	public void setAttribute(String attribute) {
 		this.attribute = attribute;
 	}
-
 	public String getDisplayOption() {
 		return displayOption;
 	}
-
 	public void setDisplayOption(String displayOption) {
 		this.displayOption = displayOption;
 	}
-
-	public Set<Picture> getPicture() {
-		return picture;
-	}
-
 	public Set<Item> getItem() {
 		return item;
 	}
-
 	public void setItem(Set<Item> item) {
 		this.item = item;
 	}
-
-	public void setPicture(Set<Picture> picture) {
-		this.picture = picture;
-	}
-
 	public boolean isActive() {
 		return isActive;
 	}
-
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}

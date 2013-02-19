@@ -14,8 +14,8 @@ import org.hibernate.annotations.Where;
 import com.bazzar.base.domain.DBBase;
 
 @Entity
-@Table(name = "Answer")
-@Where(clause="status<>1")
+@Table(name = "ANSWER")
+@Where(clause="STATUS=1")
 public class Answer extends DBBase implements Serializable{
 
 	private static final long serialVersionUID = -5527566248002296042L;
@@ -26,7 +26,7 @@ public class Answer extends DBBase implements Serializable{
 	private Long customerId;
 	@Column(name="ANSWER")
 	private String answer;
-	@Column(name="Status")
+	@Column(name="STATUS")
 	private boolean isActive;
 
 	public Long getCustomerId() {

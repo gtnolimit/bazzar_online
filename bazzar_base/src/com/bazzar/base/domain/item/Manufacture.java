@@ -22,7 +22,7 @@ import com.bazzar.base.domain.Picture;
 
 @Entity
 @Table(name = "MANUFACTURE")
-@Where(clause="status=1")
+@Where(clause="STATUS=1")
 public class Manufacture extends DBBase implements Serializable{
 	
 	private static final long serialVersionUID = -5527566248002296042L;
@@ -35,7 +35,7 @@ public class Manufacture extends DBBase implements Serializable{
 	private String number;
 	@Column(name = "AUTHORIZE_PICTURE")
 	private boolean authorizePicture;
-	@Column(name="Status")
+	@Column(name="STATUS")
 	private boolean isActive;
 	
  	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
