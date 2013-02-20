@@ -32,8 +32,6 @@ public class Category extends DBBase implements Serializable{
 
 	@Column(name="ATTRIBUTE") 
  	private String attribute;
- 	@Column(name="DISPLAY_OPTION")
- 	private String displayOption;
 	@Column(name="STATUS")
 	private boolean isActive;
  	
@@ -48,41 +46,25 @@ public class Category extends DBBase implements Serializable{
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public String getAttribute() {
 		return attribute;
 	}
-
 	public void setAttribute(String attribute) {
 		this.attribute = attribute;
 	}
-
-	public String getDisplayOption() {
-		return displayOption;
-	}
-
-	public void setDisplayOption(String displayOption) {
-		this.displayOption = displayOption;
-	}
-
 	public boolean isActive() {
 		return isActive;
 	}
-
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-
 	public Set<SubCategory> getSubCategory() {
 		return subCategory;
 	}
-
 	public void setSubCategory(Set<SubCategory> subCategory) {
 		this.subCategory = subCategory;
 	}
-
 }

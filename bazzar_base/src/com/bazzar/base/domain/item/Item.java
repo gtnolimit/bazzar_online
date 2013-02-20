@@ -34,9 +34,9 @@ public class Item extends DBBase implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id; 
 	
-	@Column(name = "SUBJECT")
+	@Column(name = "SUBJECT", nullable = true, length = 2500)
 	private String subgect;
-	@Column(name = "DESCRIPTION")
+	@Column(name = "DESCRIPTION", nullable = true, length = 2500)
 	private String description;
 	@Column(name = "SPECIAL_OFFER_PRICE")
 	private double specialOfferPrice;

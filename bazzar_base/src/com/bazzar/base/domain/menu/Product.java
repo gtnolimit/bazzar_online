@@ -36,8 +36,6 @@ public class Product extends DBBase  implements Serializable{
 
 	@Column(name="ATTRIBUTE") 
  	private String attribute;
- 	@Column(name="DISPLAY_OPTION")
- 	private String displayOption;
 	@Column(name="STATUS")
 	private boolean isActive;
 	
@@ -70,12 +68,6 @@ public class Product extends DBBase  implements Serializable{
 	}
 	public void setAttribute(String attribute) {
 		this.attribute = attribute;
-	}
-	public String getDisplayOption() {
-		return displayOption;
-	}
-	public void setDisplayOption(String displayOption) {
-		this.displayOption = displayOption;
 	}
 	public Set<Item> getItem() {
 		return item;

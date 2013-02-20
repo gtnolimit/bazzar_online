@@ -1,5 +1,6 @@
 package com.bazzar.base.ui.controller;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -54,19 +55,45 @@ public class HomeController {
 	public ModelAndView createItem() {
 		Set <Item> items = new HashSet <Item> ();
 		CreateItemTest cit = new CreateItemTest();
-		Item micr = cit.setMicrovave();
-		Long itemMicro = itemDao.addItem(micr);
-		System.out.println("Item Out will be this : " + itemMicro);
-		items.add(micr);
-		List <Product> microwaves = searchDao.findProductByName("Microwave Ovens");
-		Iterator<Product> itM = microwaves.iterator();
-		while ( itM.hasNext() ){
-			Product pr = (Product) itM.next();
-			System.out.println("ProductFound : " + pr.getAttribute());
-			pr.setItem(items);
-			System.out.println("Item added to Product: ");
-			menuDao.edit(pr);
+		Item item = null;
+		Iterator it = null;
+		Long id = (long) 0;
+		List <Product> products = new ArrayList <Product> ();
+		Product product = null;
+		
+		// set microwave
+		item = cit.setMicrovave();
+		//id = itemDao.addItem(item);
+		items.add(item);
+		products = searchDao.findProductByName("Microwave Ovens");
+		it = products.iterator();
+		while ( it.hasNext() ){
+			product = (Product) it.next();
+			product.setItem(items);
+			menuDao.edit(product);
+			System.out.println("Looping");
 		}
+		System.out.println("Item added to Product: ");
+		System.out.println("ProductFound : " + product.getAttribute());
+		System.out.println("Item Out will be this : " + id);
+		items.clear();
+		
+		// set ipod
+		item = cit.setIPodShuff();
+		//id = itemDao.addItem(item);
+		items.add(item);
+		products = searchDao.findProductByName("iPods & MP3 Players");
+		it = products.iterator();
+		while ( it.hasNext() ){
+			product = (Product) it.next();
+			product.setItem(items);
+			menuDao.edit(product);
+		}
+		System.out.println("Item added to Product: ");
+		System.out.println("ProductFound : " + product.getAttribute());
+		System.out.println("Item Out will be this : " + id);
+		items.clear();
+		
 		System.out.println("product saved");
 		return new ModelAndView(jsonView_i, ITEM_FIELD, null);
 	}

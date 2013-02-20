@@ -24,8 +24,6 @@ public class Weight extends DBBase{
 	private String attribute;
 	@Column(name = "VALUE")
 	private String value;
-	@Column(name = "DISPLAY_OPTION")
-	private String displayOption;
 	@Column(name="STATUS")
 	private boolean isActive;
 	
@@ -54,11 +52,4 @@ public class Weight extends DBBase{
 	public void setValue(String value) {
 		this.value = value;
 	}
-	public String getDisplayOption() {
-		return displayOption;
-	}
-	public void setDisplayOption(String displayOption) {
-		this.displayOption = displayOption;
-	}
-	
 }

@@ -20,16 +20,12 @@ public class Specification extends DBBase{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	@Column(name = "ATTRIBUTE")
+	@Column(name = "ATTRIBUTE", nullable = true, length = 1000)
 	private String attribute;
-	@Column(name = "VALUE")
+	@Column(name = "VALUE", nullable = true, length = 1000)
 	private String value;
-	@Column(name = "DISPLAY_OPTION")
-	private String displayOption;
 	@Column(name="STATUS")
 	private boolean isActive;
-	
- 	
 	
 	public String getAttribute() {
 		return attribute;
@@ -48,12 +44,6 @@ public class Specification extends DBBase{
 	}
 	public void setValue(String value) {
 		this.value = value;
-	}
-	public String getDisplayOption() {
-		return displayOption;
-	}
-	public void setDisplayOption(String displayOption) {
-		this.displayOption = displayOption;
 	}
 	public boolean isActive() {
 		return isActive;

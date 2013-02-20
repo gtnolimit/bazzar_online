@@ -24,6 +24,81 @@ import com.bazzar.base.domain.qa.Question;
 public class CreateItemTest {
 	
 	public CreateItemTest (){}
+	public Item setIPodShuff(){
+		Item item = this.setItem("Apple 2GB Pink iPod Shuffle", 
+				"Crafted From A Single Piece Of Aluminum/ VoiceOver Speaks 29 Different Languages/ Up To 15 Hours Of Audio Playback/ Shuffle Switch/ Earphones Included/ Charges Via USB To Computer/ 2GB Storage Capacity/ Pink Finish", 
+				49.00, 
+				new Date(), 
+				new Date(), 
+				false, 
+				49.00, 
+				69.00, 
+				-1, 
+				false, 
+				true, 
+				"MD773LLA", 
+				"MD773LL/A", 
+				null);
+		// set Color
+		String [] col = {"Black","White","Dark Grey","Almond","Steal","Pink"};
+		item.setColor(this.setColor(col));
+		// set Review
+		String [] rev = {"Small and great sound"};
+		item.setReview(this.setReviews(rev));
+		// set Manufacture
+		String [][] man = 	{{"Apple", "MD773LL/A", "/images/items/xlarge0-64033.jpg"}};
+		item.setManufacture(this.setManufactures(man));
+		// set Rating
+		int [] rating = {1,1,1,1};
+		item.setRating(setRatings(rating));
+		// set Weight
+		String [][] wet = {{"Unit","0.03 lbs"},{"Shipping","2 lbs"}};
+		item.setWieght(this.setWeights(wet));
+		// set Warranty
+		//String [][]warranty = {{"Manufacturer Warranty (authorized online retailer)",null},
+		//		{"Parts Warranty","Limited 1-year entire appliance"},
+		//		{"Labor Warranty","Limited 1-year entire appliance"}};
+		//item.setWarranty(this.setWaranties(warranty));
+		// set Demensions
+		String [][] dem = {{"Depth"," 0.34\""},{"Height","1.14\""},{"Width","1.24\""}};
+		item.setDemensions(this.setDemensions(dem));
+		// set Shipping Demensions
+		//String [][] shipDem = {{"Depth","14\""},{"Height","9-1/4\""},{"Width","18-13/16\""}};
+		//item.setShippingDemensions(this.setShippingDemensions(shipDem));
+		// set Features
+		String [][]features = {{"Sleek, anodized aluminum. Eight gorgeous colors","Its main body is crafted from a single piece of aluminum, so iPod shuffle feels solid, sleek, and durable. And the color palette makes it the perfect fashion accessory."},
+				{"Hundreds of songs to go.","Never leave a favorite tune behind. Along with up to 15 hours of battery life1, iPod shuffle gives you 2GB of storage capacity, good for hundreds of songs2. That’s plenty of room for the essential songs of your workout or commute. And for multiple playlists, Genius Mixes, podcasts, and audiobooks, too."},
+				{"Goes anywhere. And with anything.","iPod shuffle isn’t just portable. It’s wearable, too. Clip it to your shirt, jacket, workout gear, backpack, or purse strap, and it stays put — whether you’re running an errand or running around the track."},
+				{"Control your music with just a click.","The big, clickable control pad on the front of iPod shuffle makes it easy to see and use the music controls. Press the center button to play and pause. Press the outer buttons to skip forward or back and adjust volume. Click, click, click. It’s music to your fingers."},
+				{"Play it your way.","Maybe you’re the spontaneous type. Or maybe you prefer a little order. Just flip the shuffle switch to suit your listening style. Flip it to the left, and you’ll hear your music in a refreshingly random way. Flip it to the middle, and your songs play in order. Or flip to the right to turn iPod shuffle off."},
+				{"Give your songs a voice.","Say you’re listening to a song and want to know the title or the artist. Just press the VoiceOver button on top of your iPod shuffle, and it tells you3. You can even use VoiceOver to hear the names of playlists and switch between them. And if your battery needs charging, VoiceOver tells you that, too."},
+				{"It speaks your language.","A French love song. A Spanish bolero. An Italian cantata. Your music library has songs from all over the world. That’s why VoiceOver speaks 29 different languages. So it can tell you song titles and artists in their native tongues or any language you choose."},
+				{"Sync to your heart's content.","iTunes on your Mac or PC makes it easy to load up your iPod shuffle. Just choose the playlists, audiobooks, podcasts, and other audio files you want, then sync"},
+				{"When one playlist isn't enough.","You probably have multiple playlists in iTunes on your computer. One for your commute. One for the gym. Sync those playlists to iPod shuffle, and you can play the perfect mix for whatever mood strikes you. VoiceOver tells you the name of each playlist, so it’s easy to switch between them and find the one you want without looking."},
+				{"Have Genius call the tunes.","There’s another way to get a good mix of music on iPod shuffle: Let Genius do the work. Activate Genius in iTunes on your computer, and it automatically finds songs that sound great together. Then it creates Genius Mixes, which you can easily sync to your iPod shuffle. It’s the perfect way to rediscover songs you haven’t listened to in forever."}};
+		item.setFeatures(this.setFeatures(features));
+		// set Specifications
+		String [][]specification = {{"iPod Type","Shuffle"},
+				{"Average Battery Life","15 Hours"},
+				{"Recharge Time","3 Hours"},
+				{"Power Source","Built-in Rechargeable Li-ion Battery, USB"},
+				{"Storage Capacity","2GB"},
+				{"Storage Type","Flash Drive"},
+				{"Song Capacity","2GB"},
+				{"Supported Audio Formats","AAC, Protected AAC, MP3, MP3 VBR, Audible, Apple Lossless, AIFF, WAV"},
+				{"Headphone Output","3.5-mm Stereo Headphone Jack"},
+				{"Headphone Type","Apple Earphones"},
+				{"Supported Languages","Chinese (Cantonese, Mandarin), Czech, Danish, Dutch, English (Australia, UK, and U.S.), Finnish, French (Canada, France), German, Greek, Hungarian, Italian, Japanese, Korean, Norwegian, Polish, Portuguese (Brazil, Portugal), Romanian, Russian, Slovak, Spanish (Mexico, Spain), Swedish, Thai, Turkish"}};
+		item.setSpecification(this.setSpecification(specification));
+		// set Details
+		String [][]detail = {{"Apple 2GB Pink iPod Shuffle, Model MD773LLA",null}};
+		item.setDetail(this.setDetails(detail));
+		// set Pictures
+		String [] pics = {"/images/items/xlarge0-27716.jpg","/images/items/LaundryAccessories.jpg"};
+		item.setPictureLocation(this.setPictures(pics));
+		// set Accessories
+		return item;
+	}
 	public Item setMicrovave (){
 		Item item = this.setItem("GE Spacemaker Over-The-Range White Microwave Oven", 
 				"1.5 Cu. Ft. Capacity/ 950 Watts/ Convenience Controls/ Auto And Time Defrost/ Two-Speed 300-CFM Venting System/ Removable Oven Rack/ White Finish", 
