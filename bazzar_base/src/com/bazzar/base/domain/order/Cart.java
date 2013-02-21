@@ -32,6 +32,8 @@ public class Cart extends DBBase implements Serializable{
 	private Long id;
 	@Column(name="SESSION_NUMBER")
 	private String sessionNumber;
+	@Column(name="IP")
+	private String ip;
 	@Column ( name = "CUSTOMER_ID")
 	private String customer_id;
 	@Column(name="CART_CREATED")
@@ -63,6 +65,12 @@ public class Cart extends DBBase implements Serializable{
 	)
 	private Set <Note> note = new HashSet <Note> ();
 	
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
 	public String getSessionNumber() {
 		return sessionNumber;
 	}

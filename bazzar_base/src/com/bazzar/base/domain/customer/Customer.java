@@ -82,7 +82,14 @@ public class Customer  extends DBBase implements Serializable{
 	     inverseJoinColumns = @JoinColumn( name="SUBSCRIPTION_ID")
 	)
 	private Set<Subscription> subscription = new HashSet <Subscription> ();
-	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinTable(
+	     name="PERSON_IP",
+	     joinColumns = @JoinColumn( name="PERSON_ID"),
+	     inverseJoinColumns = @JoinColumn( name="IPS_ID")
+	)
+	private Set<Ip> ip = new HashSet <Ip> ();
+
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 	     name="PERSON_CREDITCARD",
@@ -116,6 +123,12 @@ public class Customer  extends DBBase implements Serializable{
 	private Set<Email> email = new HashSet <Email> ();
 	
 	
+	public Set<Ip> getIp() {
+		return ip;
+	}
+	public void setIp(Set<Ip> ip) {
+		this.ip = ip;
+	}
 	public PersonPrefixLookup getPersonPerfix() {
 		return personPerfix;
 	}

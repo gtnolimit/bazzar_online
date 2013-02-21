@@ -34,6 +34,8 @@ public class Order extends DBBase implements Serializable{
 	private Long id;
 	@Column(name="SESSION_NUMBER")
 	private String sessionNumber;
+	@Column(name="IP")
+	private String ip;
 	@Column(name="INVOICE_NUMBER")
 	private String invoiceNumber;
 	@Column ( name = "CUSTOMER_ID")
@@ -119,6 +121,12 @@ public class Order extends DBBase implements Serializable{
 	)
 	private Set <Note> note = new HashSet <Note> ();
 	
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
 	public String getSessionNumber() {
 		return sessionNumber;
 	}

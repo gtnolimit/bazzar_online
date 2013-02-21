@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Where;
 
 import com.bazzar.base.domain.DBBase;
@@ -27,6 +28,7 @@ import com.bazzar.base.domain.item.Item;
 @Entity
 @Table(name = "PRODUCT")
 @Where(clause="STATUS=1")
+@Proxy(lazy=true)
 public class Product extends DBBase  implements Serializable{
 
 	private static final long serialVersionUID = 2013406734640664822L;
