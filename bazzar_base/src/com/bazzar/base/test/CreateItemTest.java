@@ -57,16 +57,16 @@ public class CreateItemTest {
 		String [][] wet = {{"Unit","0.03 lbs"},{"Shipping","2 lbs"}};
 		item.setWieght(this.setWeights(wet));
 		// set Warranty
-		//String [][]warranty = {{"Manufacturer Warranty (authorized online retailer)",null},
-		//		{"Parts Warranty","Limited 1-year entire appliance"},
-		//		{"Labor Warranty","Limited 1-year entire appliance"}};
-		//item.setWarranty(this.setWaranties(warranty));
+		String [][]warranty = {{"Manufacturer Warranty (authorized online retailer)",null},
+				{"Parts Warranty","Limited 1-year entire appliance"},
+				{"Labor Warranty","Limited 1-year entire appliance"}};
+		item.setWarranty(this.setWaranties(warranty));
 		// set Demensions
 		String [][] dem = {{"Depth"," 0.34\""},{"Height","1.14\""},{"Width","1.24\""}};
 		item.setDemensions(this.setDemensions(dem));
 		// set Shipping Demensions
-		//String [][] shipDem = {{"Depth","14\""},{"Height","9-1/4\""},{"Width","18-13/16\""}};
-		//item.setShippingDemensions(this.setShippingDemensions(shipDem));
+		String [][] shipDem = {{"Depth","14\""},{"Height","9-1/4\""},{"Width","18-13/16\""}};
+		item.setShippingDemensions(this.setShippingDemensions(shipDem));
 		// set Specifications
 		Set <Specification> spec = new HashSet <Specification> ();
 		String [] spec1 = {"2GB flash drive"};

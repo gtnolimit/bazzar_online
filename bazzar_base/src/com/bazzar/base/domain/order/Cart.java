@@ -30,6 +30,8 @@ public class Cart extends DBBase implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	@Column(name="SESSION_NUMBER")
+	private String sessionNumber;
 	@Column ( name = "CUSTOMER_ID")
 	private String customer_id;
 	@Column(name="CART_CREATED")
@@ -61,7 +63,12 @@ public class Cart extends DBBase implements Serializable{
 	)
 	private Set <Note> note = new HashSet <Note> ();
 	
-	
+	public String getSessionNumber() {
+		return sessionNumber;
+	}
+	public void setSessionNumber(String sessionNumber) {
+		this.sessionNumber = sessionNumber;
+	}
 	public String getCustomer_id() {
 		return customer_id;
 	}
@@ -117,14 +124,6 @@ public class Cart extends DBBase implements Serializable{
 	public void setShoppingCartStatus(ShoppingCartTypeLookup shoppingCartStatus) {
 		this.shoppingCartStatus = shoppingCartStatus;
 	}
-	/*
-	public Set<Item> getItem() {
-		return item;
-	}
-	public void setItem(Set<Item> item) {
-		this.item = item;
-	}
-	*/
 	public Set<Note> getNote() {
 		return note;
 	}

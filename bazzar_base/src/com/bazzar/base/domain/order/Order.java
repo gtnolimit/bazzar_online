@@ -32,6 +32,8 @@ public class Order extends DBBase implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	@Column(name="SESSION_NUMBER")
+	private String sessionNumber;
 	@Column(name="INVOICE_NUMBER")
 	private String invoiceNumber;
 	@Column ( name = "CUSTOMER_ID")
@@ -117,200 +119,156 @@ public class Order extends DBBase implements Serializable{
 	)
 	private Set <Note> note = new HashSet <Note> ();
 	
-	
-	
+	public String getSessionNumber() {
+		return sessionNumber;
+	}
+	public void setSessionNumber(String sessionNumber) {
+		this.sessionNumber = sessionNumber;
+	}
 	public String getUrlTrackingNumber() {
 		return urlTrackingNumber;
 	}
-
 	public void setUrlTrackingNumber(String urlTrackingNumber) {
 		this.urlTrackingNumber = urlTrackingNumber;
 	}
-
 	public String getShippingCompany() {
 		return shippingCompany;
 	}
-
 	public void setShippingCompany(String shippingCompany) {
 		this.shippingCompany = shippingCompany;
 	}
-
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-
 	public Long getCustomer_id() {
 		return customer_id;
 	}
-
 	public String getInvoicePdfLocator() {
 		return invoicePdfLocator;
 	}
-
 	public void setInvoicePdfLocator(String invoicePdfLocator) {
 		this.invoicePdfLocator = invoicePdfLocator;
 	}
-
 	public void setCustomer_id(Long customer_id) {
 		this.customer_id = customer_id;
 	}
-
 	public Set<Payment> getPayment() {
 		return payment;
 	}
-
 	public void setPayment(Set<Payment> payment) {
 		this.payment = payment;
 	}
-
 	public Date getCanceledDate() {
 		return canceledDate;
 	}
-
 	public void setCanceledDate(Date canceledDate) {
 		this.canceledDate = canceledDate;
 	}
-
 	public Date getRefundedDate() {
 		return refundedDate;
 	}
-
 	public void setRefundedDate(Date refundedDate) {
 		this.refundedDate = refundedDate;
 	}
-
 	public Set<Address> getAddress() {
 		return address;
 	}
-
 	public void setAddress(Set<Address> address) {
 		this.address = address;
 	}
-
 	public Set<OrderDetail> getDetail() {
 		return detail;
 	}
-
 	public void setDetail(Set<OrderDetail> detail) {
 		this.detail = detail;
 	}
-
 	public Set<Note> getNote() {
 		return note;
 	}
-
 	public void setNote(Set<Note> note) {
 		this.note = note;
 	}
-
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public String getInvoiceNumber() {
 		return invoiceNumber;
 	}
-
 	public void setInvoiceNumber(String invoiceNumber) {
 		this.invoiceNumber = invoiceNumber;
 	}
-
 	public String getTrackingNumber() {
 		return trackingNumber;
 	}
-
 	public void setTrackingNumber(String trackingNumber) {
 		this.trackingNumber = trackingNumber;
 	}
-
 	public Date getPurchaseDate() {
 		return purchaseDate;
 	}
-
 	public void setPurchaseDate(Date purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
-
 	public Date getShippedDate() {
 		return shippedDate;
 	}
-
 	public void setShippedDate(Date shippedDate) {
 		this.shippedDate = shippedDate;
 	}
-
 	public double getTotalBeforeTax() {
 		return totalBeforeTax;
 	}
-
 	public void setTotalBeforeTax(double totalBeforeTax) {
 		this.totalBeforeTax = totalBeforeTax;
 	}
-
 	public double getShippingHandling() {
 		return shippingHandling;
 	}
-
 	public void setShippingHandling(double shippingHandling) {
 		this.shippingHandling = shippingHandling;
 	}
-
 	public double getRefundableTotal() {
 		return refundableTotal;
 	}
-
 	public void setRefundableTotal(double refundableTotal) {
 		this.refundableTotal = refundableTotal;
 	}
-
 	public double getOrderTotal() {
 		return orderTotal;
 	}
-
 	public void setOrderTotal(double orderTotal) {
 		this.orderTotal = orderTotal;
 	}
-
 	public double getOrderTax() {
 		return orderTax;
 	}
-
 	public void setOrderTax(double orderTax) {
 		this.orderTax = orderTax;
 	}
-
 	public OrderTypeLookup getOrderStatus() {
 		return orderStatus;
 	}
-
 	public void setOrderStatus(OrderTypeLookup orderStatus) {
 		this.orderStatus = orderStatus;
 	}
-
 	public Set<Customer> getCustomer() {
 		return customer;
 	}
-
 	public void setCustomer(Set<Customer> customer) {
 		this.customer = customer;
 	}
-
 	public Set<Shipping> getShipping() {
 		return shipping;
 	}
-
 	public void setShipping(Set<Shipping> shipping) {
 		this.shipping = shipping;
 	}
-
 	public boolean isActive() {
 		return isActive;
 	}
-
 	public void setIsActive(boolean isActive) {
 		this.isActive = isActive;
 	}
