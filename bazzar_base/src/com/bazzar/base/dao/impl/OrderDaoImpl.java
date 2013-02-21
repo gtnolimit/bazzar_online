@@ -37,7 +37,11 @@ protected static Logger logger = Logger.getLogger ( "OrderDao" );
 				createQuery ( "FROM Order o WHERE o.INVOICE_NUMBER = :invoiceNumber")
 				.setString ( "invoiceNumber", invoiceNumber ).uniqueResult();
 	}
-	
+	public Order getOrderBySession ( String session ) {
+		return (Order) sessionFactory.getCurrentSession ( ).
+				createQuery ( "FROM Order o WHERE o.session = :session")
+				.setString ( "session", session ).uniqueResult();
+	}
 	public Order getOrder ( Long orderId ) {
 		return ( Order ) sessionFactory.getCurrentSession ( ).get ( Order.class, orderId );
 	}

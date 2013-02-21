@@ -11,5 +11,6 @@ public interface CartDao {
 	public Cart get ( Long cartId );
 	
 	public Cart findCartByCustomerId ( Long customerId );
+	public Cart findCartBySession ( String session );
 
 }

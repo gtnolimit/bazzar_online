@@ -39,4 +39,9 @@ protected static Logger logger = Logger.getLogger ( "CartDao" );
 				createQuery ( "FROM CART c WHERE c.customer_id = :customerId")
 				.setLong ( "customerId", customerId ).uniqueResult();
 	}
+	public Cart findCartBySession ( String session ) {
+		return (Cart) sessionFactory.getCurrentSession ( ).
+				createQuery ( "FROM CART c WHERE c.sessionNumber = :session")
+				.setString ( "session", session ).uniqueResult();
+	}
 }
