@@ -33,5 +33,7 @@ public class CartServiceImpl implements CartService {
 	public Cart findCartByCustomerId(Long customerId) {
 		return cartDao.findCartByCustomerId(customerId);
 	}
-
+	public Cart findCartBySession(String session) {
+		return cartDao.findCartBySession(session);
+	}
 }

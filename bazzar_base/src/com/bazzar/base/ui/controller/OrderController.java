@@ -45,7 +45,20 @@ public class OrderController {
 		httpResponse_p.setStatus(HttpStatus.OK.value());
 		return new ModelAndView(jsonView_i, ORDER_FIELD, order);
 	}
-	
+	@RequestMapping(value = { "/order/find/session/{session}" }, method = { RequestMethod.GET })
+	public ModelAndView findOrderBySession(@PathVariable("session") String session,
+				   HttpServletResponse httpResponse_p) {
+		Order order;
+		try {
+			order = orderService_i.getOrderBySession( session );
+		} catch (Exception e) {
+			String sMessage = "Error finding product. [%1$s]";
+			return createErrorResponse(String.format(sMessage, e.toString()));
+		}
+
+		httpResponse_p.setStatus(HttpStatus.OK.value());
+		return new ModelAndView(jsonView_i, ORDER_FIELD, order);
+	}
 	@RequestMapping(value = { "/order/find/customer/{customerId}" }, method = { RequestMethod.GET })
 	public ModelAndView findOrderByCustomer(@PathVariable("customerId") String customerId,
 				   HttpServletResponse httpResponse_p) {
@@ -61,8 +74,6 @@ public class OrderController {
 		httpResponse_p.setStatus(HttpStatus.OK.value());
 		return new ModelAndView(jsonView_i, ORDERS_FIELD, order);
 	}
-
-
 	@RequestMapping(value = { "/order/update/{orderId}" }, method = { RequestMethod.PUT })
 	public ModelAndView updateOrder(@RequestBody Order order_p, @PathVariable("orderId") String orderId_p,
 								   HttpServletResponse httpResponse_p) {
@@ -76,7 +87,6 @@ public class OrderController {
 		httpResponse_p.setStatus(HttpStatus.OK.value());
 		return new ModelAndView(jsonView_i, ORDER_FIELD, null);
 	}
-
 	@RequestMapping(value = { "/order/add/" }, method = { RequestMethod.POST })
 	public ModelAndView createOrder(@RequestBody Order order_p,
 			HttpServletResponse httpResponse_p, WebRequest request_p) {
@@ -93,12 +103,10 @@ public class OrderController {
 		httpResponse_p.setHeader("order", request_p.getContextPath() + "/order/" + createOrderId);
 		return new ModelAndView(jsonView_i, ORDER_FIELD, order_p );
 	}
-
 	@RequestMapping(value = "/orders/", method = RequestMethod.GET)
 	public ModelAndView getOrders() {
 		return new ModelAndView(jsonView_i, ORDERS_FIELD, orderService_i.getOrders());
 	}
-	
 	@RequestMapping ( value = "/order/{orderId}", method = RequestMethod.GET )
 	public ModelAndView getOrder ( @PathVariable ( "orderId" ) String orderId ) {
 		Long _id = (long) 0;
@@ -110,7 +118,6 @@ public class OrderController {
 		}
 		return new ModelAndView ( jsonView_i, ORDER_FIELD, orderService_i.getOrder ( _id ) );
 	}
-
 	@RequestMapping(value = "/order/delete/{orderId}", method = RequestMethod.DELETE)
 	public ModelAndView removeOrder(@PathVariable("orderId") String orderId_p,
 								   HttpServletResponse httpResponse_p) {
@@ -126,14 +133,10 @@ public class OrderController {
 		httpResponse_p.setStatus(HttpStatus.OK.value());
 		return new ModelAndView(jsonView_i, ORDER_FIELD, null);
 	}	
-
 	public void setJsonView(View view) {
 		jsonView_i = view;
 	}
-	
 	private ModelAndView createErrorResponse(String sMessage) {
 		return new ModelAndView(jsonView_i, ERROR_FIELD, sMessage);
 	}
-
-
 }

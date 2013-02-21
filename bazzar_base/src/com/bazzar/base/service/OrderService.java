@@ -12,5 +12,6 @@ public interface OrderService {
 	public Long createOrder ( Order order );
 	public void editOrder ( Order order );
 	public Order getOrderByInvoice ( String invoiceNumber );
+	public Order getOrderBySession ( String session );
 	public void delete ( Long id );
 }

@@ -39,11 +39,37 @@ public class CartController {
 		}
 		return new ModelAndView ( jsonView_i, CART_FIELD, cartService_i.get ( _id ) );
 	}
+	@RequestMapping(value = { "/cart/find/session/{session}" }, method = { RequestMethod.GET })
+	public ModelAndView findCartBySession(@PathVariable("session") String session,
+				   HttpServletResponse httpResponse_p) {
+		Cart cart;
+		try {
+			cart = cartService_i.findCartBySession( session );
+		} catch (Exception e) {
+			String sMessage = "Error finding product. [%1$s]";
+			return createErrorResponse(String.format(sMessage, e.toString()));
+		}
+		httpResponse_p.setStatus(HttpStatus.OK.value());
+		return new ModelAndView(jsonView_i, CART_FIELD, cart);
+	}
+	@RequestMapping(value = { "/cart/find/customer/{customerId}" }, method = { RequestMethod.GET })
+	public ModelAndView findCartByCustomer(@PathVariable("customerId") String customerId,
+				   HttpServletResponse httpResponse_p) {
+		Cart cart;
+		try {
+			Long id = Long.parseLong(customerId);
+			cart = cartService_i.findCartByCustomerId ( id );
+		} catch (Exception e) {
+			String sMessage = "Error finding product. [%1$s]";
+			return createErrorResponse(String.format(sMessage, e.toString()));
+		}
 
+		httpResponse_p.setStatus(HttpStatus.OK.value());
+		return new ModelAndView(jsonView_i, CART_FIELD, cart );
+	}
 	@RequestMapping(value = { "/cart/add/" }, method = { RequestMethod.POST })
 	public ModelAndView createCart(@RequestBody Cart cart_p,
 			HttpServletResponse httpResponse_p, WebRequest request_p) {
-
 		Long createCartId;
 		try {
 			createCartId = (long) cartService_i.create ( cart_p );
@@ -56,11 +82,9 @@ public class CartController {
 		httpResponse_p.setHeader("cart", request_p.getContextPath() + "/cart/" + createCartId);
 		return new ModelAndView(jsonView_i, CART_FIELD, cart_p );
 	}
-
 	@RequestMapping(value = "/cart/delete/{cartId}", method = RequestMethod.DELETE)
 	public ModelAndView removeCart(@PathVariable("cartId") String cartId_p,
 								   HttpServletResponse httpResponse_p) {
-
 		try {
 			Long id = Long.parseLong(cartId_p);
 			cartService_i.delete( id);
@@ -68,18 +92,13 @@ public class CartController {
 			String sMessage = "Error invoking getFunds. [%1$s]";
 			return createErrorResponse(String.format(sMessage, e.toString()));
 		}
-
 		httpResponse_p.setStatus(HttpStatus.OK.value());
 		return new ModelAndView(jsonView_i, CART_FIELD, null);
 	}	
-
 	public void setJsonView(View view) {
 		jsonView_i = view;
 	}
-	
 	private ModelAndView createErrorResponse(String sMessage) {
 		return new ModelAndView(jsonView_i, ERROR_FIELD, sMessage);
 	}
-
-
 }
