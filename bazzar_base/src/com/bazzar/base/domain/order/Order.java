@@ -25,7 +25,7 @@ import com.bazzar.base.domain.customer.Customer;
 import com.bazzar.base.domain.lookup.OrderTypeLookup;
 
 @Entity
-@Table(name = "ORDER")
+@Table(name = "ORDERS")
 public class Order extends DBBase implements Serializable{
 
 	private static final long serialVersionUID = -5527566248002296042L;
