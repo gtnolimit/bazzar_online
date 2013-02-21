@@ -171,6 +171,14 @@ public class Item extends DBBase implements Serializable{
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
+	     name="ITEM_QUICKSPECS",
+	     joinColumns = @JoinColumn( name="ITEM_ID"),
+	     inverseJoinColumns = @JoinColumn( name="QUICKSPECS_ID")
+	)
+	private Set <QuickSpecs> quickSpecs = new HashSet <QuickSpecs> ();
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinTable(
 	     name="ITEM_QA",
 	     joinColumns = @JoinColumn( name="ITEM_ID"),
 	     inverseJoinColumns = @JoinColumn( name="QA_ID")
@@ -360,5 +368,10 @@ public class Item extends DBBase implements Serializable{
 	public void setShippingDemensions(Set<ShippingDemensions> shippingDemensions) {
 		this.shippingDemensions = shippingDemensions;
 	}
-		
+	public Set<QuickSpecs> getQuickSpecs() {
+		return quickSpecs;
+	}
+	public void setQuickSpecs(Set<QuickSpecs> quickSpecs) {
+		this.quickSpecs = quickSpecs;
+	}	
 }

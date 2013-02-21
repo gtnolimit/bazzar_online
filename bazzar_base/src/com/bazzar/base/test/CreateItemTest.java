@@ -13,9 +13,11 @@ import com.bazzar.base.domain.item.Detail;
 import com.bazzar.base.domain.item.Features;
 import com.bazzar.base.domain.item.Item;
 import com.bazzar.base.domain.item.Manufacture;
+import com.bazzar.base.domain.item.QuickSpecs;
 import com.bazzar.base.domain.item.Rating;
 import com.bazzar.base.domain.item.ShippingDemensions;
 import com.bazzar.base.domain.item.Specification;
+import com.bazzar.base.domain.item.SpecificationDetails;
 import com.bazzar.base.domain.item.Warranty;
 import com.bazzar.base.domain.item.Weight;
 import com.bazzar.base.domain.qa.Answer;
@@ -65,6 +67,15 @@ public class CreateItemTest {
 		// set Shipping Demensions
 		//String [][] shipDem = {{"Depth","14\""},{"Height","9-1/4\""},{"Width","18-13/16\""}};
 		//item.setShippingDemensions(this.setShippingDemensions(shipDem));
+		// set Specifications
+		Set <Specification> spec = new HashSet <Specification> ();
+		String [] spec1 = {"2GB flash drive"};
+		spec.add(this.setSpecification("Capacity", spec1));
+		String [] spec2 = {"Control pad","Play in order","Turn off","Shuffle","3.5mm stereo headphone minijack","VoiceOver button"};
+		spec.add(this.setSpecification("External Buttons and Controls", spec2));
+		String [] spec3 = {"Control pad","Play in order","Turn off","Shuffle","3.5mm stereo headphone minijack","VoiceOver button"};
+		spec.add(this.setSpecification("Audio Playback", spec3));
+		item.setSpecification(spec);
 		// set Features
 		String [][]features = {{"Sleek, anodized aluminum. Eight gorgeous colors","Its main body is crafted from a single piece of aluminum, so iPod shuffle feels solid, sleek, and durable. And the color palette makes it the perfect fashion accessory."},
 				{"Hundreds of songs to go.","Never leave a favorite tune behind. Along with up to 15 hours of battery life1, iPod shuffle gives you 2GB of storage capacity, good for hundreds of songs2. That’s plenty of room for the essential songs of your workout or commute. And for multiple playlists, Genius Mixes, podcasts, and audiobooks, too."},
@@ -77,8 +88,8 @@ public class CreateItemTest {
 				{"When one playlist isn't enough.","You probably have multiple playlists in iTunes on your computer. One for your commute. One for the gym. Sync those playlists to iPod shuffle, and you can play the perfect mix for whatever mood strikes you. VoiceOver tells you the name of each playlist, so it’s easy to switch between them and find the one you want without looking."},
 				{"Have Genius call the tunes.","There’s another way to get a good mix of music on iPod shuffle: Let Genius do the work. Activate Genius in iTunes on your computer, and it automatically finds songs that sound great together. Then it creates Genius Mixes, which you can easily sync to your iPod shuffle. It’s the perfect way to rediscover songs you haven’t listened to in forever."}};
 		item.setFeatures(this.setFeatures(features));
-		// set Specifications
-		String [][]specification = {{"iPod Type","Shuffle"},
+		// set Quick Specifications
+		String [][]qiuick = {{"iPod Type","Shuffle"},
 				{"Average Battery Life","15 Hours"},
 				{"Recharge Time","3 Hours"},
 				{"Power Source","Built-in Rechargeable Li-ion Battery, USB"},
@@ -89,7 +100,7 @@ public class CreateItemTest {
 				{"Headphone Output","3.5-mm Stereo Headphone Jack"},
 				{"Headphone Type","Apple Earphones"},
 				{"Supported Languages","Chinese (Cantonese, Mandarin), Czech, Danish, Dutch, English (Australia, UK, and U.S.), Finnish, French (Canada, France), German, Greek, Hungarian, Italian, Japanese, Korean, Norwegian, Polish, Portuguese (Brazil, Portugal), Romanian, Russian, Slovak, Spanish (Mexico, Spain), Swedish, Thai, Turkish"}};
-		item.setSpecification(this.setSpecification(specification));
+		item.setQuickSpecs(this.setQuickSpecs(qiuick));
 		// set Details
 		String [][]detail = {{"Apple 2GB Pink iPod Shuffle, Model MD773LLA",null}};
 		item.setDetail(this.setDetails(detail));
@@ -151,7 +162,16 @@ public class CreateItemTest {
 				{"Removable Oven Rack","Makes multi-dish cooking possible"}};
 		item.setFeatures(this.setFeatures(features));
 		// set Specifications
-		String [][]specification = {{"Type","Under Cabinet"},
+		Set <Specification> spec = new HashSet <Specification> ();
+		String [] spec1 = {"2GB flash drive"};
+		spec.add(this.setSpecification("Capacity", spec1));
+		String [] spec2 = {"Control pad","Play in order","Turn off","Shuffle","3.5mm stereo headphone minijack","VoiceOver button"};
+		spec.add(this.setSpecification("External Buttons and Controls", spec2));
+		String [] spec3 = {"Control pad","Play in order","Turn off","Shuffle","3.5mm stereo headphone minijack","VoiceOver button"};
+		spec.add(this.setSpecification("Audio Playback", spec3));
+		item.setSpecification(spec);
+		// set Quick Specifications
+		String [][]quick = {{"Type","Under Cabinet"},
 				{"CFM","300"},
 				{"Venting Type","Ducked"},
 				{"Fan Speeds","2"},
@@ -167,7 +187,7 @@ public class CreateItemTest {
 				{"Interior Light","Yes"},
 				{"Quick Minute","Yes"},
 				{"Timer","Yes"}};
-		item.setSpecification(this.setSpecification(specification));
+		item.setQuickSpecs(this.setQuickSpecs(quick));
 		// set Details
 		String [][]detail = {{"GE Spacemaker JVM1540DNWW Over-The-Range White Microwave Oven, Model JVM1540WH",null}};
 		item.setDetail(this.setDetails(detail));
@@ -260,9 +280,12 @@ public class CreateItemTest {
 			String number = null;
 			String pic = null;
 			for ( int i=0; i< row.length; i++){
-				name = row[i];
-				number = row[i];
-				pic = row[i];
+				if ( i == 0 )
+					name = row[i];
+				else if ( i ==1 )
+					number = row[i];
+				else
+					pic = row[i];
 			}
 			manuf.add(setManufacture(name,number,pic));	
 		}
@@ -326,8 +349,10 @@ public class CreateItemTest {
  			String att = null;
  			String value = null;
  			for ( int i=0; i<row.length; i++){
- 				att = row[i];
- 				value = row[i];
+ 				if (i==0)
+ 					att = row[i];
+ 				else
+ 					value = row[i];
  			}
  			setObj.add(this.setWarranty(att,value));
  		}
@@ -343,22 +368,24 @@ public class CreateItemTest {
 		dem.setUPD(new Date());
 		return dem;
 	}
-	private Set <Specification> setSpecification ( String [][] object){
-		Set <Specification> setObj = new HashSet <Specification> ();
+	private Set <QuickSpecs> setQuickSpecs ( String [][] object){
+		Set <QuickSpecs> setObj = new HashSet <QuickSpecs> ();
  		for ( int index=0; index < object.length; index ++){
  			String [] row = object[index];
  			String att = null;
  			String value = null;
  			for ( int i=0; i<row.length; i++){
- 				att = row[i];
- 				value = row[i];
+ 				if ( i==0 )
+ 					att = row[i];
+ 				else
+ 					value = row[i];
  			}
- 			setObj.add(this.setSpecification(att,value));
+ 			setObj.add(this.setQuickSpecs(att,value));
  		}
  		return setObj;
 	}
-	private Specification setSpecification ( String att, String value){
-		Specification dem = new Specification ();
+	private QuickSpecs setQuickSpecs ( String att, String value){
+		QuickSpecs dem = new QuickSpecs ();
 		dem.setActive(true);
 		dem.setAttribute(att);
 		dem.setValue(value);
@@ -373,8 +400,10 @@ public class CreateItemTest {
  			String att = null;
  			String value = null;
  			for ( int i=0; i<row.length; i++){
- 				att = row[i];
- 				value = row[i];
+ 				if ( i==0 )
+ 	 				att = row[i];
+ 				else
+ 					value = row[i];
  			}
  			setObj.add(this.setFeatures(att,value));
  		}
@@ -396,8 +425,10 @@ public class CreateItemTest {
  			String att = null;
  			String value = null;
  			for ( int i=0; i<row.length; i++){
- 				att = row[i];
- 				value = row[i];
+ 				if ( i==0 )
+ 	 				att = row[i];
+ 				else
+ 					value = row[i];
  			}
  			setObj.add(this.setDetail(att,value));
  		}
@@ -420,8 +451,10 @@ public class CreateItemTest {
  			String att = null;
  			String value = null;
  			for ( int i=0; i<row.length; i++){
- 				att = row[i];
- 				value = row[i];
+ 				if ( i==0 )
+ 	 				att = row[i];
+ 				else
+ 					value = row[i];
  			}
  			setObj.add(this.setDemensions(att,value));
  		}
@@ -444,8 +477,10 @@ public class CreateItemTest {
  			String att = null;
  			String value = null;
  			for ( int i=0; i<row.length; i++){
- 				att = row[i];
- 				value = row[i];
+ 				if ( i==0 )
+ 	 				att = row[i];
+ 				else
+ 					value = row[i];
  			}
  			setObj.add(this.setShippingDemensions(att,value));
  		}
@@ -475,6 +510,27 @@ public class CreateItemTest {
 		pic.setCPD(new Date ());
 		pic.setUPD(new Date ());
 		return pic;
+	}
+	private Specification setSpecification ( String att, String [] value){
+		Specification spec = new Specification ();
+		spec.setAttribute(att);
+		spec.setActive(true);
+		spec.setCPD(new Date ());
+		spec.setUPD(new Date ());
+ 		spec.setSpecDetails(this.setSpecificationDetails(value));
+ 		return spec;
+	}
+	private Set<SpecificationDetails> setSpecificationDetails ( String []value ){
+		Set <SpecificationDetails> specSet = new HashSet <SpecificationDetails> ();
+		for ( int i=0; i<value.length; i++){
+			SpecificationDetails pic = new SpecificationDetails ();
+			pic.setValue(value[i]);
+			pic.setActive(true);
+			pic.setCPD(new Date ());
+			pic.setUPD(new Date ());
+			specSet.add(pic);
+		}
+		return specSet;
 	}
 	private Set <Accessories> setAccessories ( Long [] ids){
 		Set <Accessories> acc = new HashSet <Accessories> ();
