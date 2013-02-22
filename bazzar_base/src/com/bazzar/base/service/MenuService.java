@@ -11,6 +11,7 @@ public interface MenuService {
 	public List <Category> getAllCategories ( );
 	public List <SubCategory> getAllSubCategories ( );
 	public List <Product> getAllProducts ( );
+	
 	public Category getCategory ( Long id );
 	public SubCategory getSubCategory ( Long id );
 	public Product getProduct ( Long id );

@@ -13,5 +13,6 @@ public interface OrderService {
 	public void editOrder ( Order order );
 	public Order getOrderByInvoice ( String invoiceNumber );
 	public Order getOrderBySession ( String session );
+	public Order getOrderByIp ( String ip );
 	public void delete ( Long id );
 }

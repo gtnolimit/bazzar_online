@@ -36,6 +36,9 @@ public class OrderServiceImpl implements OrderService {
 	public Order getOrderBySession(String session) {
 		return orderDao.getOrderBySession(session);
 	}
+	public Order getOrderByIp(String ip) {
+		return orderDao.getOrderByIp(ip);
+	}
 	public void delete ( Long orderId ){
 		orderDao.delete ( orderId );
 	}

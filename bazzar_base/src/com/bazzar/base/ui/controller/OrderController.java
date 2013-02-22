@@ -59,6 +59,20 @@ public class OrderController {
 		httpResponse_p.setStatus(HttpStatus.OK.value());
 		return new ModelAndView(jsonView_i, ORDER_FIELD, order);
 	}
+	@RequestMapping(value = { "/order/find/ip/{ip}" }, method = { RequestMethod.GET })
+	public ModelAndView findOrderByIp(@PathVariable("ip") String ip,
+				   HttpServletResponse httpResponse_p) {
+		Order order;
+		try {
+			order = orderService_i.getOrderByIp( ip );
+		} catch (Exception e) {
+			String sMessage = "Error finding product. [%1$s]";
+			return createErrorResponse(String.format(sMessage, e.toString()));
+		}
+
+		httpResponse_p.setStatus(HttpStatus.OK.value());
+		return new ModelAndView(jsonView_i, ORDER_FIELD, order);
+	}
 	@RequestMapping(value = { "/order/find/customer/{customerId}" }, method = { RequestMethod.GET })
 	public ModelAndView findOrderByCustomer(@PathVariable("customerId") String customerId,
 				   HttpServletResponse httpResponse_p) {

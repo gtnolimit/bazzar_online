@@ -25,24 +25,21 @@ public class MenuDaoImpl implements MenuDao {
 	private SessionFactory sessionFactory;
 	  
 	public Category getCategory ( Long id ){
-		return ( Category ) sessionFactory.getCurrentSession ( ).
-				get ( Category.class, id );
+		return ( Category ) sessionFactory.getCurrentSession ( ) .
+				createQuery ( "FROM Category c WHERE c.id = :id" ).
+				setParameter ( "id", id ).uniqueResult ( );
 	}
 	
 	public SubCategory getSubCategory ( Long id ){
-		return ( SubCategory ) sessionFactory.getCurrentSession ( ).
-				get ( SubCategory.class, id );
+		return ( SubCategory ) sessionFactory.getCurrentSession ( ) .
+				createQuery ( "FROM SubCategory sc WHERE sc.id = :id" ).
+				setParameter ( "id", id ).uniqueResult ( );
 	}
 	
 	public Product getProduct ( Long id ){
-		return ( Product ) sessionFactory.getCurrentSession ( ).
-				get ( Product.class, id );
-	}
-	
-	public Product getProductById ( Long productId ){
 		return ( Product ) sessionFactory.getCurrentSession ( ) .
 				createQuery ( "FROM Product p WHERE p.id = :productId" ).
-				setParameter ( "productId", productId ).uniqueResult ( );
+				setParameter ( "productId", id ).uniqueResult ( );
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -1,7 +1,28 @@
 package com.bazzar.base.service;
 
-public interface InvoiceNumber {
+import java.util.concurrent.atomic.AtomicInteger;
 
-	public int getCounter() ;
-	public String getInvoiceNumber ();
+public class InvoiceNumber {
+	
+	private AtomicInteger atomicInteger;  
+    private static InvoiceNumber obj = null; 
+    
+    private InvoiceNumber(int initialValue){  
+        this.atomicInteger = new AtomicInteger(initialValue);   
+    }  
+      
+    public static InvoiceNumber getInstance(){  
+        if(obj == null){  
+            obj = new InvoiceNumber(100);  
+        }  
+        return obj;  
+    }  
+  
+    public int getCounter() {  
+        return atomicInteger.getAndIncrement();  
+    }  
+    
+    public String getInvoiceNumber (){
+    	return "BAZ_" + getCounter();
+    }
 }

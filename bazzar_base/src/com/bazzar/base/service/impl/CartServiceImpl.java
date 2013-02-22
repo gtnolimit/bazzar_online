@@ -36,4 +36,7 @@ public class CartServiceImpl implements CartService {
 	public Cart findCartBySession(String session) {
 		return cartDao.findCartBySession(session);
 	}
+	public Cart findCartByIp(String ip) {
+		return cartDao.findCartByIp(ip);
+	}
 }

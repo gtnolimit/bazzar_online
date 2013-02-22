@@ -1,5 +1,7 @@
 package com.bazzar.base.ui.controller;
 
+import java.util.StringTokenizer;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +39,35 @@ public class ItemController {
 	@RequestMapping ( value = "/item/{itemId}", method = RequestMethod.GET )
 	public ModelAndView getItem ( @PathVariable ( "itemId" ) String itemId ) {
 		Long _id = (long) 0;
+		Item item = null;
 		try {
+			/*
+			String id = null; String user = null; String pass = null;
+			StringTokenizer st = new StringTokenizer(itemId, "&"); 
+			while(st.hasMoreTokens()) { 
+				String word = st.nextToken();
+				StringTokenizer object = new StringTokenizer ( word, "=");
+				while (object.hasMoreTokens()){
+					String parameter = object.nextToken();
+					if (parameter.equals("id"))
+						id = object.nextToken();
+					else if (parameter.equals("user"))
+						user = object.nextToken();
+					else if (parameter.equals("pass"))
+						pass = object.nextToken();
+				}
+			}
+			System.out.println(" id : " + id + " - user : " + user + " - pass : " + pass);
+			*/
+			System.out.println("looking for item : " + itemId);
 			_id = Long.parseLong ( itemId );
+			item = itemService_i.getItem ( _id );
+			System.out.println(" Item found : " + item.getSubgect());
 		} catch (Exception e) {
 			String sMessage = "Error converting ID into numeric value";
 			return createErrorResponse(String.format(sMessage, e.toString()));
 		}
-		return new ModelAndView ( jsonView_i, ITEM_FIELD, itemService_i.getItem ( _id ) );
+		return new ModelAndView ( jsonView_i, ITEM_FIELD, item );
 	}
 
 	@RequestMapping ( value = "/itemQuestions/{itemId}", method = RequestMethod.GET )

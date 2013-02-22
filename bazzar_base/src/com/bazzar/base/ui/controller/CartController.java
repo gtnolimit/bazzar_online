@@ -52,6 +52,19 @@ public class CartController {
 		httpResponse_p.setStatus(HttpStatus.OK.value());
 		return new ModelAndView(jsonView_i, CART_FIELD, cart);
 	}
+	@RequestMapping(value = { "/cart/find/ip/{ip}" }, method = { RequestMethod.GET })
+	public ModelAndView findCartByIp(@PathVariable("ip") String ip,
+				   HttpServletResponse httpResponse_p) {
+		Cart cart;
+		try {
+			cart = cartService_i.findCartByIp( ip );
+		} catch (Exception e) {
+			String sMessage = "Error finding product. [%1$s]";
+			return createErrorResponse(String.format(sMessage, e.toString()));
+		}
+		httpResponse_p.setStatus(HttpStatus.OK.value());
+		return new ModelAndView(jsonView_i, CART_FIELD, cart);
+	}
 	@RequestMapping(value = { "/cart/find/customer/{customerId}" }, method = { RequestMethod.GET })
 	public ModelAndView findCartByCustomer(@PathVariable("customerId") String customerId,
 				   HttpServletResponse httpResponse_p) {

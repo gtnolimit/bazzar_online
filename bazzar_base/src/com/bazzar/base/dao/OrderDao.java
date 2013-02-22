@@ -13,4 +13,5 @@ public interface OrderDao {
 	public Order getOrderByInvoice ( String invoiceNumber );
 	public void delete ( Long id );
 	public Order getOrderBySession ( String session);
+	public Order getOrderByIp ( String ip);
 }

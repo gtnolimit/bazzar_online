@@ -22,7 +22,7 @@ protected static Logger logger = Logger.getLogger ( "OrderDao" );
 	
 	@SuppressWarnings("unchecked")
 	public List<Order> getOrders ( ) {
-		return sessionFactory.getCurrentSession ( ).createCriteria ( Order.class ).list ();
+		return sessionFactory.getCurrentSession ( ).createQuery ( "FROM Order o").list ();
 	} 
 
 	@SuppressWarnings("unchecked")
@@ -41,6 +41,11 @@ protected static Logger logger = Logger.getLogger ( "OrderDao" );
 		return (Order) sessionFactory.getCurrentSession ( ).
 				createQuery ( "FROM Order o WHERE o.session = :session")
 				.setString ( "session", session ).uniqueResult();
+	}
+	public Order getOrderByIp ( String ip ) {
+		return (Order) sessionFactory.getCurrentSession ( ).
+				createQuery ( "FROM Order o WHERE o.ip = :ip")
+				.setString ( "ip", ip ).uniqueResult();
 	}
 	public Order getOrder ( Long orderId ) {
 		return ( Order ) sessionFactory.getCurrentSession ( ).get ( Order.class, orderId );

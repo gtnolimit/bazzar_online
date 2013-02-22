@@ -25,8 +25,9 @@ protected static Logger logger = Logger.getLogger ( "ItemDao" );
 	private SessionFactory sessionFactory;
 	
 	public Item getItem(Long id) {
-		return ( Item ) sessionFactory.getCurrentSession ( ).
-				get ( Item.class, id );
+		return (Item) sessionFactory.getCurrentSession ( )
+				.createQuery("FROM Item i WHERE i.id = :id")
+				.setParameter("id", id).uniqueResult();
 	}
 
 	public Item getItemQuestions(Long id) {

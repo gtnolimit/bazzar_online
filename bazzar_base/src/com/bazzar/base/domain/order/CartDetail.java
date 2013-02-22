@@ -21,11 +21,27 @@ public class CartDetail extends DBBase implements Serializable{
 		private Long id;
 		@Column(name="ITEM_ID")
 		private Long itemId;
-		@Column(name="ITEM_PRICE")
+		@Column(name="PRICE")
 		private double price;
 		@Column(name="QTY")
 		private int qty;
+		@Column(name="SUBJECT")
+		private String subject;
+		@Column(name="PICTURE_LOCATION")
+		private String pictureLocation;
 		
+		public String getSubject() {
+			return subject;
+		}
+		public void setSubject(String subject) {
+			this.subject = subject;
+		}
+		public String getPictureLocation() {
+			return pictureLocation;
+		}
+		public void setPictureLocation(String pictureLocation) {
+			this.pictureLocation = pictureLocation;
+		}
 		public Long getId() {
 			return id;
 		}

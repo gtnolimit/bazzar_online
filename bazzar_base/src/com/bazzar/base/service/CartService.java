@@ -12,5 +12,6 @@ public interface CartService {
 	
 	public Cart findCartByCustomerId ( Long customerId );
 	public Cart findCartBySession ( String session );
+	public Cart findCartByIp ( String ip );
 
 }

@@ -17,11 +17,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import com.bazzar.base.dao.CartDao;
 import com.bazzar.base.dao.ItemDao;
 import com.bazzar.base.dao.MenuDao;
 import com.bazzar.base.dao.SearchDao;
 import com.bazzar.base.domain.item.Item;
 import com.bazzar.base.domain.menu.Product;
+import com.bazzar.base.domain.order.Cart;
+import com.bazzar.base.test.CreateCartTest;
 import com.bazzar.base.test.CreateItemTest;
 import com.bazzar.base.test.CreateMenuTest;
 
@@ -36,10 +42,17 @@ public class HomeController {
 	ItemDao itemDao;
 	@Autowired 
 	SearchDao searchDao;
+	@Autowired
+	CartDao cartDao;
 	
 	private static final String HOME_FIELD = "home";
 	private static final String ITEM_FIELD = "item";
 	private static final String ERROR_FIELD = "error";
+	private static final String CART_FIELD = "cart";
+	
+	//private static final String ip = "10.10.120.122";
+	private static final String session = "3344556677-456";
+
 	
 	@RequestMapping(value = "/createMenuTest/", method = RequestMethod.GET)
 	public ModelAndView createMenu() {
@@ -51,6 +64,32 @@ public class HomeController {
 		menuDao.add( cm.setPortableElectronics() );
 		return new ModelAndView(jsonView_i, HOME_FIELD, null);
 	}
+	@RequestMapping(value = "/createCartTest/", method = RequestMethod.GET)
+	public ModelAndView createCart() {
+		// TODO delete after testing
+		String ip = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes())
+		           .getRequest().getRemoteAddr();
+		CreateCartTest cct = new CreateCartTest ();
+		Item item = itemDao.getItem( (long) 1 );
+		Cart cart = cartDao.findCartByIp(ip);
+		cart = cct.addCart(cart, item, 10, session, ip);
+		cart = cartDao.edit(cart);
+		return new ModelAndView(jsonView_i, CART_FIELD, cart);
+	}
+	
+	@RequestMapping(value = "/updateCartTest/", method = RequestMethod.GET)
+	public ModelAndView updateCart() {
+		// TODO delete after testing
+		String ip = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes())
+		           .getRequest().getRemoteAddr();
+		Cart cart = cartDao.findCartByIp(ip);
+		CreateCartTest cct = new CreateCartTest ();
+		Item item = itemDao.getItem( (long) 2 );
+		cart = cct.addCart(cart, item, 5, session, ip);
+		cart = cartDao.edit(cart);
+		return new ModelAndView(jsonView_i, CART_FIELD, cart);
+	}
+	
 	@RequestMapping(value = "/createItemTest/", method = RequestMethod.GET)
 	public ModelAndView createItem() {
 		Set <Item> items = new HashSet <Item> ();

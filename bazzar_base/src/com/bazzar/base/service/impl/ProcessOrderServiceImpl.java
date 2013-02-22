@@ -12,13 +12,15 @@ import com.bazzar.base.domain.item.Item;
 import com.bazzar.base.domain.lookup.OrderTypeLookup;
 import com.bazzar.base.domain.order.Order;
 import com.bazzar.base.domain.order.OrderDetail;
+import com.bazzar.base.service.CalculateOrder;
+import com.bazzar.base.service.InvoiceNumber;
 import com.bazzar.base.service.ProcessOrderService;
 
 @Service
 public class ProcessOrderServiceImpl implements ProcessOrderService {
 	
-	CalculateOrderImpl calcOrderImpl;
-	InvoiceNumberImpl invoiceNumImpl;
+	CalculateOrder calcOrderImpl;
+	InvoiceNumber invoiceNumImpl;
 	@Autowired 
 	OrderDao orderDao;
 	@Autowired

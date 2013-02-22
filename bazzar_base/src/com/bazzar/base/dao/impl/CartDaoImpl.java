@@ -28,20 +28,27 @@ protected static Logger logger = Logger.getLogger ( "CartDao" );
 	public void delete ( Cart cart ) {
 		sessionFactory.getCurrentSession ().delete ( cart );
 	}
-	public void edit ( Cart cart ) {
-		sessionFactory.getCurrentSession ().merge ( cart );
+	public Cart edit ( Cart cart ) {
+		return (Cart) sessionFactory.getCurrentSession ().merge ( cart );
 	}
 	public Cart get ( Long cartId ) {
-		return ( Cart ) sessionFactory.getCurrentSession ().get ( Cart.class, cartId);
+		return (Cart) sessionFactory.getCurrentSession ( ).
+				createQuery ( "FROM Cart c WHERE c.id = :cartId")
+				.setLong ( "cartId", cartId ).uniqueResult();
 	}
 	public Cart findCartByCustomerId ( Long customerId ) {
 		return (Cart) sessionFactory.getCurrentSession ( ).
-				createQuery ( "FROM CART c WHERE c.customer_id = :customerId")
+				createQuery ( "FROM Cart c WHERE c.customer_id = :customerId")
 				.setLong ( "customerId", customerId ).uniqueResult();
 	}
 	public Cart findCartBySession ( String session ) {
 		return (Cart) sessionFactory.getCurrentSession ( ).
-				createQuery ( "FROM CART c WHERE c.sessionNumber = :session")
+				createQuery ( "FROM Cart c WHERE c.sessionNumber = :session")
 				.setString ( "session", session ).uniqueResult();
+	}
+	public Cart findCartByIp ( String ip ) {
+		return (Cart) sessionFactory.getCurrentSession ( ).
+				createQuery ( "FROM Cart c WHERE c.ip = :ip")
+				.setString ( "ip", ip ).uniqueResult();
 	}
 }

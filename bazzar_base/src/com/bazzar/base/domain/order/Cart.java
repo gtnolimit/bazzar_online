@@ -1,7 +1,6 @@
 package com.bazzar.base.domain.order;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,13 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.bazzar.base.domain.DBBase;
 import com.bazzar.base.domain.Note;
-import com.bazzar.base.domain.lookup.ShoppingCartTypeLookup;
 
 @Entity
 @Table(name = "CART")
@@ -36,19 +33,10 @@ public class Cart extends DBBase implements Serializable{
 	private String ip;
 	@Column ( name = "CUSTOMER_ID")
 	private String customer_id;
-	@Column(name="CART_CREATED")
-	private Date shoppingCartCreated;
-	@Column(name="CART_SEND")
-	private Date shoppingCartSendToOrder;
-	@Column(name="CART_CANCELED")
-	private Date shoppingCartCanceled;
-	@Column(name="CART_SAVED")
-	private Date shoppingCartSaved;
 	@Column(name="CART_SUB_TOTAL")
 	private double shoppingCartSubTotal;
-	@ManyToOne
-	@JoinColumn(name="CART_STATUS")
-	private ShoppingCartTypeLookup shoppingCartStatus;
+	@Column(name="ITEMS_COUNT")
+	private int itemCount;
  
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
@@ -65,6 +53,12 @@ public class Cart extends DBBase implements Serializable{
 	)
 	private Set <Note> note = new HashSet <Note> ();
 	
+	public int getItemCount() {
+		return itemCount;
+	}
+	public void setItemCount(int itemCount) {
+		this.itemCount = itemCount;
+	}
 	public String getIp() {
 		return ip;
 	}
@@ -101,36 +95,6 @@ public class Cart extends DBBase implements Serializable{
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public Date getShoppingCartCreated() {
-		return shoppingCartCreated;
-	}
-	public void setShoppingCartCreated(Date shoppingCartCreated) {
-		this.shoppingCartCreated = shoppingCartCreated;
-	}
-	public Date getShoppingCartSendToOrder() {
-		return shoppingCartSendToOrder;
-	}
-	public void setShoppingCartSendToOrder(Date shoppingCartSendToOrder) {
-		this.shoppingCartSendToOrder = shoppingCartSendToOrder;
-	}
-	public Date getShoppingCartCanceled() {
-		return shoppingCartCanceled;
-	}
-	public void setShoppingCartCanceled(Date shoppingCartCanceled) {
-		this.shoppingCartCanceled = shoppingCartCanceled;
-	}
-	public Date getShoppingCartSaved() {
-		return shoppingCartSaved;
-	}
-	public void setShoppingCartSaved(Date shoppingCartSaved) {
-		this.shoppingCartSaved = shoppingCartSaved;
-	}
-	public ShoppingCartTypeLookup getShoppingCartStatus() {
-		return shoppingCartStatus;
-	}
-	public void setShoppingCartStatus(ShoppingCartTypeLookup shoppingCartStatus) {
-		this.shoppingCartStatus = shoppingCartStatus;
 	}
 	public Set<Note> getNote() {
 		return note;

@@ -16,7 +16,6 @@ public interface MenuDao {
 	public List <SubCategory> getAllSubCategories ();
 	public List <Product> getAllProducts ();
 	
-	public Product getProductById ( Long productId );
 	public List <Product> findProductByName ( String productName );
 	
 	public void edit ( Category category );
