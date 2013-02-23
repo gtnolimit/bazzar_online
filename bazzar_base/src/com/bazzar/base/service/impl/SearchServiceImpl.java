@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.bazzar.base.dao.SearchDao;
 import com.bazzar.base.domain.item.Item;
+import com.bazzar.base.domain.menu.Product;
 import com.bazzar.base.service.SearchService;
 
 @Service
@@ -33,6 +34,11 @@ public class SearchServiceImpl implements SearchService {
 
 	public List<Item> findItemsByBarCode(String barCode) {
 		return searchDao.findItemsByBarCode(barCode);
+	}
+
+	@Override
+	public List<Product> findProdactByName(String name) {
+		return searchDao.findProductByName(name);
 	}
 
 }

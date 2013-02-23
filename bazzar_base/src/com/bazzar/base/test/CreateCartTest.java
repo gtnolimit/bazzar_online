@@ -4,12 +4,10 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.bazzar.base.domain.item.Item;
 import com.bazzar.base.domain.order.Cart;
 import com.bazzar.base.domain.order.CartDetail;
-import com.bazzar.base.service.CalculateCart;
+import com.bazzar.base.service.impl.CalculateCart;
 
 public class CreateCartTest {
 	

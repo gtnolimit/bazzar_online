@@ -1,4 +1,4 @@
-package com.bazzar.base.domain.lookup;
+package com.bazzar.base.domain;
 
 
 public interface LookupType {

@@ -10,13 +10,13 @@ import com.bazzar.base.domain.Home;
 
 @Repository
 @Transactional
-public class homeDaoImpl implements HomeDao {
+public class HomeDaoImpl implements HomeDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public int create ( Home home ) {
-		return ( Integer ) sessionFactory.getCurrentSession ().save ( home );
+	public Long create ( Home home ) {
+		return ( Long ) sessionFactory.getCurrentSession ().save ( home );
 	}
 
 	public void edit ( Home home ) {
@@ -24,7 +24,10 @@ public class homeDaoImpl implements HomeDao {
 	}
 
 	public Home get ( Long homeId ) {
-		return ( Home ) sessionFactory.getCurrentSession ().get ( Home.class, homeId);
+		System.out.println("insideHomeDao");
+		return (Home) sessionFactory.getCurrentSession ( )
+				.createQuery("FROM Home h WHERE h.id = :id")
+				.setParameter("id", homeId).uniqueResult();
 	}
 
 }

@@ -8,12 +8,13 @@ import java.util.Date;
 import java.util.List;
 
 import com.bazzar.base.domain.DBBase;
+import com.bazzar.base.domain.LookupType;
 
 
 /**
  * Base Lookup Type Object. Provides common handling for Lookups.
  */
-public abstract class AbstractLookupType extends DBBase implements LookupType, Serializable {
+public abstract class AbstractLookupType implements LookupType, Serializable {
    private static final long serialVersionUID = -7509811352454828732L;
 
 	    long id = -1;

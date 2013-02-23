@@ -23,7 +23,6 @@ protected static Logger logger = Logger.getLogger ( "CartDao" );
 	}
 	public void delete ( Long cartId ){
 		delete ( get ( cartId ) );
-		
 	}
 	public void delete ( Cart cart ) {
 		sessionFactory.getCurrentSession ().delete ( cart );

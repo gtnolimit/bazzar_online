@@ -24,8 +24,8 @@ public class CartServiceImpl implements CartService {
 	public void delete(Long cartId) {
 		cartDao.delete(cartId);
 	}
-	public void edit(Cart cart) {
-		cartDao.edit(cart);
+	public Cart edit(Cart cart) {
+		return cartDao.edit(cart);
 	}
 	public Cart get(Long cartId) {
 		return cartDao.get(cartId);

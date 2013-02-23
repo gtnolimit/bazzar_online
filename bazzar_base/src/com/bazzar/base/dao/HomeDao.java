@@ -4,7 +4,7 @@ import com.bazzar.base.domain.Home;
 
 public interface HomeDao {
 
-	public int create ( Home cart );
-	public void edit ( Home cart );
+	public Long create ( Home home );
+	public void edit ( Home home );
 	public Home get ( Long homeId );
 }

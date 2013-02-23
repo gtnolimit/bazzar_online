@@ -2,7 +2,7 @@ package com.bazzar.base.dao;
 
 import java.util.List;
 
-import com.bazzar.base.domain.lookup.LookupType;
+import com.bazzar.base.domain.LookupType;
 
 public interface LookupTypeDao {
 	

@@ -18,11 +18,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.bazzar.base.domain.Address;
 import com.bazzar.base.domain.DBBase;
 import com.bazzar.base.domain.Note;
-import com.bazzar.base.domain.customer.Customer;
-import com.bazzar.base.domain.lookup.OrderTypeLookup;
+import com.bazzar.base.domain.lookup.OrderStatusLookup;
 
 @Entity
 @Table(name = "ORDERS")
@@ -71,15 +69,7 @@ public class Order extends DBBase implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="ORDER_STATUS")
-	private OrderTypeLookup orderStatus;
-	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinTable(
-	     name="ORDER_CUSTOMER",
-	     joinColumns = @JoinColumn( name="ORDER_ID"),
-	     inverseJoinColumns = @JoinColumn( name="CUSTOMER_ID")
-	)
-	private Set <Customer> customer = new HashSet <Customer> ();
+	private OrderStatusLookup orderStatus;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
@@ -88,14 +78,6 @@ public class Order extends DBBase implements Serializable{
 	     inverseJoinColumns = @JoinColumn( name="SHIPPING_ID")
 	)
 	private Set <Shipping> shipping = new HashSet <Shipping> ();
-	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinTable(
-	     name="ORDER_ADDRESS",
-	     joinColumns = @JoinColumn( name="ORDER_ID"),
-	     inverseJoinColumns = @JoinColumn( name="ADDRESS_ID")
-	)
-	private Set <Address> address = new HashSet <Address> ();
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
@@ -178,12 +160,6 @@ public class Order extends DBBase implements Serializable{
 	public void setRefundedDate(Date refundedDate) {
 		this.refundedDate = refundedDate;
 	}
-	public Set<Address> getAddress() {
-		return address;
-	}
-	public void setAddress(Set<Address> address) {
-		this.address = address;
-	}
 	public Set<OrderDetail> getDetail() {
 		return detail;
 	}
@@ -256,17 +232,11 @@ public class Order extends DBBase implements Serializable{
 	public void setOrderTax(double orderTax) {
 		this.orderTax = orderTax;
 	}
-	public OrderTypeLookup getOrderStatus() {
+	public OrderStatusLookup getOrderStatus() {
 		return orderStatus;
 	}
-	public void setOrderStatus(OrderTypeLookup orderStatus) {
+	public void setOrderStatus(OrderStatusLookup orderStatus) {
 		this.orderStatus = orderStatus;
-	}
-	public Set<Customer> getCustomer() {
-		return customer;
-	}
-	public void setCustomer(Set<Customer> customer) {
-		this.customer = customer;
 	}
 	public Set<Shipping> getShipping() {
 		return shipping;

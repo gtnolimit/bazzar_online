@@ -34,7 +34,7 @@ public class Phone  extends DBBase {
 	@Column(name="EXT")
 	private String ext;
 	@Column(name="STATUS")
-	private Boolean isActive;
+	private boolean isActive;
 
 	public String getCountryCode() {
 		return countryCode;

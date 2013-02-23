@@ -29,14 +29,14 @@ public class Email  extends DBBase {
 	@Column(name="EMAIL")
 	private String email;
 	@Column(name="STATUS")
-	private Boolean isActuve;
+	private boolean isActive;
 
 	
-		public Boolean getIsActuve() {
-		return isActuve;
+		public Boolean getIsActive() {
+		return isActive;
 	}
-	public void setIsActuve(Boolean isActuve) {
-		this.isActuve = isActuve;
+	public void setIsActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 		public long getId() {
 			return id;

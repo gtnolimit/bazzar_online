@@ -7,7 +7,7 @@ public interface CartService {
 	public Long create ( Cart cart );
 	public void delete ( Cart cart );
 	public void delete ( Long cartId );
-	public void edit ( Cart cart );
+	public Cart edit ( Cart cart );
 	public Cart get ( Long cartId );
 	
 	public Cart findCartByCustomerId ( Long customerId );

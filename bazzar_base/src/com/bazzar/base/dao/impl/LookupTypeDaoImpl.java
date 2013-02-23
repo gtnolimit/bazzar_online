@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bazzar.base.dao.LookupTypeDao;
-import com.bazzar.base.domain.lookup.LookupType;
+import com.bazzar.base.domain.LookupType;
 
 //@Repository("lookupTypeDao")
 @Repository

@@ -1,4 +1,4 @@
-package com.bazzar.base.service;
+package com.bazzar.base.service.impl;
 
 
 import java.util.Iterator;

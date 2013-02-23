@@ -9,11 +9,9 @@ import org.springframework.stereotype.Service;
 import com.bazzar.base.dao.ItemDao;
 import com.bazzar.base.dao.OrderDao;
 import com.bazzar.base.domain.item.Item;
-import com.bazzar.base.domain.lookup.OrderTypeLookup;
+import com.bazzar.base.domain.lookup.OrderStatusLookup;
 import com.bazzar.base.domain.order.Order;
 import com.bazzar.base.domain.order.OrderDetail;
-import com.bazzar.base.service.CalculateOrder;
-import com.bazzar.base.service.InvoiceNumber;
 import com.bazzar.base.service.ProcessOrderService;
 
 @Service
@@ -46,7 +44,7 @@ public class ProcessOrderServiceImpl implements ProcessOrderService {
 		
 		Order order = orderDao.getOrder ( orderId );
 		order.setInvoiceNumber ( invoiceNumImpl.getInvoiceNumber () );
-		order = ( calcOrderImpl.calculateOrder ( order ) );
+		//order = ( calcOrderImpl.calculateOrder ( order ) );
 		Set <OrderDetail> orderDetails = order.getDetail ();
 		Iterator <OrderDetail> orderDetailIterator = orderDetails.iterator ();
 		while ( orderDetailIterator.hasNext () ){
@@ -62,7 +60,7 @@ public class ProcessOrderServiceImpl implements ProcessOrderService {
 				itemDao.editItem ( item );
 			}
 		}
-		order.setOrderStatus ( OrderTypeLookup.PR );
+		order.setOrderStatus ( OrderStatusLookup.PR );
 		// TODO create shipping request
 		orderDao.editOrder ( order );
 		createInvoicePDF ( order );
