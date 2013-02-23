@@ -93,6 +93,7 @@ public class HomeController {
 		Item item = itemDao.getItem( (long) 1 );
 		Cart cart = cartDao.findCartByIp(ip);
 		cart = cct.addCart(cart, item, 10, session, ip);
+		cart = cartDao.calculateSubTotal(cart);
 		cart = cartDao.edit(cart);
 		return new ModelAndView(jsonView_i, CART_FIELD, cart);
 	}
@@ -188,11 +189,7 @@ public class HomeController {
 		try {
 			Long id = Long.parseLong(orderId);
 			order = orderDao.getOrder(id);
-			CreateOrderTest cot = new CreateOrderTest();
-			Home home = homeDao.get( (long) 1);
-			System.out.println("customer id : " + order.getCustomer_id());
-			Customer customer = custDao.get(order.getCustomer_id());
-			order = cot.calcOrder(order, home, customer);
+			order = orderDao.calculateOrder( order );
 			orderDao.editOrder(order);
 		} catch (Exception e) {
 			String sMessage = "Error finding product. [%1$s]";

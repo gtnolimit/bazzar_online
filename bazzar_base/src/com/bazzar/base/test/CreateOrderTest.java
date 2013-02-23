@@ -7,7 +7,6 @@ import java.util.Set;
 
 import com.bazzar.base.domain.Address;
 import com.bazzar.base.domain.Email;
-import com.bazzar.base.domain.Home;
 import com.bazzar.base.domain.Phone;
 import com.bazzar.base.domain.customer.Customer;
 import com.bazzar.base.domain.customer.Ip;
@@ -21,8 +20,6 @@ import com.bazzar.base.domain.order.Cart;
 import com.bazzar.base.domain.order.CartDetail;
 import com.bazzar.base.domain.order.Order;
 import com.bazzar.base.domain.order.OrderDetail;
-import com.bazzar.base.service.impl.CalculateOrder;
-import com.bazzar.base.service.impl.InvoiceNumber;
 
 public class CreateOrderTest {
 	
@@ -63,7 +60,7 @@ public class CreateOrderTest {
 		order.setActive(true);
 		order.setCPD(new Date ());
 		order.setUPD(new Date ());
-		order.setInvoiceNumber(InvoiceNumber.getInstance ().getInvoiceNumber ());
+		order.setInvoiceNumber("BAZZAR-" + String.format("%015d", cart.getId()));
 		order.setIp ( cart.getIp ( ) );
 		order.setSessionNumber ( cart.getSessionNumber ( ) );
 		order.setOrderStatus ( OrderStatusLookup.CR );
@@ -71,15 +68,6 @@ public class CreateOrderTest {
 		order.setTotalBeforeTax ( cart.getShoppingCartSubTotal ( ) ); 
 		return order;
 	}
-	public Order calcOrder ( Order order, Home home, Customer customer ){
-		System.out.println("in test");
-		CalculateOrder co = new CalculateOrder ();
-		System.out.println("about call calc");
-		order = co.calculateOrder(order, home, customer);
-		System.out.println("about to return Calc test");
-		return order;
-	}
-	
 	private Ip setIp ( String session, String ip_t){
 		Ip ip = new Ip ();
 		ip.setCPD(new Date ());

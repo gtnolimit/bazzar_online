@@ -15,4 +15,10 @@ public interface OrderService {
 	public Order getOrderBySession ( String session );
 	public Order getOrderByIp ( String ip );
 	public void delete ( Long id );
+	
+	public Order calculateOrder ( Order order );
+//	public Order calculateSubTotal ( Order order );
+//	public Order calculateTax ( Order order );
+//	public Order calculateShipping ( Order order );
+//	public Order calculateTotal ( Order order );
 }

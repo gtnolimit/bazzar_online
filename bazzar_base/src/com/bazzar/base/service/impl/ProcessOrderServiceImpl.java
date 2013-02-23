@@ -17,8 +17,6 @@ import com.bazzar.base.service.ProcessOrderService;
 @Service
 public class ProcessOrderServiceImpl implements ProcessOrderService {
 	
-	CalculateOrder calcOrderImpl;
-	InvoiceNumber invoiceNumImpl;
 	@Autowired 
 	OrderDao orderDao;
 	@Autowired
@@ -43,7 +41,7 @@ public class ProcessOrderServiceImpl implements ProcessOrderService {
  	public Order processOrderComplete ( Long orderId ){
 		
 		Order order = orderDao.getOrder ( orderId );
-		order.setInvoiceNumber ( invoiceNumImpl.getInvoiceNumber () );
+		//order.setInvoiceNumber ( invoiceNumImpl.getInvoiceNumber () );
 		//order = ( calcOrderImpl.calculateOrder ( order ) );
 		Set <OrderDetail> orderDetails = order.getDetail ();
 		Iterator <OrderDetail> orderDetailIterator = orderDetails.iterator ();
