@@ -20,14 +20,6 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.bazzar.base.dao.CartDao;
-import com.bazzar.base.dao.CustomerDao;
-import com.bazzar.base.dao.HomeDao;
-import com.bazzar.base.dao.ItemDao;
-import com.bazzar.base.dao.MenuDao;
-import com.bazzar.base.dao.OrderDao;
-import com.bazzar.base.dao.SearchDao;
-import com.bazzar.base.domain.Home;
 import com.bazzar.base.domain.customer.Customer;
 import com.bazzar.base.domain.item.Item;
 import com.bazzar.base.domain.menu.Product;
@@ -35,6 +27,7 @@ import com.bazzar.base.domain.order.Cart;
 import com.bazzar.base.domain.order.Order;
 import com.bazzar.base.service.CartService;
 import com.bazzar.base.service.CustomerService;
+import com.bazzar.base.service.HomeService;
 import com.bazzar.base.service.ItemService;
 import com.bazzar.base.service.MenuService;
 import com.bazzar.base.service.OrderService;
@@ -50,19 +43,19 @@ public class HomeController {
 	@Autowired
 	private View jsonView_i;
 	@Autowired 
-	MenuService menuDao;
+	MenuService menuService_i;
 	@Autowired 
-	ItemService itemDao;
+	ItemService itemService_i;
 	@Autowired 
-	SearchService searchDao;
+	SearchService searchService_i;
 	@Autowired
-	CartService cartDao;
+	CartService cartService_i;
 	@Autowired
-	OrderService orderDao;
+	OrderService orderService_i;
 	@Autowired
-	CustomerService custDao;
+	CustomerService custService_i;
 	@Autowired
-	HomeDao homeDao;
+	HomeService homeService_i;
 	
 	private static final String HOME_FIELD = "home";
 	private static final String ITEM_FIELD = "item";
@@ -77,11 +70,11 @@ public class HomeController {
 	@RequestMapping(value = "/createMenuTest/", method = RequestMethod.GET)
 	public ModelAndView createMenu() {
 		CreateMenuTest cm = new CreateMenuTest ();
-		menuDao.create( cm.setAppliances() );
-		menuDao.create( cm.setAudio() );
-		menuDao.create( cm.setCamerasCamcorders() );
-		menuDao.create( cm.setComputers() );
-		menuDao.create( cm.setPortableElectronics() );
+		menuService_i.create( cm.setAppliances() );
+		menuService_i.create( cm.setAudio() );
+		menuService_i.create( cm.setCamerasCamcorders() );
+		menuService_i.create( cm.setComputers() );
+		menuService_i.create( cm.setPortableElectronics() );
 		return new ModelAndView(jsonView_i, HOME_FIELD, null);
 	}
 	@RequestMapping(value = "/createCartTest/", method = RequestMethod.GET)
@@ -90,11 +83,11 @@ public class HomeController {
 		String ip = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes())
 		           .getRequest().getRemoteAddr();
 		CreateCartTest cct = new CreateCartTest ();
-		Item item = itemDao.getItem( (long) 1 );
-		Cart cart = cartDao.findCartByIp(ip);
+		Item item = itemService_i.getItem( (long) 1 );
+		Cart cart = cartService_i.findCartByIp(ip);
 		cart = cct.addCart(cart, item, 10, session, ip);
-		cart = cartDao.calculateSubTotal(cart);
-		cart = cartDao.edit(cart);
+		cart = cartService_i.calculateSubTotal(cart);
+		cart = cartService_i.edit(cart);
 		return new ModelAndView(jsonView_i, CART_FIELD, cart);
 	}
 	@RequestMapping(value = "/updateCartTest/", method = RequestMethod.GET)
@@ -102,12 +95,11 @@ public class HomeController {
 		// TODO delete after testing
 		String ip = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes())
 		           .getRequest().getRemoteAddr();
-		Cart cart = cartDao.findCartByIp(ip);
+		Cart cart = cartService_i.findCartByIp(ip);
 		CreateCartTest cct = new CreateCartTest ();
-		Item item = itemDao.getItem( (long) 2 );
+		Item item = itemService_i.getItem( (long) 2 );
 		cart = cct.addCart(cart, item, 5, session, ip);
-		cart = cartDao.edit(cart);
-		System.out.println("cart id : " + cart.getId());
+		cart = cartService_i.edit(cart);
 		return new ModelAndView(jsonView_i, CART_FIELD, cart);
 	}
 	@RequestMapping(value = "/createItemTest/", method = RequestMethod.GET)
@@ -116,27 +108,27 @@ public class HomeController {
 		CreateItemTest cit = new CreateItemTest();
 		Item item = null;
 		Iterator<Product> it = null;
-		Long id = (long) 0;
+		//Long id = (long) 0;
 		List <Product> products = new ArrayList <Product> ();
 		Product product = null;
 		item = cit.setMicrovave();
 		items.add(item);
-		products = searchDao.findProdactByName("Microwave Ovens");
+		products = searchService_i.findProdactByName("Microwave Ovens");
 		it = products.iterator();
 		while ( it.hasNext() ){
 			product = (Product) it.next();
 			product.setItem(items);
-			menuDao.update(product);
+			menuService_i.update(product);
 		}
 		items.clear();
 		item = cit.setIPodShuff();
 		items.add(item);
-		products = searchDao.findProdactByName("iPods & MP3 Players");
+		products = searchService_i.findProdactByName("iPods & MP3 Players");
 		it = products.iterator();
 		while ( it.hasNext() ){
 			product = (Product) it.next();
 			product.setItem(items);
-			menuDao.update(product);
+			menuService_i.update(product);
 		}
 		items.clear();
 		return new ModelAndView(jsonView_i, ITEM_FIELD, null);
@@ -147,14 +139,12 @@ public class HomeController {
 		Order order = null;
 		try {
 			Long id = Long.parseLong(cartId);
-			Cart cart = cartDao.get(id);
-			System.out.println("got cart");
+			Cart cart = cartService_i.get(id);
 			CreateOrderTest cot = new CreateOrderTest ();
 			order = cot.createOrder(cart);
-			System.out.println("order returned");
-			Long orderId = orderDao.createOrder(order);
-			//cartDao.delete(id);
-			System.out.println("order saved id : " + orderId);
+			@SuppressWarnings("unused")
+			Long orderId = orderService_i.createOrder(order);
+			cartService_i.delete(id);
 		} catch (Exception e) {
 			String sMessage = "Error finding product. [%1$s]";
 			return createErrorResponse(String.format(sMessage, e.toString()));
@@ -169,11 +159,11 @@ public class HomeController {
 		Order order = null;
 		try {
 			Long id = Long.parseLong(orderId);
-			order = orderDao.getOrder(id);
+			order = orderService_i.getOrder(id);
 			CreateOrderTest cot = new CreateOrderTest();
 			Customer cust = cot.createCastomer( order.getSessionNumber(), order.getIp());
-			order.setCustomer_id(custDao.create(cust));
-			orderDao.editOrder(order);
+			order.setCustomer_id(custService_i.create(cust));
+			orderService_i.editOrder(order);
 		} catch (Exception e) {
 			String sMessage = "Error finding product. [%1$s]";
 			return createErrorResponse(String.format(sMessage, e.toString()));
@@ -188,9 +178,9 @@ public class HomeController {
 		Order order = null;
 		try {
 			Long id = Long.parseLong(orderId);
-			order = orderDao.getOrder(id);
-			order = orderDao.calculateOrder( order );
-			orderDao.editOrder(order);
+			order = orderService_i.getOrder(id);
+			order = orderService_i.calculateOrder( order );
+			orderService_i.editOrder(order);
 		} catch (Exception e) {
 			String sMessage = "Error finding product. [%1$s]";
 			return createErrorResponse(String.format(sMessage, e.toString()));

@@ -532,6 +532,7 @@ public class CreateItemTest {
 		}
 		return specSet;
 	}
+	@SuppressWarnings("unused")
 	private Set <Accessories> setAccessories ( Long [] ids){
 		Set <Accessories> acc = new HashSet <Accessories> ();
 		for ( int i=0; i< ids.length; i++){
