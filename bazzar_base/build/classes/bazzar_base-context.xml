@@ -24,8 +24,9 @@
 		 for classes configured as Spring managed beans and automatically sets up objects annotated with
 		 @Controller, @Service etc.
 	-->
-    <context:component-scan base-package="com.bazzar" />
-   
+    <context:component-scan base-package="com.bazzar.base.service" />
+	<context:component-scan base-package="com.bazzar.base.ui.controller" /> 
+	<context:component-scan base-package="com.bazzar.base.dao" />  
 	<!--
 		 TODO
 	-->
