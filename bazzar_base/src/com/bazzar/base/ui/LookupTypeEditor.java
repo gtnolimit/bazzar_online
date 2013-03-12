@@ -2,7 +2,7 @@ package com.bazzar.base.ui;
 
 import java.beans.PropertyEditorSupport;
 
-import com.bazzar.base.domain.lookup.LookupType;
+import com.bazzar.base.domain.LookupType;
 import com.bazzar.base.service.impl.LookupTypeServiceImpl;
 
 /**

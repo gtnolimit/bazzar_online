@@ -1,6 +1,9 @@
 package com.bazzar.base;
 
+import javax.inject.Inject;
+
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +17,8 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import redis.clients.jedis.JedisShardInfo;
 
+import com.bazzar.base.dao.redis.ItemRepository;
+import com.bazzar.base.job.batch.ImportItemJob;
 import com.bazzar.base.message.redis.RedisMessageListener;
 
 @Configuration
@@ -29,40 +34,61 @@ public class AppConfig {
 	@Value(value = "${redis.pass}")
 	private String redisPassword;
 
+	@Value(value = "${redis.pool}")
+	private Boolean redisPool;
+
+	@Value(value = "${redis.on}")
+	private Boolean redisOn;
+
+	@Inject
+	private ItemRepository itemRepository;
+
+	@Autowired
+	ImportItemJob importItemJob;
+
 	@Bean
 	JedisConnectionFactory jedisConnectionFactory() {
-		JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(
-		        new JedisShardInfo(redisHost, redisPort));
-		if (StringUtils.isNotBlank(redisPassword)) {
-			jedisConnectionFactory.setPassword(redisPassword);
+		JedisConnectionFactory jedisConnectionFactory = null;
+		if (redisOn) {
+			jedisConnectionFactory = new JedisConnectionFactory(
+			        new JedisShardInfo(redisHost, redisPort));
+			if (StringUtils.isNotBlank(redisPassword)) {
+				jedisConnectionFactory.setPassword(redisPassword);
+			}
+			jedisConnectionFactory.setUsePool(true);
 		}
-		jedisConnectionFactory.setUsePool(true);
 		return jedisConnectionFactory;
 	}
 
 	@Bean
 	RedisTemplate<String, Object> redisTemplate() {
-		final RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
-		template.setConnectionFactory(jedisConnectionFactory());
-		template.setKeySerializer(new StringRedisSerializer());
-		template.setHashValueSerializer(new GenericToStringSerializer<Object>(
-		        Object.class));
-		template.setValueSerializer(new GenericToStringSerializer<Object>(
-		        Object.class));
+		RedisTemplate<String, Object> template = null;
+		if (redisOn) {
+			template = new RedisTemplate<String, Object>();
+			template.setConnectionFactory(jedisConnectionFactory());
+			template.setKeySerializer(new StringRedisSerializer());
+			template.setHashValueSerializer(new GenericToStringSerializer<Object>(
+			        Object.class));
+			template.setValueSerializer(new GenericToStringSerializer<Object>(
+			        Object.class));
+		}
 		return template;
 	}
 
 	@Bean
 	MessageListenerAdapter messageListener() {
-		return new MessageListenerAdapter(new RedisMessageListener());
+		return new MessageListenerAdapter(new RedisMessageListener(
+		        itemRepository, importItemJob));
 	}
 
 	@Bean
 	RedisMessageListenerContainer redisContainer() {
 		final RedisMessageListenerContainer container = new RedisMessageListenerContainer();
 
-		container.setConnectionFactory(jedisConnectionFactory());
-		container.addMessageListener(messageListener(), topic());
+		if (redisOn) {
+			container.setConnectionFactory(jedisConnectionFactory());
+			container.addMessageListener(messageListener(), topic());
+		}
 
 		return container;
 	}

@@ -1,17 +1,17 @@
 package com.bazzar.base.ui.controller;
 
-import java.util.List;
+//import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
+//import javax.annotation.PostConstruct;
+//import javax.annotation.Resource;
 
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.support.WebBindingInitializer;
 import org.springframework.web.context.request.WebRequest;
 
-import com.bazzar.base.domain.lookup.LookupType;
-import com.bazzar.base.service.impl.LookupTypeServiceImpl;
-import com.bazzar.base.ui.LookupTypeEditor;
+//import com.bazzar.base.domain.lookup.LookupType;
+//import com.bazzar.base.service.impl.LookupTypeServiceImpl;
+//import com.bazzar.base.ui.LookupTypeEditor;
 
 
 public class BindingInitializer implements WebBindingInitializer {

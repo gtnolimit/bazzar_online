@@ -1,0 +1,31 @@
+id,category,subCategory,product,subject,description,specialOfferPrice,specialPriceStart,specialPriceEnd,spesialPriceActive,salePrice,listedPrice,quantity,rebate,inStock,manufactureModelNumber,barCode,pageLocator,isActive
+,Appliances,Kitchen,Coocking Products,Frying Pan 1,Frying Pan 1,12.99,2/1/13,3/1/13,Y,9.99,11.99,36,,Y,123abc456def,12121212,,Y
+,Appliances,Kitchen,Coocking Products,Frying Pan 2,Frying Pan 2,13.99,2/2/13,3/2/13,N,10.99,12.99,37,,Y,123abc456def,12121212,,Y
+,Appliances,Kitchen,Coocking Products,Frying Pan 3,Frying Pan 3,14.99,2/3/13,3/3/13,Y,11.99,13.99,38,,Y,123abc456def,12121212,,Y
+,Appliances,Kitchen,Coocking Products,Frying Pan 4,Frying Pan 4,15.99,2/4/13,3/4/13,N,12.99,14.99,39,,Y,123abc456def,12121212,,Y
+,Appliances,Kitchen,Coocking Products,Frying Pan 5,Frying Pan 5,16.99,2/5/13,3/5/13,Y,13.99,15.99,40,,Y,123abc456def,12121212,,Y
+,Appliances,Kitchen,Coocking Products,Frying Pan 6,Frying Pan 6,17.99,2/6/13,3/6/13,N,14.99,16.99,41,,Y,123abc456def,12121212,,Y
+,Appliances,Kitchen,Coocking Products,Frying Pan 7,Frying Pan 7,18.99,2/7/13,3/7/13,Y,15.99,17.99,42,,Y,123abc456def,12121212,,Y
+,Appliances,Kitchen,Coocking Products,Frying Pan 8,Frying Pan 8,19.99,2/8/13,3/8/13,N,16.99,18.99,43,,Y,123abc456def,12121212,,Y
+,Appliances,Kitchen,Coocking Products,Frying Pan 9,Frying Pan 9,20.99,2/9/13,3/9/13,Y,17.99,19.99,44,,Y,123abc456def,12121212,,Y
+,Appliances,Kitchen,Coocking Products 2,Frying Pan 10,Frying Pan 10,21.99,2/10/13,3/10/13,N,18.99,20.99,45,,Y,123abc456def,12121212,,Y
+,Appliances,Kitchen,Coocking Products 2,Blender 1,Blender 1,22.99,2/11/13,3/11/13,Y,19.99,21.99,46,,Y,123abc456def,12121213,,Y
+,Appliances,Kitchen,Coocking Products 2,Blender 2,Blender 2,23.99,2/12/13,3/12/13,N,20.99,22.99,47,,Y,123abc456def,12121214,,Y
+,Appliances,Kitchen,Coocking Products 5,Blender 3,Blender 3,24.99,2/13/13,3/13/13,Y,21.99,23.99,48,,Y,123abc456def,12121215,,Y
+,Appliances,Kitchen,Coocking Products 6,Blender 4,Blender 4,25.99,2/14/13,3/14/13,N,22.99,24.99,49,,Y,123abc456def,12121216,,Y
+,Appliances,Kitchen 2,Coocking Products,Blender 5,Blender 5,26.99,2/15/13,3/15/13,Y,23.99,25.99,50,,Y,123abc456def,12121217,,Y
+,Appliances,Kitchen 3,Coocking Products,Blender 6,Blender 6,27.99,2/16/13,3/16/13,N,24.99,26.99,51,,Y,123abc456def,12121218,,Y
+,Appliances,Kitchen 4,Coocking Products,Blender 7,Blender 7,28.99,2/17/13,3/17/13,Y,25.99,27.99,52,,Y,123abc456def,12121219,,Y
+,Appliances,Kitchen 5,Coocking Products,Blender 8,Blender 8,29.99,2/18/13,3/18/13,N,26.99,28.99,53,,Y,123abc456def,12121220,,Y
+,Appliances,Kitchen 6,Coocking Products,Blender 9,Blender 9,30.99,2/19/13,3/19/13,Y,27.99,29.99,54,,Y,123abc456def,12121221,,Y
+,Appliances 2,Kitchen,Coocking Products,Blender 10,Blender 10,31.99,2/20/13,3/20/13,N,28.99,30.99,55,,Y,123abc456def,12121222,,Y
+,Appliances 3,Kitchen,Coocking Products,Pie Pan 1,Pie Pan 1,32.99,2/21/13,3/21/13,Y,29.99,31.99,56,,Y,123abc456def,12121223,,Y
+,Appliances 4,Kitchen,Coocking Products,Pie Pan 2,Pie Pan 2,33.99,2/22/13,3/22/13,N,30.99,32.99,57,,Y,123abc456def,12121224,,Y
+,Appliances 5,Kitchen,Coocking Products,Pie Pan 3,Pie Pan 3,34.99,2/23/13,3/23/13,Y,31.99,33.99,58,,Y,123abc456def,12121225,,Y
+,Appliances 6,Kitchen,Coocking Products,Pie Pan 4,Pie Pan 4,35.99,2/24/13,3/24/13,N,32.99,34.99,59,,Y,123abc456def,12121226,,Y
+,Appliances,Kitchen 2,Coocking Products,Pie Pan 5,Pie Pan 5,36.99,2/25/13,3/25/13,Y,33.99,35.99,60,,Y,123abc456def,12121227,,Y
+,Appliances,Kitchen 3,Coocking Products,Pie Pan 6,Pie Pan 6,37.99,2/26/13,3/26/13,N,34.99,36.99,61,,Y,123abc456def,12121228,,Y
+,Appliances,Kitchen 4,Coocking Products,Pie Pan 7,Pie Pan 7,38.99,2/27/13,3/27/13,Y,35.99,37.99,62,,Y,123abc456def,12121229,,Y
+,Appliances,Kitchen 5,Coocking Products,Pie Pan 8,Pie Pan 8,39.99,2/28/13,3/28/13,N,36.99,38.99,63,,Y,123abc456def,12121230,,Y
+,Appliances,Kitchen,Coocking Products 2,Pie Pan 9,Pie Pan 9,40.99,3/1/13,3/29/13,Y,37.99,39.99,64,,Y,123abc456def,12121231,,Y
+,Appliances,Kitchen,Coocking Products 3,Pie Pan 10,Pie Pan 10,41.99,3/2/13,3/30/13,N,38.99,40.99,65,,Y,123abc456def,12121232,,Y

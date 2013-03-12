@@ -15,33 +15,33 @@ import com.bazzar.base.domain.lookup.AddressTypeLookup;
 import com.bazzar.base.domain.lookup.StateTypeLookup;
 
 @Entity
-@Table(name="Address")
-@Where(clause="status<>0")
+@Table(name="ADDRESS")
+@Where(clause="STATUS=1")
 public class Address extends DBBase {
 
 	private static final long serialVersionUID = 1L;
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="ID")
+	@Id 
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	@ManyToOne
 	@JoinColumn (name="type")
 	private AddressTypeLookup addressType;
-	@Column(name="Address_1")
+	@Column(name="ADDRESS_1")
 	private String addressLine1;
-	@Column(name="Address_2")
+	@Column(name="ADDRESS_2")
 	private String addressLine2;
-	@Column(name="Address_3")
+	@Column(name="ADDRESS_3")
 	private String addressLine3;
-	@Column(name="City")
+	@Column(name="CITY")
 	private String city;
 	@ManyToOne
-    @JoinColumn(name = "State")
+    @JoinColumn(name = "STATE")
 	private StateTypeLookup state;
-	@Column(name="Zip")
+	@Column(name="ZIP")
 	private String zip;
-	@Column(name="Zip4")
+	@Column(name="ZIP4")
 	private String zip4;
-	@Column(name="Status")
+	@Column(name="STATUS")
 	private Boolean isActive;
 	
 	public Boolean getIsActive() {
@@ -50,14 +50,12 @@ public class Address extends DBBase {
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
-
 	public AddressTypeLookup getAddressType() {
 		return addressType;
 	}
 	public void setAddressType(AddressTypeLookup addressType) {
 		this.addressType = addressType;
 	}
-
 	public long getId() {
 		return id;
 	}

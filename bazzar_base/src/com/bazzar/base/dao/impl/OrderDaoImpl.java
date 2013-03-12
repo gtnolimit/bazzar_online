@@ -22,7 +22,7 @@ protected static Logger logger = Logger.getLogger ( "OrderDao" );
 	
 	@SuppressWarnings("unchecked")
 	public List<Order> getOrders ( ) {
-		return sessionFactory.getCurrentSession ( ).createCriteria ( Order.class ).list ();
+		return sessionFactory.getCurrentSession ( ).createQuery ( "FROM Order o").list ();
 	} 
 
 	@SuppressWarnings("unchecked")
@@ -37,13 +37,22 @@ protected static Logger logger = Logger.getLogger ( "OrderDao" );
 				createQuery ( "FROM Order o WHERE o.INVOICE_NUMBER = :invoiceNumber")
 				.setString ( "invoiceNumber", invoiceNumber ).uniqueResult();
 	}
-	
+	public Order getOrderBySession ( String session ) {
+		return (Order) sessionFactory.getCurrentSession ( ).
+				createQuery ( "FROM Order o WHERE o.session = :session")
+				.setString ( "session", session ).uniqueResult();
+	}
+	public Order getOrderByIp ( String ip ) {
+		return (Order) sessionFactory.getCurrentSession ( ).
+				createQuery ( "FROM Order o WHERE o.ip = :ip")
+				.setString ( "ip", ip ).uniqueResult();
+	}
 	public Order getOrder ( Long orderId ) {
 		return ( Order ) sessionFactory.getCurrentSession ( ).get ( Order.class, orderId );
 	}
 
-	public int createOrder ( Order order ) {
-		return ( Integer ) sessionFactory.getCurrentSession ( ).save ( order );
+	public Long createOrder ( Order order ) {
+		return ( Long ) sessionFactory.getCurrentSession ( ).save ( order );
 	}
 
 	public void editOrder ( Order order ) {
@@ -53,8 +62,8 @@ protected static Logger logger = Logger.getLogger ( "OrderDao" );
 	@Override
 	public void delete(Long id) {
 		Order order = getOrder ( id );
-		// TODO implement delete order
-		
+		order.setIsActive(false);
+		this.editOrder(order);
 	}
 
 }

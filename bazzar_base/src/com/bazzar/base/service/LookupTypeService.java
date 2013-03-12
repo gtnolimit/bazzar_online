@@ -2,7 +2,7 @@ package com.bazzar.base.service;
 
 import java.util.List;
 
-import com.bazzar.base.domain.lookup.LookupType;
+import com.bazzar.base.domain.LookupType;
 
 public interface LookupTypeService {
 

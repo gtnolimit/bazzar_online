@@ -17,8 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bazzar.base.dao.LookupTypeDao;
+import com.bazzar.base.domain.LookupType;
 import com.bazzar.base.domain.lookup.AbstractLookupType;
-import com.bazzar.base.domain.lookup.LookupType;
 import com.bazzar.base.domain.lookup.LookupTypeManager;
 import com.bazzar.base.service.LookupTypeService;
 

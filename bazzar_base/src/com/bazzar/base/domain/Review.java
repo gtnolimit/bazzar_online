@@ -14,7 +14,7 @@ import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "REVIEW")
-@Where(clause="status<>1")
+@Where(clause="STATUS=1")
 public class Review  extends DBBase implements Serializable {
 	
 	
@@ -26,7 +26,7 @@ public class Review  extends DBBase implements Serializable {
 	private String review;
 	@Column(name = "REVIEW_DATE")
 	private Date reviewDate;
-	@Column(name="Status")
+	@Column(name="STATUS")
 	private boolean isActive;
 	 	
 	public boolean isActive() {

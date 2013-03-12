@@ -11,56 +11,52 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Where;
 
 import com.bazzar.base.domain.DBBase;
 import com.bazzar.base.domain.Picture;
 import com.bazzar.base.domain.item.Item;
 
-
 @Entity
 @Table(name = "PRODUCT")
-@Where(clause="status=1")
-public class Product extends DBBase  implements Serializable{
+@Where(clause = "STATUS=1")
+@Proxy(lazy = true)
+public class Product extends DBBase implements Serializable {
 
 	private static final long serialVersionUID = 2013406734640664822L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id; 
+	private Long id;
 
-	@Column(name="ATTRIBUTE") 
- 	private String attribute;
- 	@Column(name="DISPLAY_OPTION")
- 	private String displayOption;
-	@Column(name="Status")
+	@Column(name = "ATTRIBUTE")
+	private String attribute;
+	@Column(name = "STATUS")
 	private boolean isActive;
-	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinTable(
-	     name="PRODUCT_PICTURE",
-	     joinColumns = @JoinColumn( name="PRODUCT_ID"),
-	     inverseJoinColumns = @JoinColumn( name="PICTURE_ID")
-	)
-	private Set <Picture> picture = new HashSet <Picture> ();
 
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
- 	@JoinTable(
-	     name="PRODUCT_ITEM",
-	     joinColumns = @JoinColumn( name="PRODUCT_ID"),
-	     inverseJoinColumns = @JoinColumn( name="ITEM_ID")
-	)
-	@LazyCollection(LazyCollectionOption.TRUE)
-	private Set <Item> item = new HashSet <Item> ();
- 	
-	
- 	public Long getId() {
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "PICTURE_ID")
+	private Picture picture;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "PRODUCT_ITEM", joinColumns = @JoinColumn(name = "PRODUCT_ID"), inverseJoinColumns = @JoinColumn(name = "ITEM_ID"))
+	private Set<Item> item = new HashSet<Item>();
+
+	public Picture getPicture() {
+		return picture;
+	}
+
+	public void setPicture(Picture picture) {
+		this.picture = picture;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
@@ -76,18 +72,6 @@ public class Product extends DBBase  implements Serializable{
 		this.attribute = attribute;
 	}
 
-	public String getDisplayOption() {
-		return displayOption;
-	}
-
-	public void setDisplayOption(String displayOption) {
-		this.displayOption = displayOption;
-	}
-
-	public Set<Picture> getPicture() {
-		return picture;
-	}
-
 	public Set<Item> getItem() {
 		return item;
 	}
@@ -96,16 +80,38 @@ public class Product extends DBBase  implements Serializable{
 		this.item = item;
 	}
 
-	public void setPicture(Set<Picture> picture) {
-		this.picture = picture;
-	}
-
 	public boolean isActive() {
 		return isActive;
 	}
 
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+		        + ((attribute == null) ? 0 : attribute.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		if (attribute == null) {
+			if (other.attribute != null)
+				return false;
+		} else if (!attribute.equals(other.attribute))
+			return false;
+		return true;
 	}
 
 }

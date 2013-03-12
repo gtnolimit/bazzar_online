@@ -14,8 +14,8 @@ import org.hibernate.annotations.Where;
 import com.bazzar.base.domain.lookup.PhoneTypeLookup;
 
 @Entity
-@Table(name="Phone")
-@Where(clause="status<>1")
+@Table(name="PHONE")
+@Where(clause="STATUS=1")
 public class Phone  extends DBBase {
 
 	private static final long serialVersionUID = 1L;
@@ -25,16 +25,23 @@ public class Phone  extends DBBase {
 	@ManyToOne
     @JoinColumn(name="Type")
 	private PhoneTypeLookup phoneType;
-	@Column(name="Area_Code")
+	@Column(name="COUNTRY_CODE")
+	private String countryCode;
+	@Column(name="AREA_CODE")
 	private String areaCode;
-	@Column(name="Phone")
+	@Column(name="PHONE")
 	private String phone;
-	@Column(name="Ext")
+	@Column(name="EXT")
 	private String ext;
-	@Column(name="Status")
-	private Boolean isActive;
+	@Column(name="STATUS")
+	private boolean isActive;
 
-	
+	public String getCountryCode() {
+		return countryCode;
+	}
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
+	}
 	public Boolean getIsActive() {
 		return isActive;
 	}
@@ -65,7 +72,6 @@ public class Phone  extends DBBase {
 	public void setExt(String ext) {
 		this.ext = ext;
 	}
-	
 	public PhoneTypeLookup getPhoneType() {
 		return phoneType;
 	}

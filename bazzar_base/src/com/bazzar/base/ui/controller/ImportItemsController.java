@@ -1,9 +1,9 @@
 package com.bazzar.base.ui.controller;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +14,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
+import com.bazzar.base.dao.redis.ItemRepository;
 import com.bazzar.base.service.impl.ItemServiceImpl;
 
 @Controller
@@ -25,8 +26,8 @@ public class ImportItemsController {
 	@Autowired
 	private View jsonView_i;
 
-	@Autowired
-	private RedisTemplate<String, Object> template;
+	@Inject
+	private ItemRepository itemRepository;
 
 	private static final String JOB_FIELD = "job";
 	private static final String ERROR_FIELD = "error";
@@ -44,15 +45,15 @@ public class ImportItemsController {
 		}
 
 		httpResponse_p.setStatus(HttpStatus.OK.value());
-		return new ModelAndView(jsonView_i, JOB_FIELD, template.opsForHash()
-		        .entries(jobId.toString()));
+		return new ModelAndView(jsonView_i, JOB_FIELD,
+		        itemRepository.getJob(jobId));
 	}
 
 	@RequestMapping(value = { "/item/import/jobStatus/{jobId}" }, method = { RequestMethod.GET })
-	public ModelAndView importItemsStatus(@PathVariable("jobId") String jobId,
+	public ModelAndView importItemsStatus(@PathVariable("jobId") Long jobId,
 	        HttpServletResponse httpResponse_p) {
-		return new ModelAndView(jsonView_i, JOB_FIELD, template.opsForHash()
-		        .entries(jobId));
+		return new ModelAndView(jsonView_i, JOB_FIELD,
+		        itemRepository.getJob(jobId));
 	}
 
 	public void setJsonView(View view) {

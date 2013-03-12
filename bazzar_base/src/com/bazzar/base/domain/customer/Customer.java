@@ -14,7 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -33,7 +32,7 @@ import com.bazzar.base.domain.Review;
 
 @Entity
 @Table(name = "CUSTOMER")
-@Where(clause="status<>1")
+@Where(clause="STATUS=1")
 public class Customer  extends DBBase implements Serializable{
 // TODO add user
 	
@@ -41,14 +40,11 @@ public class Customer  extends DBBase implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id; 
-	
-	//@Column(name = "TYPE")
-	//private String type;
 	@ManyToOne
-	@JoinColumn(name="prefix")
+	@JoinColumn(name="PREFIX")
 	private PersonPrefixLookup personPerfix;
 	@ManyToOne
-	@JoinColumn(name="type")
+	@JoinColumn(name="TYPE")
 	private CustomerTypeLookup customerType;
 	@Column(name = "FIRST_NAME")
 	private String firstName;
@@ -60,10 +56,10 @@ public class Customer  extends DBBase implements Serializable{
 	private String suffix;
 	@Column(name = "DOB")
 	private Date dob;
-	@Column(name="Status")
+	@Column(name="STATUS")
 	private boolean isActive;
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 	     name="PERSON_ADDRESS",
 	     joinColumns = @JoinColumn( name="PERSON_ID"),
@@ -86,7 +82,14 @@ public class Customer  extends DBBase implements Serializable{
 	     inverseJoinColumns = @JoinColumn( name="SUBSCRIPTION_ID")
 	)
 	private Set<Subscription> subscription = new HashSet <Subscription> ();
-	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinTable(
+	     name="PERSON_IP",
+	     joinColumns = @JoinColumn( name="PERSON_ID"),
+	     inverseJoinColumns = @JoinColumn( name="IPS_ID")
+	)
+	private Set<Ip> ip = new HashSet <Ip> ();
+
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 	     name="PERSON_CREDITCARD",
@@ -103,7 +106,7 @@ public class Customer  extends DBBase implements Serializable{
 	)
 	private Set<Review> review = new HashSet <Review> ();
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 	     name="PERSON_QUESTIONS",
 	     joinColumns = @JoinColumn( name="PERSON_ID"),
@@ -111,7 +114,7 @@ public class Customer  extends DBBase implements Serializable{
 	)
 	private Set<Question> qa = new HashSet <Question> ();
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(
 	     name="PERSON_EMAIL",
 	     joinColumns = @JoinColumn( name="PERSON_ID"),
@@ -120,6 +123,12 @@ public class Customer  extends DBBase implements Serializable{
 	private Set<Email> email = new HashSet <Email> ();
 	
 	
+	public Set<Ip> getIp() {
+		return ip;
+	}
+	public void setIp(Set<Ip> ip) {
+		this.ip = ip;
+	}
 	public PersonPrefixLookup getPersonPerfix() {
 		return personPerfix;
 	}

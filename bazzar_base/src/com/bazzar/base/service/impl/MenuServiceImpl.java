@@ -33,7 +33,7 @@ public class MenuServiceImpl implements MenuService {
 		return menuDao.getSubCategory ( id ); 
 	}
 	public Product getProduct ( Long id ){
-		return menuDao.getProductById ( id );
+		return menuDao.getProduct ( id );
 	}
 	public Long create(Category category) {
 		return menuDao.add( category );

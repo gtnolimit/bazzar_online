@@ -12,13 +12,8 @@ public interface ItemService {
 	public Item getItemAccessories ( Long id );
 	public Item getItem ( Long id );
 	
-	public List <Item> findItemsByName ( String itemName );
-	public List <Item> findItemsByManufactureNumber ( String manufactureNumber );
-	public List <Item> findItemsByManufacture ( String manufacture );
-	public List <Item> findItemsByDescription ( String description );
- 	
 	public void editItem ( Item item );
-	public int addItem ( Item item );
+	public Long addItem ( Item item );
 	public void delete ( Long id );
 	public void delete ( Item item );
 }

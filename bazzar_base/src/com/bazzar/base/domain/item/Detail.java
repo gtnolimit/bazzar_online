@@ -13,22 +13,18 @@ import com.bazzar.base.domain.DBBase;
 
 @Entity
 @Table(name = "DETAIL")
-@Where(clause="status=1")
+@Where(clause="STATUS=1")
 public class Detail extends DBBase{
 
 	private static final long serialVersionUID = -5527566248002296042L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	@Column(name = "CATEGORY")
-	private String category;
-	@Column(name = "ATTRIBUTE")
+	@Column(name = "ATTRIBUTE", nullable = true, length = 2500)
 	private String attribute;
-	@Column(name = "VALUE")
+	@Column(name = "VALUE", nullable = true, length = 2500)
 	private String value;
-	@Column(name = "DISPLAY_OPTION")
-	private String displayOption;
-	@Column(name="Status")
+	@Column(name="STATUS")
 	private boolean isActive;
 	
 	
@@ -37,12 +33,6 @@ public class Detail extends DBBase{
 	}
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
-	}
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
 	}
 	public String getAttribute() {
 		return attribute;
@@ -63,11 +53,4 @@ public class Detail extends DBBase{
 	public void setValue(String value) {
 		this.value = value;
 	}
-	public String getDisplayOption() {
-		return displayOption;
-	}
-	public void setDisplayOption(String displayOption) {
-		this.displayOption = displayOption;
-	}
-	
 }

@@ -22,28 +22,22 @@ import com.bazzar.base.domain.DBBase;
 
 @Entity
 @Table(name = "SUBCATEGORY")
-@Where(clause="status=1")
-public class SubCategory  extends DBBase implements Serializable{
+@Where(clause = "STATUS=1")
+public class SubCategory extends DBBase implements Serializable {
 
 	private static final long serialVersionUID = 2013406734640664822L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id; 
+	private Long id;
 
-	@Column(name="ATTRIBUTE") 
- 	private String attribute;
- 	@Column(name="DISPLAY_OPTION")
- 	private String displayOption;
-	@Column(name="Status")
+	@Column(name = "ATTRIBUTE")
+	private String attribute;
+	@Column(name = "STATUS")
 	private boolean isActive;
-	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinTable(
-	     name="SUBCATEGORY_PRODUCT",
-	     joinColumns = @JoinColumn( name="SUBCATEGORY_ID"),
-	     inverseJoinColumns = @JoinColumn( name="PRODUCT_ID")
-	)
-	private Set<Product> product = new HashSet <Product> ();
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "SUBCATEGORY_PRODUCT", joinColumns = @JoinColumn(name = "SUBCATEGORY_ID"), inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
+	private Set<Product> product = new HashSet<Product>();
 
 	public Long getId() {
 		return id;
@@ -61,15 +55,6 @@ public class SubCategory  extends DBBase implements Serializable{
 		this.attribute = attribute;
 	}
 
-	public String getDisplayOption() {
-		return displayOption;
-	}
-
-	public void setDisplayOption(String displayOption) {
-		this.displayOption = displayOption;
-	}
-
-
 	public boolean isActive() {
 		return isActive;
 	}
@@ -84,6 +69,32 @@ public class SubCategory  extends DBBase implements Serializable{
 
 	public void setProduct(Set<Product> product) {
 		this.product = product;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+		        + ((attribute == null) ? 0 : attribute.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SubCategory other = (SubCategory) obj;
+		if (attribute == null) {
+			if (other.attribute != null)
+				return false;
+		} else if (!attribute.equals(other.attribute))
+			return false;
+		return true;
 	}
 
 }

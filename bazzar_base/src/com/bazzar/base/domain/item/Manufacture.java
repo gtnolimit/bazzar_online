@@ -1,8 +1,6 @@
 package com.bazzar.base.domain.item;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -25,7 +22,7 @@ import com.bazzar.base.domain.Picture;
 
 @Entity
 @Table(name = "MANUFACTURE")
-@Where(clause="status=1")
+@Where(clause="STATUS=1")
 public class Manufacture extends DBBase implements Serializable{
 	
 	private static final long serialVersionUID = -5527566248002296042L;
@@ -38,7 +35,7 @@ public class Manufacture extends DBBase implements Serializable{
 	private String number;
 	@Column(name = "AUTHORIZE_PICTURE")
 	private boolean authorizePicture;
-	@Column(name="Status")
+	@Column(name="STATUS")
 	private boolean isActive;
 	
  	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
@@ -48,9 +45,6 @@ public class Manufacture extends DBBase implements Serializable{
 	     inverseJoinColumns = @JoinColumn( name="PICTURE_ID")
 	)
  	private Picture picture;
- 	
- 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "manufacture")
-	private Set<Item> item = new HashSet<Item>(0);
  	
 	public Picture getPicture() {
 		return picture;

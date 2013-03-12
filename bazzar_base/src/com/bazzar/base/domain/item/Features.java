@@ -13,44 +13,25 @@ import com.bazzar.base.domain.DBBase;
 
 @Entity
 @Table(name = "FEATURES")
-@Where(clause="status=1")
+@Where(clause="STATUS=1")
 public class Features extends DBBase{
 	
 	private static final long serialVersionUID = -5527566248002296042L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	@Column(name = "CATEGORY")
-	private String category;
-	//@Column(name = "SUB_CATEGORY")
-	//private String subCategory;
-	@Column(name = "ATTRIBUTE")
+	@Column(name = "ATTRIBUTE", nullable = true, length = 2500)
 	private String attribute;
-	@Column(name = "VALUE")
+	@Column(name = "VALUE", nullable = true, length = 2500)
 	private String value;
-	@Column(name = "DISPLAY_OPTION")
-	private String displayOption;
-	@Column(name="Status")
+	@Column(name="STATUS")
 	private boolean isActive;
-	
-	
-	//public String getSubCategory() {
-	//	return subCategory;
-	//}
-	//public void setSubCategory(String subCategory) {
-	//	this.subCategory = subCategory;
-	//}
+
 	public boolean isActive() {
 		return isActive;
 	}
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
-	}
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
 	}
 	public Long getId() {
 		return id;
@@ -69,11 +50,5 @@ public class Features extends DBBase{
 	}
 	public void setValue(String value) {
 		this.value = value;
-	}
-	public String getDisplayOption() {
-		return displayOption;
-	}
-	public void setDisplayOption(String displayOption) {
-		this.displayOption = displayOption;
 	}
 }

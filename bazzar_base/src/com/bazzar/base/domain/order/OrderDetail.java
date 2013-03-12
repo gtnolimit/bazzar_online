@@ -25,6 +25,7 @@ public class OrderDetail extends DBBase implements Serializable{
 		private double price;
 		@Column(name="QTY")
 		private int qty;
+		
 		public Long getId() {
 			return id;
 		}

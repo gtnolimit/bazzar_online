@@ -14,9 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -27,17 +26,13 @@ import com.bazzar.base.domain.Picture;
 import com.bazzar.base.domain.Review;
 import com.bazzar.base.domain.menu.Product;
 import com.bazzar.base.domain.qa.Question;
-//import com.bazzar.base.domain.menu.Product;
-//import com.bazzar.base.domain.order.Shipping;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "ITEM")
-@Where(clause = "status=1")
+@Where(clause = "STATUS=1")
 public class Item extends DBBase implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2013406734640664822L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -53,13 +48,14 @@ public class Item extends DBBase implements Serializable {
 	@Transient
 	private String product;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "PRODUCT_ITEM", joinColumns = @JoinColumn(name = "PRODUCT_ID"), inverseJoinColumns = @JoinColumn(name = "ITEM_ID"))
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "PRODUCT_ITEM", joinColumns = @JoinColumn(name = "ITEM_ID"), inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
 	private Product parent;
 
-	@Column(name = "SUBJECT")
+	@Column(name = "SUBJECT", nullable = true, length = 2500)
 	private String subject;
-	@Column(name = "DESCRIPTION")
+	@Column(name = "DESCRIPTION", nullable = true, length = 2500)
 	private String description;
 	@Column(name = "SPECIAL_OFFER_PRICE")
 	private double specialOfferPrice;
@@ -85,16 +81,20 @@ public class Item extends DBBase implements Serializable {
 	private String barCode;
 	@Column(name = "PAGE_LOCATOR")
 	private String pageLocator;
-	@Column(name = "Status")
-	private boolean active;
+	@Column(name = "STATUS")
+	private boolean isActive;
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "ITEM_MANUFACTURE", joinColumns = @JoinColumn(name = "ITEM_ID"), inverseJoinColumns = @JoinColumn(name = "MANUFACTURE_ID"))
 	private Set<Manufacture> manufacture = new HashSet<Manufacture>();
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "ITEM_RATING", joinColumns = @JoinColumn(name = "ITEM_ID"), inverseJoinColumns = @JoinColumn(name = "RATING_ID"))
 	private Set<Rating> rating = new HashSet<Rating>();
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "ITEM_COLOR", joinColumns = @JoinColumn(name = "ITEM_ID"), inverseJoinColumns = @JoinColumn(name = "COLOR_ID"))
+	private Set<Color> color = new HashSet<Color>();
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "ITEM_REVIEW", joinColumns = @JoinColumn(name = "ITEM_ID"), inverseJoinColumns = @JoinColumn(name = "REVIEW_ID"))
@@ -120,7 +120,11 @@ public class Item extends DBBase implements Serializable {
 	@JoinTable(name = "ITEM_DEMENSIONS", joinColumns = @JoinColumn(name = "ITEM_ID"), inverseJoinColumns = @JoinColumn(name = "DEMENSIONS_ID"))
 	private Set<Demensions> demensions = new HashSet<Demensions>();
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "ITEM_SHIPMENTDEMENSIONS", joinColumns = @JoinColumn(name = "ITEM_ID"), inverseJoinColumns = @JoinColumn(name = "DEMENSIONS_ID"))
+	private Set<ShippingDemensions> shippingDemensions = new HashSet<ShippingDemensions>();
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "ITEM_ACCESSORIES", joinColumns = @JoinColumn(name = "ITEM_ID"), inverseJoinColumns = @JoinColumn(name = "ACCESSORIES_ID"))
 	private Set<Accessories> accessories = new HashSet<Accessories>();
 
@@ -133,8 +137,20 @@ public class Item extends DBBase implements Serializable {
 	private Set<Specification> specification = new HashSet<Specification>();
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "ITEM_QUICKSPECS", joinColumns = @JoinColumn(name = "ITEM_ID"), inverseJoinColumns = @JoinColumn(name = "QUICKSPECS_ID"))
+	private Set<QuickSpecs> quickSpecs = new HashSet<QuickSpecs>();
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "ITEM_QA", joinColumns = @JoinColumn(name = "ITEM_ID"), inverseJoinColumns = @JoinColumn(name = "QA_ID"))
 	private Set<Question> qa = new HashSet<Question>();
+
+	public Set<Color> getColor() {
+		return color;
+	}
+
+	public void setColor(Set<Color> color) {
+		this.color = color;
+	}
 
 	public Product getParent() {
 		return parent;
@@ -168,14 +184,6 @@ public class Item extends DBBase implements Serializable {
 		this.barCode = barCode;
 	}
 
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
 	public String getPageLocator() {
 		return pageLocator;
 	}
@@ -200,20 +208,12 @@ public class Item extends DBBase implements Serializable {
 		this.id = id;
 	}
 
-	public String getSubject() {
-		return subject;
-	}
-
-	public void setSubject(String subgect) {
-		this.subject = subgect;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 
 	public double getSpecialOfferPrice() {
@@ -296,12 +296,6 @@ public class Item extends DBBase implements Serializable {
 		this.manufacture = manufacture;
 	}
 
-	// public Set<Shipping> getShipping() {
-	// return shipping;
-	// }
-	// public void setShipping(Set<Shipping> shipping) {
-	// this.shipping = shipping;
-	// }
 	public Set<Review> getReview() {
 		return review;
 	}
@@ -374,6 +368,22 @@ public class Item extends DBBase implements Serializable {
 		this.specification = specification;
 	}
 
+	public Set<ShippingDemensions> getShippingDemensions() {
+		return shippingDemensions;
+	}
+
+	public void setShippingDemensions(Set<ShippingDemensions> shippingDemensions) {
+		this.shippingDemensions = shippingDemensions;
+	}
+
+	public Set<QuickSpecs> getQuickSpecs() {
+		return quickSpecs;
+	}
+
+	public void setQuickSpecs(Set<QuickSpecs> quickSpecs) {
+		this.quickSpecs = quickSpecs;
+	}
+
 	public String getCategory() {
 		return category;
 	}
@@ -396,6 +406,54 @@ public class Item extends DBBase implements Serializable {
 
 	public void setProduct(String product) {
 		this.product = product;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+		        + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((subject == null) ? 0 : subject.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Item other = (Item) obj;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (subject == null) {
+			if (other.subject != null)
+				return false;
+		} else if (!subject.equals(other.subject))
+			return false;
+		return true;
 	}
 
 }

@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.beans.BeanUtils;
 
+import com.bazzar.base.domain.LookupType;
+
 public class LookupTypeManager {
     static final Map<Class<? extends LookupType>, Map<String, LookupType>> lookupTypeCache = new HashMap<Class<? extends LookupType>, Map<String, LookupType>>();
 

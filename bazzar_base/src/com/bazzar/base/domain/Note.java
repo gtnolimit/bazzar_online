@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.bazzar.base.domain.lookup.OrderTypeLookup;
+import com.bazzar.base.domain.lookup.OrderStatusLookup;
 
 @Entity
 @Table(name = "NOTE")
@@ -24,8 +24,8 @@ public class Note extends DBBase implements Serializable{
 	@Column(name="NOTE")
 	private String note;
 	@ManyToOne
-	@JoinColumn(name="type")
-	private OrderTypeLookup noteType;
+	@JoinColumn(name="TYPE")
+	private OrderStatusLookup noteType;
 	
 	
 	public Long getId() {
@@ -40,10 +40,10 @@ public class Note extends DBBase implements Serializable{
 	public void setNote(String note) {
 		this.note = note;
 	}
-	public OrderTypeLookup getNoteType() {
+	public OrderStatusLookup getNoteType() {
 		return noteType;
 	}
-	public void setNoteType(OrderTypeLookup noteType) {
+	public void setNoteType(OrderStatusLookup noteType) {
 		this.noteType = noteType;
 	}	
 }
